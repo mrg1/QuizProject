@@ -11,9 +11,41 @@ public class User {
 	public User(String username, String password){
 		this.username = username;
 		this.password = password;
-		achievments = new ArrayList<String>();
-		friends = new ArrayList<User>();
-		//DB.addUser(this);
+		this.achievments = new ArrayList<String>();
+		this.friends = new ArrayList<User>();
+//		db.addUser(this);
 	}
 	
+	public String getUsername() {
+		return this.username;
+	}
+	
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public List<User> getFriends() {
+		return friends;
+	}
+
+	public void setFriends(List<User> friends) {
+		this.friends = friends;
+	}
+
+	public List<String> getAchievments() {
+		return achievments;
+	}
+
+	public void setAchievments(List<String> achievments) {
+		this.achievments = achievments;
+	}
+
 }
