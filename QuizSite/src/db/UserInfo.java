@@ -3,7 +3,6 @@ package db;
 import java.sql.*;
 
 
-
 public class UserInfo {
 	private static Connection con;
 	
@@ -37,9 +36,31 @@ public class UserInfo {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}	
+		QuizDB.close();
+		return result;
+	}
+	
+	public static boolean checkPassword(String username, String password){
+		boolean result = false;
+		con = QuizDB.getConnection();
+		try {
+			PreparedStatement selectStatement = con.prepareStatement(QuizSqlStatements.SQL_GET_PASSWORD);
+			selectStatement.setString(1, username);
+			ResultSet rs = selectStatement.executeQuery();
+			if(rs.next()){
+				String actual = rs.getString(1); //In this instance password will be the only column in the resultset
+				if(actual.equals(password)){
+					result = true;
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}	
+		
+		QuizDB.close();
 		return result;
 	}
 	
 	
-	
 }
+
