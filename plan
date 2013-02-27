@@ -4,7 +4,7 @@ Quiz – fields: name, time created, author
 User – fields: name, password hash, admin status
 Message – sender, recipient, content
 Tables:
-•   Users
+• Users
 •	Quizzes
 •	Scores – user, quiz, score, timestamp
 •	Messages – sender, receiver, content, timestamp
