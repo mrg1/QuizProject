@@ -8,8 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import login.AccountManager;
+import db.*;
 
 /**
  * Servlet implementation class LoginServlet
@@ -40,7 +39,7 @@ public class LoginServlet extends HttpServlet {
 		ServletContext sc = getServletContext();
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
-		if (db.checkPassword(username, password))
+		if (UserInfo.checkPassword(username, password))
 			request.getRequestDispatcher("welcome-success.jsp").forward(request, response);
 		else
 			request.getRequestDispatcher("information-incorrect.html").forward(request, response);

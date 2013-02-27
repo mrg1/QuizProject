@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import login.AccountManager;
+import db.UserInfo;
 
 /**
  * Servlet implementation class CreateServlet
@@ -37,13 +37,13 @@ public class CreateServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ServletContext sc = getServletContext();
+//		ServletContext sc = getServletContext();
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
-		if (db.userExists(username))
+		if (UserInfo.userExists(username))
 			request.getRequestDispatcher("name-in-use.jsp").forward(request, response);
 		else {
-			db.addNewUser(username, password);
+			UserInfo.addUser(username, password);
 			request.getRequestDispatcher("welcome-success.jsp").forward(request, response);
 		}
 	}
