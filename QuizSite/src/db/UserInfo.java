@@ -40,4 +40,6 @@ public class UserInfo {
 		return result;
 	}
 	
+	
+	
 }
