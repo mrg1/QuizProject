@@ -57,4 +57,38 @@ public class UserInfo {
 		}
 		return result;
 	}
+	
+	public static void addFriend(String user, String friend) {
+		con = QuizDB.getConnection();
+		try {
+			PreparedStatement addStatement = con.prepareStatement(QuizSqlStatements.SQL_ADD_FRIEND);
+			addStatement.setString(1, user);
+			addStatement.setString(2, friend);
+			addStatement.execute();
+			//Got to add other way too
+			addStatement.setString(1, friend);
+			addStatement.setString(2, user);
+			addStatement.execute();
+			con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static ArrayList<String> getFriends(String user) {
+		ArrayList<String> friends;
+		con = QuizDB.getConnection();
+		try {
+			PreparedStatement selectStatement = con.prepareStatement(QuizSqlStatements.SQL_GET_FRIENDS);
+			selectStatement.setString(1, user);
+			ResultSet rs = selectStatement.executeQuery();
+			while(rs.next()) {
+				friends.add(rs.getString(2));
+			}
+			con.close();
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return friends;
+	}
 }

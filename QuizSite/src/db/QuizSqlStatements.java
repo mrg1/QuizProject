@@ -7,4 +7,9 @@ public class QuizSqlStatements {
 	public final static String SQL_GET_USER = "SELECT * FROM " + USER_TABLE + " WHERE " + USER_ID + "=?;";
 	public final static String SQL_ADD_USER = "INSERT INTO " + USER_TABLE + " VALUES (?, ?);";
 	
+	//Friend shit
+	private final static String FRIENDS_TABLE = "friends";
+	private final static String USER_ID = "user";
+	public final static String SQL_GET_FRIENDS = "SELECT * FROM " + FRIENDS_TABLE + " WHERE " + USER_ID + "=?;";
+	public final static String SQL_ADD_FRIEND = "INSERT INTO " + FRIENDS_TABLE + " VALUES (?, ?);";
 }

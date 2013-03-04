@@ -8,8 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import db.UserInfo;
+import db.*;
 
 /**
  * Servlet implementation class CreateServlet
