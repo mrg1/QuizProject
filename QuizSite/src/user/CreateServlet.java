@@ -39,7 +39,6 @@ public class CreateServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		ServletContext sc = getServletContext();
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		if (UserInfo.userExists(username))

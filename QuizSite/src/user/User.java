@@ -13,7 +13,6 @@ public class User {
 		this.password = password;
 		this.achievments = new ArrayList<String>();
 		this.friends = new ArrayList<User>();
-//		db.addUser(this);
 	}
 	
 	public String getUsername() {
