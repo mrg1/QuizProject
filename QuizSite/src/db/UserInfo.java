@@ -1,9 +1,6 @@
 package db;
 
 import java.sql.*;
-
-
-
 public class UserInfo {
 	private static Connection con;
 	
@@ -18,10 +15,10 @@ public class UserInfo {
 			addStatement.setString(1, username);
 			addStatement.setString(2, password);
 			addStatement.execute();
+			con.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		QuizDB.close();
 	}
 	
 	public static boolean userExists(String username){
@@ -34,9 +31,10 @@ public class UserInfo {
 			if(rs.next()){
 				result = true;
 			}
+			con.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}	
+		}
 		return result;
 	}
 	
@@ -44,23 +42,19 @@ public class UserInfo {
 		boolean result = false;
 		con = QuizDB.getConnection();
 		try {
-			PreparedStatement selectStatement = con.prepareStatement(QuizSqlStatements.SQL_GET_PASSWORD);
+			PreparedStatement selectStatement = con.prepareStatement(QuizSqlStatements.SQL_GET_USER);
 			selectStatement.setString(1, username);
 			ResultSet rs = selectStatement.executeQuery();
 			if(rs.next()){
-				String actual = rs.getString(1); //In this instance password will be the only column in the resultset
+				String actual = rs.getString(2); //In this instance password will be the only column in the resultset
 				if(actual.equals(password)){
 					result = true;
 				}
 			}
+			con.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}	
-		
-		QuizDB.close();
+		}
 		return result;
 	}
-	
-	
 }
-

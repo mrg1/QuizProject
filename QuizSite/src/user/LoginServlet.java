@@ -3,8 +3,6 @@ package user;
 import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -45,6 +43,7 @@ public class LoginServlet extends HttpServlet {
 			password = hexToString(md.digest(password.getBytes()));
 		} catch (NoSuchAlgorithmException ignored) {}
 		
+		System.out.println(password);
 		if (UserInfo.checkPassword(username, password))
 			request.getRequestDispatcher("welcome-success.jsp").forward(request, response);
 		else
