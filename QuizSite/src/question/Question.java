@@ -1,4 +1,4 @@
-package quiz;
+package question;
 
 /**
  * Question Interface to be implemented by the various question types.
