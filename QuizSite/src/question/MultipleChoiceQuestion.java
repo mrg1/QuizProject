@@ -38,7 +38,31 @@ public class MultipleChoiceQuestion implements Question {
 	public int getMaxScore() {
 		return weight;
 	}
+	
+	public String getText() {
+		return question;
+	}
+	
+	public String[] getChoices() {
+		return (String[]) answers.toArray();
+	}
 
+	public void setWeight(int weight) {
+		this.weight = weight;
+	}
+	
+	public int getWeight() {
+		return weight;
+	}
+	
+	public void setRandom(boolean bool) {
+		randomize = bool;
+	}
+	
+	public boolean getRandom() {
+		return randomize;
+	}
+	
 	@Override
 	public String getHTML() {
 		// TODO Auto-generated method stub
