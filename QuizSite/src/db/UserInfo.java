@@ -16,7 +16,7 @@ public class UserInfo {
 			addStatement.setString(1, username);
 			addStatement.setString(2, password);
 			addStatement.execute();
-			con.close();
+			//con.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -32,7 +32,7 @@ public class UserInfo {
 			if(rs.next()){
 				result = true;
 			}
-			con.close();
+			//con.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -52,7 +52,7 @@ public class UserInfo {
 					result = true;
 				}
 			}
-			con.close();
+			//con.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -70,7 +70,7 @@ public class UserInfo {
 			addStatement.setString(1, friend);
 			addStatement.setString(2, user);
 			addStatement.execute();
-			con.close();
+			//con.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -86,7 +86,7 @@ public class UserInfo {
 			while(rs.next()) {
 				friends.add(rs.getString(2));
 			}
-			con.close();
+			//con.close();
 		} catch(SQLException e) {
 			e.printStackTrace();
 		}
