@@ -1,0 +1,55 @@
+.navbar {
+	float:right;
+	margin:0;
+	padding:0;
+}
+.inline {
+	display:inline;
+}
+.title {
+	font-style:italic;
+	font-family:'Trebuchet MS';
+	color:olivedrab;
+}
+.achievements {
+	margin-left:50;
+	margin-top:-20;
+}
+.welcome {
+	font-size:30;
+	font-weight:bold;
+}
+.announce {
+	font-weight:bold;
+}
+table.table1 td{ 
+	border-left:1px dotted black;
+	border-right:1px dotted black;
+	padding:5px;
+}
+table.table2 td, table.table3 td  { 
+	border-left:0px dotted black;
+	border-right:0px dotted black;
+	padding:5px;
+	text-align:center;
+}
+table.table1 th, table.table2 th, table.table3 th {
+	border-bottom:1px dotted black;
+	min-width:80;
+}
+.panel1 {
+	width:65%;
+	float:left;
+}
+.panel2 {
+	width:35%;
+	float:left;
+}
+.list1 {
+	list-style-type:none;
+	margin-top:-10px;
+	margin-left:-20px;
+}
+.table3 {
+	margin-left:-5px;
+}

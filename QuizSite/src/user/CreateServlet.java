@@ -47,7 +47,7 @@ public class CreateServlet extends HttpServlet {
 			} catch (NoSuchAlgorithmException ignored) {}
 			
 			UserInfo.addUser(username, password);
-			request.getRequestDispatcher("welcome-success.jsp").forward(request, response);
+			request.getRequestDispatcher("homepage.jsp").forward(request, response);
 		}
 	}
 	

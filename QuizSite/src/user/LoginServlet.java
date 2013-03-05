@@ -45,7 +45,7 @@ public class LoginServlet extends HttpServlet {
 		
 		System.out.println(password);
 		if (UserInfo.checkPassword(username, password))
-			request.getRequestDispatcher("welcome-success.jsp").forward(request, response);
+			request.getRequestDispatcher("homepage.jsp").forward(request, response);
 		else
 			request.getRequestDispatcher("information-incorrect.html").forward(request, response);
 	}
