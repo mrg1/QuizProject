@@ -1,7 +1,6 @@
 package db;
 
 import java.sql.*;
-import java.util.ArrayList;
 public class UserInfo {
 	private static Connection con;
 	
@@ -77,7 +76,7 @@ public class UserInfo {
 	}
 	
 	public static ArrayList<String> getFriends(String user) {
-		ArrayList<String> friends = new ArrayList<String>();
+		ArrayList<String> friends;
 		con = QuizDB.getConnection();
 		try {
 			PreparedStatement selectStatement = con.prepareStatement(QuizSqlStatements.SQL_GET_FRIENDS);
