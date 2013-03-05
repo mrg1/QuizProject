@@ -50,8 +50,7 @@ public class PictureQuestion implements Question {
 
 	@Override
 	public int getMaxScore() {
-		// TODO Auto-generated method stub
-		return 0;
+		return weight;
 	}
 
 	@Override
