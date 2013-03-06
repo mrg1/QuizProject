@@ -4,9 +4,13 @@
 
 <head>
 <title>Create Account</title>
+<link href="stylesheet.css" rel="stylesheet" type="text/css"></link>
 </head>
 
 <body>
+
+<h3 class="title">Awesome Quiz Site</h3>
+
 <h1>The Name <%= request.getParameter("username") %> is Already In Use</h1>
 <p>Please enter another name and password.</p>
 <form action="CreateServlet" method="post">

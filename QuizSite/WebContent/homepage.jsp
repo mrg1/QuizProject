@@ -12,7 +12,7 @@
 <h3 class="inline title">Awesome Quiz Site</h3>
 
 <ul class="navbar">
-<li class="inline"><a href="default.asp">Home</a></li>
+<li class="inline"><a href="homepage.jsp">Home</a></li>
 <li class="inline"><a href="news.asp">Quizzes</a></li>
 <li class="inline"><a href="about.asp">Messages</a></li>
 </ul>
