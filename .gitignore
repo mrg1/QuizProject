@@ -1,0 +1,4 @@
+# Files for git to ignore
+*.class
+.classpath
+.DS_Store
