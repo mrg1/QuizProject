@@ -15,6 +15,7 @@ public class UserInfo {
 			PreparedStatement addStatement = con.prepareStatement(QuizSqlStatements.SQL_ADD_USER);
 			addStatement.setString(1, username);
 			addStatement.setString(2, password);
+			addStatement.setBoolean(3, false);
 			addStatement.execute();
 			//con.close();
 		} catch (SQLException e) {
