@@ -4,8 +4,17 @@ import user.User;
 import question.Question;
 
 /*
+ * Database Commands needed:
+ * addQuiz(Quiz quiz)
+ * getQuiz(String id)
+ * removeQuiz(String id)
+ * clearHistory(String username)
+ * getUserHistory(String username) //from scores table
+ * 
  * Extension Ideas:
- * 		Author (and/or administrator?) can go in and edit quiz after it's been made.
+ * Author (and/or administrator?) can go in and edit quiz after it's been made.
+ * XML import
+ * 
  */
 public class Quiz {
 
@@ -33,16 +42,22 @@ public class Quiz {
 		this.onePage = onePage; 
 		this.immediateCorrection = immediateCorrection; 
 		this.practice = practice;
+		//TODO add to table
 	}
 	
 	public void remove() {
-		//TODO
+		//TODO deletes quiz (including score history) from table
+		this.clearHistory();
 	}
 	
 	public void clearHistory() {
-		//TODO
-		//Delete scores out of table.
+		//TODO Delete scores out of table.
 	}
+	
+	public static Quiz parseXML(String XML) {
+		return null;
+	}
+	
 	/**
 	 * Retrieves a user's past scores on this quiz in the form of
 	 * a two-dimensional array. 
@@ -50,7 +65,7 @@ public class Quiz {
 	 * @return A two-dimensional array containing a given record's score, 
 	 * date, and time elapsed.
 	 */
-	public int[][] getUserScores(String user) {
+	public int[][] getUserHistory(String user) {
 		//TODO get out of scores table
 		return null;
 	}
@@ -79,18 +94,16 @@ public class Quiz {
 		return onePage;
 	}
 	
-	//EXTENSION IDEA: we can have an option for the author to let the user choose	
-	public void setOnePage() {
-		
+	public void setOnePage(boolean bool) {
+		onePage = bool;
 	}
 
 	public boolean immediateCorrection() {
 		return immediateCorrection;
 	}
 	
-	//same thing as setOnePage comment
-	public void setImmediateCorrection() {
-		
+	public void setImmediateCorrection(boolean bool) {
+		immediateCorrection = bool;
 	}
 	
 	public boolean canPractice() {

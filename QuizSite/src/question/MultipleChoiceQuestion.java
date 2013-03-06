@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 public class MultipleChoiceQuestion implements Question {
 
+	public static final String DISPLAY_NAME = "Multiple Choice Question";
+	
 	private String question;
 	private boolean randomize;
 	private int weight;
@@ -68,9 +70,19 @@ public class MultipleChoiceQuestion implements Question {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
+	@Override
+	public String getDisplayName() {
+		return DISPLAY_NAME;
+	}
+	
 	public static String getBuilderHTML() {
 		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	public static MultipleChoiceQuestion parseXML(String XML) {
+		//TODO
 		return null;
 	}
 

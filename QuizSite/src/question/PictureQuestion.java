@@ -2,6 +2,7 @@ package question;
 
 public class PictureQuestion implements Question {
 
+	public static final String DISPLAY_NAME = "Picture-Response Question";
 	private String url;
 	private int weight;
 	private boolean caseSensitive;
@@ -58,9 +59,19 @@ public class PictureQuestion implements Question {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	@Override
+	public String getDisplayName() {
+		return DISPLAY_NAME;
+	}
 
 	public static String getBuilderHTML() {
 		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	public static PictureQuestion parseXML(String XML) {
+		//TODO
 		return null;
 	}
 }

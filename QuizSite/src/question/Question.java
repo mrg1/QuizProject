@@ -26,4 +26,5 @@ public interface Question {
 	 */
 	String getHTML();
 
+	String getDisplayName();
 }

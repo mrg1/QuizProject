@@ -4,6 +4,8 @@ import java.util.*;
 
 public class ResponseQuestion implements Question {
 
+	public static final String DISPLAY_NAME = "Question-Response Question";
+	
 	private String question;
 	private boolean caseSensitive;
 	private int weight;
@@ -47,8 +49,18 @@ public class ResponseQuestion implements Question {
 		return null;
 	}
 	
+	@Override
+	public String getDisplayName() {
+		return DISPLAY_NAME;
+	}
+	
 	public static String getBuilderHTML() {
 		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	public static ResponseQuestion parseXML(String XML) {
+		//TODO
 		return null;
 	}
 

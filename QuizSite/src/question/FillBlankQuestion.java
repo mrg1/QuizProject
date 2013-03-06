@@ -4,24 +4,27 @@ import java.util.ArrayList;
 
 public class FillBlankQuestion implements Question {
 
-	private String question;
+	public static final String DISPLAY_NAME = "Fill in the Blank Question";
+	
+	private String pre, post;
 	private int weight;
 	private boolean caseSensitive;
 	private ArrayList<String> answers;
-	private static final String BLANK = "_________";
 	
-	public FillBlankQuestion(String before, String after, String[] answers) {
-		question = (before + BLANK + after);
+	public FillBlankQuestion(String pre, String post, String[] answers, boolean sensitive) {
+		this.pre = pre;
+		this.post = post;
 		weight = 1;
-		caseSensitive = false;
+		caseSensitive = sensitive;
 		this.answers = new ArrayList<String>();
 		storeAnswers(answers);
 	}
 	
-	public FillBlankQuestion(String before, String after, String[] answers, int weight) {
-		question = (before + BLANK + after);
+	public FillBlankQuestion(String pre, String post, String[] answers, boolean sensitive, int weight) {
+		this.pre = pre;
+		this.post = post;
 		this.weight = weight;
-		caseSensitive = false;
+		caseSensitive = sensitive;
 		this.answers = new ArrayList<String>();
 		storeAnswers(answers);
 	}
@@ -68,8 +71,12 @@ public class FillBlankQuestion implements Question {
 		return caseSensitive;
 	}
 	
-	public String getText() {
-		return question;
+	public String getPre() {
+		return pre;
+	}
+	
+	public String getPost() {
+		return post;
 	}
 	
 	@Override
@@ -78,8 +85,18 @@ public class FillBlankQuestion implements Question {
 		return null;
 	}
 	
+	@Override
+	public String getDisplayName() {
+		return DISPLAY_NAME;
+	}
+	
 	public static String getBuilderHTML() {
 		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	public static FillBlankQuestion parseXML(String XML) {
+		//TODO
 		return null;
 	}
 
