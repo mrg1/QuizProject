@@ -26,11 +26,11 @@ public class PictureQuestion implements Question {
 		caseSensitive = bool;
 	}
 	
-	public String getURL() {
+	public String getPictureURL() {
 		return url;
 	}
 	
-	public void setURL(String str) {
+	public void setPictureURL(String str) {
 		url = str;
 	}
 	
