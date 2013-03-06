@@ -43,7 +43,6 @@ public class LoginServlet extends HttpServlet {
 			password = hexToString(md.digest(password.getBytes()));
 		} catch (NoSuchAlgorithmException ignored) {}
 		
-		System.out.println(password);
 		if (UserInfo.checkPassword(username, password))
 			request.getRequestDispatcher("homepage.jsp").forward(request, response);
 		else

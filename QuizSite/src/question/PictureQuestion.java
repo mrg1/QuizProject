@@ -26,11 +26,11 @@ public class PictureQuestion implements Question {
 		caseSensitive = bool;
 	}
 	
-	public String getURL() {
+	public String getPictureURL() {
 		return url;
 	}
 	
-	public void setURL(String str) {
+	public void setPictureURL(String str) {
 		url = str;
 	}
 	
@@ -50,8 +50,7 @@ public class PictureQuestion implements Question {
 
 	@Override
 	public int getMaxScore() {
-		// TODO Auto-generated method stub
-		return 0;
+		return weight;
 	}
 
 	@Override
