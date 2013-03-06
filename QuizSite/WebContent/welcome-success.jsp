@@ -8,7 +8,12 @@
 
 <body>
 <h1>Welcome <%= request.getParameter("username") %></h1>
-<%UserInfo.addFriend(request.getParameter("username"),"michael"); %>
+<p>Friends:</p>
+<ul>
+	<%for(String cur : UserInfo.getFriends(request.getParameter("username"))) { %>
+		<li><%=cur %></li>
+	<%} %>
+</ul>
 </body>
 
 </html>
