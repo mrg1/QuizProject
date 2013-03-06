@@ -20,6 +20,7 @@
 <p class="announce">ANNOUNCE: Important Site Announcement</p>
 
 <div class="panel1">
+
 <p class="welcome">Welcome <%= request.getParameter("username") %></p>
 
 <p class="achievements">Achievements go here</p>
