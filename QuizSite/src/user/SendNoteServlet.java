@@ -40,7 +40,14 @@ public class SendNoteServlet extends HttpServlet {
 		String to = request.getParameter("to");
 		String content = request.getParameter("content");
 		
-		UserInfo.addMessage(new Note(to,from,content));
+		if(UserInfo.userExists(to)) {
+			UserInfo.addMessage(new Note(to,from,content));
+			request.setAttribute("message", "Message successfully sent!");
+			request.getRequestDispatcher("homepage.jsp").forward(request, response);
+		} else {
+			request.setAttribute("message", "Message couldn't be sent, user " + to + " doesn't exist.");
+			request.getRequestDispatcher("homepage.jsp").forward(request, response);
+		}
 	}
 
 }

@@ -4,6 +4,7 @@
 
 <%@ page import="db.*" %>
 <%@ page import="message.*" %>
+<%@ page import="java.util.List" %>
 
 <head>
 <% String username = (String)session.getAttribute("username"); %>
@@ -21,6 +22,9 @@
 <li class="inline"><a href="about.asp">Messages</a></li>
 </ul>
 
+<% Object message = request.getAttribute("message"); %>
+<% if(message != null) %><p><%=(String)message %></p><%; %>
+
 <p class="announce">ANNOUNCE: Important Site Announcement</p>
 
 <div class="panel1">
@@ -32,7 +36,9 @@
 <h3>Inbox</h3>
 <a href="sendMessage.jsp">Create Message</a>
 <ul class="list">
-	<% for(Message cur : UserInfo.getMessages(username)) {%>
+	<% List<Message> messages = UserInfo.getMessages(username); %>
+	<% if(messages.isEmpty()) %><li>Nothing yet!</li><%; %>
+	<% for(Message cur : messages) {%>
 		<li class="message"><%= cur.getHtml() %></li>
 	<% } %>
 </ul>
