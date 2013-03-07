@@ -33,7 +33,7 @@ public class Quiz {
 	 * @param immediateCorrection TRUE for immediate correction of questions. Correction will only take place if onePage is FALSE.
 	 * @param practice TRUE indicates practice mode is available, FALSE disables practice.
 	 */
-	private Quiz(String name, String author, String description, Question[] questions, boolean random, boolean onePage, boolean immediateCorrection, boolean practice) {
+	public Quiz(String name, String author, String description, Question[] questions, boolean random, boolean onePage, boolean immediateCorrection, boolean practice) {
 		this.name = name;
 		this.author = author;
 		this.desc = description;

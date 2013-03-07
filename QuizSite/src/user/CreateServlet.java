@@ -46,7 +46,7 @@ public class CreateServlet extends HttpServlet {
 				password = hexToString(md.digest(password.getBytes()));
 			} catch (NoSuchAlgorithmException ignored) {}
 			
-			UserInfo.addUser(username, password);
+			UserInfo.addUser(username, password, "salt", false);
 			request.getRequestDispatcher("homepage.jsp").forward(request, response);
 		}
 	}
