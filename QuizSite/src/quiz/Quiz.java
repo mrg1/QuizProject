@@ -1,6 +1,5 @@
 package quiz;
 
-import user.User;
 import question.Question;
 
 /*
@@ -10,6 +9,7 @@ import question.Question;
  * removeQuiz(String id)
  * clearHistory(String username)
  * getUserHistory(String username) //from scores table
+ * recordScore(String username, int score) //how do we represent timestamp?
  * 
  * Extension Ideas:
  * Author (and/or administrator?) can go in and edit quiz after it's been made.
@@ -54,8 +54,8 @@ public class Quiz {
 		//TODO Delete scores out of table.
 	}
 	
-	public static Quiz parseXML(String XML) {
-		return null;
+	public void recordScore(String user, int score) {
+		//TODO add score to table
 	}
 	
 	/**
@@ -69,6 +69,10 @@ public class Quiz {
 		//TODO get out of scores table
 		return null;
 	}
+	
+	public static Quiz parseXML(String XML) {
+		return null;
+	}
 
 	public String getName() {
 		return name;
@@ -76,6 +80,10 @@ public class Quiz {
 	
 	public String getAuthor() {
 		return author;
+	}
+	
+	public String getDescription() {
+		return desc;
 	}
 	
 	public Question[] getQuestions() {
