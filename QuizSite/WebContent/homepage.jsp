@@ -22,8 +22,11 @@
 <li class="inline"><a href="about.asp">Messages</a></li>
 </ul>
 
-<% Object message = request.getAttribute("message"); %>
-<% if(message != null) %><p><%=(String)message %></p><%; %>
+<% Object message = request.getAttribute("alert"); %>
+<% if(message != null) { %>
+	<p><%=(String)message %></p>
+	<% request.setAttribute("alert",null); %>
+<% } %>
 
 <p class="announce">ANNOUNCE: Important Site Announcement</p>
 
