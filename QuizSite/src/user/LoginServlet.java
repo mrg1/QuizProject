@@ -44,8 +44,10 @@ public class LoginServlet extends HttpServlet {
 			password = hexToString(md.digest(password.getBytes()));
 		} catch (NoSuchAlgorithmException ignored) {}
 		
-		if (UserInfo.checkPassword(username, password))
+		if (UserInfo.checkPassword(username, password)) {
+			request.getSession().setAttribute("username", username);
 			request.getRequestDispatcher("homepage.jsp").forward(request, response);
+		}
 		else
 			request.getRequestDispatcher("information-incorrect.html").forward(request, response);
 	}

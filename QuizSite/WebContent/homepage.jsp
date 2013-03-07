@@ -3,8 +3,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
+<% String username = (String)session.getAttribute("username"); %>
 <title>Home</title>
-<link href="stylesheet.css" rel="stylesheet" type="text/css">
+<link href="stylesheet.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
@@ -21,7 +22,7 @@
 
 <div class="panel1">
 
-<p class="welcome">Welcome <%= request.getParameter("username") %></p>
+<p class="welcome">Welcome <%= username %></p>
 
 <p class="achievements">Achievements go here</p>
 
@@ -112,4 +113,5 @@
 
 </div>
 
+</body>
 </html>
