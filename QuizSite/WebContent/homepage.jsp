@@ -2,6 +2,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 
+<%@ page import="db.*" %>
+<%@ page import="message.*" %>
+
 <head>
 <% String username = (String)session.getAttribute("username"); %>
 <title>Home</title>
@@ -26,12 +29,12 @@
 
 <p class="achievements">Achievements go here</p>
 
-<h3>Messages</h3>
-
+<h3>Inbox</h3>
+<a href="sendMessage.jsp">Create Message</a>
 <ul class="list">
-<li class="message">Message 1</li>
-<li class="message">Message 2</li>
-<li class="message">Message 3</li>
+	<% for(Message cur : UserInfo.getMessages(username)) {%>
+		<li class="message"><%= cur.getHtml() %></li>
+	<% } %>
 </ul>
 
 <h3 class="inline">User's Recent Activity</h3>

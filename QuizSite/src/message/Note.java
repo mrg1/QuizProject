@@ -11,8 +11,10 @@ public class Note extends Message {
 	private static final int type = MessageInfo.NOTE_ID;
 	
 	public String getHtml(){
-		//TODO
-		return "";
+		String out = "";
+		out += "<p>From: " + from + "</p>\n";
+		out += "<p>" + content + "</p>";
+		return out;
 	}
 	
 	public int getType(){
