@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Send Message</title>
 <link href="stylesheet.css" rel="stylesheet" type="text/css">
 </head>
 
