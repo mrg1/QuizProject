@@ -493,11 +493,12 @@ public class UserInfo {
 		return recent;
 	}
 	
-	public static List<Integer> getAuthorHistory(){
+	public static List<Integer> getAuthorHistory(String username){
 		List<Integer> history = new ArrayList<Integer>();
 		con = QuizDB.getConnection();
 		try {
 			PreparedStatement selectStatement = con.prepareStatement(QuizSqlStatements.SQL_GET_AUTHOR_HISTORY);
+			selectStatement.setString(1, username);
 			ResultSet rs = selectStatement.executeQuery();
 			while(rs.next()){
 				history.add(rs.getInt(1));
@@ -508,11 +509,12 @@ public class UserInfo {
 		return history;
 	}
 	
-	public static List<Score> getFriendHistory(){
+	public static List<Score> getFriendHistory(String username){
 		List<Score> history = new ArrayList<Score>();
 		con = QuizDB.getConnection();
 		try {
 			PreparedStatement selectStatement = con.prepareStatement(QuizSqlStatements.SQL_GET_FRIEND_HISTORY);
+			selectStatement.setString(1, username);
 			ResultSet rs = selectStatement.executeQuery();
 			while(rs.next()){
 				history.add(new Score(rs.getInt(3), rs.getInt(1),rs.getString(2)));
