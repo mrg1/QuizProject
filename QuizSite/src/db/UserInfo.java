@@ -462,4 +462,19 @@ public class UserInfo {
 		}
 		
 	}
+	
+	public static List<String> popularQuizTitles(){
+		List<String> popular = new ArrayList<String>();
+		con = QuizDB.getConnection();
+		try {
+			PreparedStatement selectStatement = con.prepareStatement(QuizSqlStatements.SQL_MOST_PLAYED_QUIZ);
+			ResultSet rs = selectStatement.executeQuery();
+			while(rs.next()){
+				popular.add(rs.getString(1));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return popular;
+	}
 }
