@@ -14,7 +14,8 @@ public class Request extends Message{
 		String out = "";
 		out += "<p>" + from + " would like to be your friend.</p>\n";
 		out += "<form action=\"AcceptServlet\" method=\"post\">\n";
-		out += "<input type=\"hidden\" name = \"from\" value=\""+from+"\" />\n";
+		out += "<input type=\"hidden\" name=\"from\" value=\""+from+"\" />\n";
+		out += "<input type=\"hidden\" name=\"id\" value=\""+getMessageId()+"\" />\n";
 		out += "<input type=\"submit\" value=\"Accept\" />\n";
 		out += "</form>";
 		return out;
