@@ -31,11 +31,3 @@ QuizSite/bin/question/Question.class
 QuizSite/bin/question/PictureQuestion.class
 
 QuizSite/bin/question/MultipleChoiceQuestion.class
-
-*.class
-
-QuizSite/bin/db/QuizSqlStatements.class
-
-QuizSite/bin/db/UserInfo.class
-
-QuizSite/bin/user/CreateServlet.class
