@@ -327,11 +327,11 @@ public class UserInfo {
 		return result;
 	}
 	
-	public static void deleteMessages(Message m){
+	public static void deleteMessages(int messageId){
 		con = QuizDB.getConnection();
 		try {
 			PreparedStatement addStatement = con.prepareStatement(QuizSqlStatements.SQL_DELETE_MESSAGE);
-			addStatement.setInt(1, m.getMessageId());
+			addStatement.setInt(1, messageId);
 			addStatement.execute();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -463,18 +463,63 @@ public class UserInfo {
 		
 	}
 	
-	public static List<String> popularQuizTitles(){
-		List<String> popular = new ArrayList<String>();
+	public static List<Integer> popularQuizIds(){
+		List<Integer> popular = new ArrayList<Integer>();
 		con = QuizDB.getConnection();
 		try {
 			PreparedStatement selectStatement = con.prepareStatement(QuizSqlStatements.SQL_MOST_PLAYED_QUIZ);
 			ResultSet rs = selectStatement.executeQuery();
 			while(rs.next()){
-				popular.add(rs.getString(1));
+				popular.add(rs.getInt(1));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return popular;
+	}
+	
+	public static List<Integer> recentlyCreatedQuizIds(){
+		List<Integer> recent = new ArrayList<Integer>();
+		con = QuizDB.getConnection();
+		try {
+			PreparedStatement selectStatement = con.prepareStatement(QuizSqlStatements.SQL_GET_RECENTLY_CREATED_QUIZZES);
+			ResultSet rs = selectStatement.executeQuery();
+			while(rs.next()){
+				recent.add(rs.getInt(1));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return recent;
+	}
+	
+	public static List<Integer> getAuthorHistory(){
+		List<Integer> history = new ArrayList<Integer>();
+		con = QuizDB.getConnection();
+		try {
+			PreparedStatement selectStatement = con.prepareStatement(QuizSqlStatements.SQL_GET_AUTHOR_HISTORY);
+			ResultSet rs = selectStatement.executeQuery();
+			while(rs.next()){
+				history.add(rs.getInt(1));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return history;
+	}
+	
+	public static List<Score> getFriendHistory(){
+		List<Score> history = new ArrayList<Score>();
+		con = QuizDB.getConnection();
+		try {
+			PreparedStatement selectStatement = con.prepareStatement(QuizSqlStatements.SQL_GET_FRIEND_HISTORY);
+			ResultSet rs = selectStatement.executeQuery();
+			while(rs.next()){
+				history.add(new Score(rs.getInt(3), rs.getInt(1),rs.getString(2)));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return history;
 	}
 }
