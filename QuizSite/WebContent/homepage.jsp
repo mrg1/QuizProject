@@ -18,8 +18,8 @@
 
 <ul class="navbar">
 <li class="inline"><a href="homepage.jsp">Home</a></li>
-<li class="inline"><a href="news.asp">Quizzes</a></li>
-<li class="inline"><a href="about.asp">Messages</a></li>
+<li class="inline"><a href="quizzes.jsp">Quizzes</a></li>
+<li class="inline"><a href="messages.jsp">Messages</a></li>
 </ul>
 
 <% Object message = request.getAttribute("alert"); %>
@@ -34,10 +34,15 @@
 
 <p class="welcome">Welcome <%= username %></p>
 
-<p class="achievements">Achievements go here</p>
+<div class="achievements">
+<% List<Integer> achievements = UserInfo.getAchievements(username); %>
+<% for(Integer i : achievements) {%>
+	<p> i</p>
+	<%} %>
+</div>
 
-<h3>Inbox</h3>
-<a href="sendMessage.jsp">Create Message</a>
+<h3 class="inline">Inbox</h3>
+<a href="sendMessage.jsp" class="inline">(Create Message)</a>
 <ul class="list">
 	<% List<Message> messages = UserInfo.getMessages(username); %>
 	<% if(messages.isEmpty()) %><li>Nothing yet!</li><%; %>

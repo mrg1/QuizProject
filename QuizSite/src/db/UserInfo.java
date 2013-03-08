@@ -119,7 +119,7 @@ public class UserInfo {
 		}
 	}
 	
-	public static ArrayList<Integer> getAchievments(String user){
+	public static ArrayList<Integer> getAchievements(String user){
 		ArrayList<Integer> achs = new ArrayList<Integer>();
 		con = QuizDB.getConnection();
 		try {

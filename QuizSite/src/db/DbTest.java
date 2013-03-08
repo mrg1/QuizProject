@@ -32,10 +32,10 @@ public class DbTest extends TestCase {
 		Integer achID = 1;
 		Integer secondAchId = 2;
 		UserInfo.addAchievment(username, achID);
-		List<Integer> achs = UserInfo.getAchievments(username);
+		List<Integer> achs = UserInfo.getAchievements(username);
 		assertTrue(achs.get(0).equals(achID));
 		UserInfo.addAchievment(username, secondAchId);
-		achs = UserInfo.getAchievments(username);
+		achs = UserInfo.getAchievements(username);
 		assertTrue(achs.get(0).equals(achID));
 		assertTrue(achs.get(1).equals(secondAchId));
 	}

@@ -38,8 +38,7 @@ public class SendNoteServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String from = (String)request.getSession().getAttribute("username");
 		String to = request.getParameter("to");
-		String content = request.getParameter("content");
-		
+		String content = request.getParameter("content");		
 		if(UserInfo.userExists(to)) {
 			UserInfo.addMessage(new Note(to,from,content));
 			request.setAttribute("alert", "Message successfully sent!");

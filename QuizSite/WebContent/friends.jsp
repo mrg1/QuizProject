@@ -19,7 +19,7 @@
 <li class="inline"><a href="about.asp">Messages</a></li>
 </ul>
 
-<h1>Friends for <%= request.getParameter("username") %>:</h1>
+<h1>Friends for <%= session.getAttribute("username") %>:</h1>
 <ul>
 	<%for(String cur : UserInfo.getFriends(request.getParameter("username"))) { %>
 		<li><%=cur %></li>
@@ -31,18 +31,16 @@
 <th>Friend</th>
 <th></th>
 </tr>
+
+<% for(String friend : UserInfo.getFriends((String) session.getAttribute("username"))) { %>
+
 <tr>
-<td>Friend 1</td>
+<td><%= friend %></td>
 <td><a href="friends.jsp">Remove</a></td>
 </tr>
-<tr>
-<td>Friend 2</td>
-<td><a href="friends.jsp">Remove</a></td>
-</tr>
-<tr>
-<td>Friend 2</td>
-<td><a href="friends.jsp">Remove</a></td>
-</tr>
+
+<%} %>
+
 </table>
 
 </body>
