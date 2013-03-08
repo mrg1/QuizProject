@@ -105,21 +105,31 @@
 <div class="panel2">
 
 <h3>Popular Quizzes</h3>
+
 <ul class="list1">
-<li>1. Quiz 1</li>
-<li>2. Quiz 2</li>
-<li>3. Quiz 3</li>
-<li>4. Quiz 4</li>
-<li>5. Quiz 5</li>
+
+<% List<Integer> popular = UserInfo.popularQuizIds(); %>
+<% if(!popular.isEmpty()) { %>
+<% for (int i = 0; i < 10; i++) {%>
+<% if(popular.size() > i) { %>
+<% int id = popular.get(i); %>
+<li><%=i + 1 %>. <%=UserInfo.getQuiz(id).getName() %></li>
+<% } } } %>
+
 </ul>
 
 <h3>Recently Created</h3>
+
 <ul class="list1">
-<li>Quiz 1</li>
-<li>Quiz 2</li>
-<li>Quiz 3</li>
-<li>Quiz 4</li>
-<li>Quiz 5</li>
+
+<% List<Integer> recent = UserInfo.recentlyCreatedQuizIds(); %>
+<% if(!recent.isEmpty()) { %>
+<% for (int i = 0; i < 5; i++) {%>
+<% if(recent.size() > i) { %>
+<% int id = recent.get(i); %>
+<li><%=UserInfo.getQuiz(id).getName() %></li>
+<% } } } %>
+
 </ul>
 
 <h3 class="inline">Friend Activity</h3>
