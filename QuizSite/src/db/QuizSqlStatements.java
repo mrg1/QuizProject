@@ -54,7 +54,10 @@ public class QuizSqlStatements {
 	public final static String SQL_GET_TOP_TEN = "SELECT username, score FROM " + SCORES_TABLE + " WHERE quizId=? ORDER BY score LIMIT 10";
 	public final static String SQL_ADD_SCORE = "INSERT INTO " + SCORES_TABLE + " (username, quizId, score) VALUES (?, ?, ?);";
 	public final static String SQL_REMOVE_USER_HISTORY = "DELETE FROM " + SCORES_TABLE + " where username=?;";
+	public final static String SQL_REMOVE_USER_HISTORY_ON_QUIZ = "DELETE FROM " + SCORES_TABLE + " where username=? AND quizId=?;";
 	public final static String SQL_MOST_PLAYED_QUIZ = "SELECT quizId FROM (SELECT quizId, count(*) as c FROM " +  SCORES_TABLE + " GROUP BY quizId ORDER BY c DESC) as temp_table;";
+	public final static String SQL_GET_USER_QUIZ_HISTORY = "SELECT score FROM " + SCORES_TABLE + " where username=? AND quizId=?;";
+	
 	
 	//Some multi-table stuff
 	public final static String SQL_DELETE_QUIZ = "DELETE FROM " + ANSWER_TABLE + " WHERE questionId IN (SELECT questionId FROM " + QUESTION_TABLE + " WHERE quizId=?);";
