@@ -19,6 +19,17 @@
 <li class="inline"><a href="about.asp">Messages</a></li>
 </ul>
 
+<% Object message = request.getAttribute("alert"); %>
+<% if(message != null) { %>
+	<p><%=(String)message %></p>
+	<% request.setAttribute("alert",null); %>
+<% } %>
+
+<form action="SendRequestServlet" method="post">
+	<p>Add Friend: <input type="text" name="to" /></p>
+	<p><input type="submit" value="Add" /></p>
+</form>
+
 <h1>Friends for <%= session.getAttribute("username") %>:</h1>
 <ul>
 	<%for(String cur : UserInfo.getFriends(request.getParameter("username"))) { %>
