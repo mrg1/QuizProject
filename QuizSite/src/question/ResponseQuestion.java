@@ -27,6 +27,14 @@ public class ResponseQuestion implements Question {
 		storeAnswers(answers);
 	}
 	
+	public ResponseQuestion(String question, String[] answers, boolean caseSensitive, int weight) {
+		this.question = question;
+		this.weight = weight;
+		this.caseSensitive = caseSensitive;
+		this.answers = new ArrayList<String>();
+		storeAnswers(answers);
+	}
+	
 	
 	@Override
 	public int checkAnswer(String userAnswer) {
@@ -94,4 +102,52 @@ public class ResponseQuestion implements Question {
 			}
 		}
 	}
+	
+	public int getQuestionType(){
+		return QuestionInfo.RESPONSE_QUESTION_ID;
+	}
+	
+	public List<String> getCorrectAnswers(){
+		List<String> result = answers;
+		return result;
+	}
+	
+	public List<String> getIncorrectAnswers(){
+		List<String> result = new ArrayList<String>();
+		return result;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (caseSensitive ? 1231 : 1237);
+		result = prime * result
+				+ ((question == null) ? 0 : question.hashCode());
+		result = prime * result + weight;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ResponseQuestion other = (ResponseQuestion) obj;
+		if (caseSensitive != other.caseSensitive)
+			return false;
+		if (question == null) {
+			if (other.question != null)
+				return false;
+		} else if (!question.equals(other.question))
+			return false;
+		if (weight != other.weight)
+			return false;
+		return true;
+	}
+	
+	
 }

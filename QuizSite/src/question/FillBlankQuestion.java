@@ -1,6 +1,7 @@
 package question;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class FillBlankQuestion implements Question {
 
@@ -100,4 +101,56 @@ public class FillBlankQuestion implements Question {
 		return null;
 	}
 
+	public int getQuestionType(){
+		return QuestionInfo.FILL_BLANK_ID;
+	}
+	
+	public List<String> getCorrectAnswers(){
+		List<String> result = answers;
+		return result;
+	}
+	
+	public List<String> getIncorrectAnswers(){
+		List<String> result = new ArrayList<String>();
+		return result;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (caseSensitive ? 1231 : 1237);
+		result = prime * result + ((post == null) ? 0 : post.hashCode());
+		result = prime * result + ((pre == null) ? 0 : pre.hashCode());
+		result = prime * result + weight;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		FillBlankQuestion other = (FillBlankQuestion) obj;
+		if (caseSensitive != other.caseSensitive)
+			return false;
+		if (post == null) {
+			if (other.post != null)
+				return false;
+		} else if (!post.equals(other.post))
+			return false;
+		if (pre == null) {
+			if (other.pre != null)
+				return false;
+		} else if (!pre.equals(other.pre))
+			return false;
+		if (weight != other.weight)
+			return false;
+		return true;
+	}
+	
+	
 }

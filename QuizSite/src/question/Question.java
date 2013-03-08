@@ -1,5 +1,7 @@
 package question;
 
+import java.util.List;
+
 /**
  * Question Interface to be implemented by the various question types.
  * Can support questions with varied weights and partial credit.
@@ -21,10 +23,22 @@ public interface Question {
 	 */
 	int getMaxScore();
 	
+	int getQuestionType();
+	
+	int getWeight();
+	
+	List<String> getIncorrectAnswers();
+	
+	List<String> getCorrectAnswers();
+	
 	/**
 	 * @return HTML representation of the question for quiz view.
 	 */
 	String getHTML();
 
 	String getDisplayName();
+	
+	boolean equals(Object obj);
+	
+	public int hashCode();
 }
