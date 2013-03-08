@@ -65,9 +65,9 @@ public class DbTest extends TestCase {
 		assertTrue(list.contains(c));
 		assertTrue(list.contains(n));
 		assertTrue(list.contains(r));
-		UserInfo.deleteMessages(r);
-		UserInfo.deleteMessages(c);
-		UserInfo.deleteMessages(n);
+		UserInfo.deleteMessages(r.getMessageId());
+		UserInfo.deleteMessages(c.getMessageId());
+		UserInfo.deleteMessages(n.getMessageId());
 	}
 	
 	@Test
