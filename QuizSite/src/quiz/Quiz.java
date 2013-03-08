@@ -2,6 +2,8 @@ package quiz;
 
 import java.util.Arrays;
 
+import db.UserInfo;
+
 import question.Question;
 
 /*
@@ -44,12 +46,12 @@ public class Quiz {
 		this.onePage = onePage; 
 		this.immediateCorrection = immediateCorrection; 
 		this.practice = practice;
-		//TODO add to table
+		UserInfo.addQuiz(this);
 	}
 	
 	public void remove() {
-		//TODO deletes quiz (including score history) from table
 		this.clearHistory();
+		UserInfo.deleteQuiz(this.getQuizId());
 	}
 	
 	public void clearHistory() {
@@ -57,7 +59,8 @@ public class Quiz {
 	}
 	
 	public void recordScore(String user, int score) {
-		//TODO add score to table
+		Score s = new Score(score, this.getQuizId(), user);
+		UserInfo.addScore(s);
 	}
 	
 	/**
