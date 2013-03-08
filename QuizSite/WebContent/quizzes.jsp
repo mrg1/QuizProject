@@ -2,10 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 
-<%@ page import="db.UserInfo" %>
-
 <head>
-<title>Friends</title>
+<title>Quizzes</title>
 <link href="stylesheet.css" rel="stylesheet" type="text/css"></link>
 </head>
 
@@ -19,31 +17,31 @@
 <li class="inline"><a href="about.asp">Messages</a></li>
 </ul>
 
-<h1>Friends for <%= request.getParameter("username") %>:</h1>
-<ul>
-	<%for(String cur : UserInfo.getFriends(request.getParameter("username"))) { %>
-		<li><%=cur %></li>
-	<%} %>
-</ul>
+<h1>All Quizzes</h1>
 
 <table class="table4">
 <tr>
-<th>Friend</th>
-<th></th>
+<th>Quiz Title</th>
+<th>Created By</th>
+<th>Date</th>
 </tr>
 <tr>
-<td>Friend 1</td>
-<td><a href="friends.jsp">Remove</a></td>
+<td><a href="quiz.jsp">Title 1</a></td>
+<td>User 1</td>
+<td>Date 1</td>
 </tr>
 <tr>
-<td>Friend 2</td>
-<td><a href="friends.jsp">Remove</a></td>
+<td>Title 2</td>
+<td>User 2</td>
+<td>Date 2</td>
 </tr>
 <tr>
-<td>Friend 2</td>
-<td><a href="friends.jsp">Remove</a></td>
+<td>Title 3</td>
+<td>User 3</td>
+<td>Date 3</td>
 </tr>
 </table>
+
 
 </body>
 
