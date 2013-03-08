@@ -124,4 +124,5 @@ public class DbTest extends TestCase {
 		UserInfo.deleteQuiz(qId);
 		assertTrue(UserInfo.getQuiz(qId) == (null));
 	}
+	
 }

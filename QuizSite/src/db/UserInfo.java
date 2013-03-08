@@ -524,4 +524,33 @@ public class UserInfo {
 		}
 		return history;
 	}
+	
+	public static List<Score> getUserHistoryOnQuiz(String username, int quizId){
+		List<Score> history = new ArrayList<Score>();
+		con = QuizDB.getConnection();
+		try {
+			PreparedStatement selectStatement = con.prepareStatement(QuizSqlStatements.SQL_GET_USER_QUIZ_HISTORY);
+			selectStatement.setString(1, username);
+			selectStatement.setInt(2, quizId);
+			ResultSet rs = selectStatement.executeQuery();
+			while(rs.next()){
+				history.add(new Score(rs.getInt(1), quizId, username));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return history;
+	}
+	
+	public static void deleteUserHistoryOnQuiz(String username, int quizId){
+		con = QuizDB.getConnection();
+		try {
+			PreparedStatement deleteStatement = con.prepareStatement(QuizSqlStatements.SQL_REMOVE_USER_HISTORY_ON_QUIZ);
+			deleteStatement.setString(1, username);
+			deleteStatement.setInt(2, quizId);
+			deleteStatement.execute();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 }
