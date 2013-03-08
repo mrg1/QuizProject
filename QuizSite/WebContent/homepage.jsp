@@ -5,6 +5,7 @@
 <%@ page import="db.*" %>
 <%@ page import="message.*" %>
 <%@ page import="java.util.List" %>
+<%@ page import="quiz.*" %>
 
 <head>
 <% String username = (String)session.getAttribute("username"); %>
@@ -37,7 +38,7 @@
 <div class="achievements">
 <% List<Integer> achievements = UserInfo.getAchievements(username); %>
 <% for(Integer i : achievements) {%>
-	<p> i</p>
+	<p> <%=AchievementInfo.getAchievement(i) %></p>
 	<%} %>
 </div>
 
@@ -65,14 +66,17 @@
 <table class="table2">
 <tr>
 <th>Name</th>
-<th>Date</th>
 <th>Score</th>
 </tr>
+
+<% List<Score> history = UserInfo.getHistory(username); %>
+<% for(int i = 0; i < 5; i++) { %>
+<% if(history.size() > i) { %>
+<%	Score score = history.get(i); %>
 <tr>
-<td>Name 1</td>
-<td>Date 1</td>
-<td>Score 1</td>
-</tr>
+<td><%= UserInfo.getQuiz(score.getQuizId()).getName() %></td>
+<td><%= score.getScore()%></td>
+<% } } %></tr>
 </table>
 </td>
 
