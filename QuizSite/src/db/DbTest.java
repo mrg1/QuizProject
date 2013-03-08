@@ -1,12 +1,14 @@
 package db;
 
-import java.util.List;
+import java.util.*;
 import user.*;
 import message.*;
 
 import org.junit.Test;
 
+import question.*;
 import quiz.Quiz;
+import quiz.Score;
 
 import junit.framework.TestCase;
 
@@ -39,23 +41,9 @@ public class DbTest extends TestCase {
 		assertTrue(achs.get(0).equals(achID));
 		assertTrue(achs.get(1).equals(secondAchId));
 	}
-/*
-	//@Test
-	public void testQuiz(){
-		boolean rq = false;
-		boolean ic = true;
-		boolean mp = false;
-		boolean pm = true;
-		String author = "mrg";
-		int quizId = UserInfo.addQuiz(author, rq, mp, ic, pm);
-		Quiz q = UserInfo.getQuiz(quizId);
-		assertTrue(q.getAuthor().equals(author));
-		assertTrue(q.isRandom() == false);
-		assertTrue(q.immediateCorrection() == true);
-		assertTrue(q.isOnePage() == false);
-		assertTrue(q.canPractice() == true);
-	}
-	*/
+
+	
+	
 	@Test
 	public void testMessage(){
 		String to = "mrg1";
@@ -67,18 +55,73 @@ public class DbTest extends TestCase {
 		Challenge c = new Challenge(to, from, content);
 		UserInfo.addMessage(c);
 		List<Message> list = UserInfo.getMessages("mrg1");
-		assertTrue(list.get(0).equals(c));
+		assertTrue(list.contains(c));
 		UserInfo.addMessage(n);
 		list = UserInfo.getMessages("mrg1");
-		assertTrue(list.get(0).equals(c));
-		assertTrue(list.get(1).equals(n));
+		assertTrue(list.contains(c));
+		assertTrue(list.contains(n));
 		UserInfo.addMessage(r);
 		list = UserInfo.getMessages("mrg1");
-		assertTrue(list.get(0).equals(c));
-		assertTrue(list.get(1).equals(n));
-		assertTrue(list.get(2).equals(r));
+		assertTrue(list.contains(c));
+		assertTrue(list.contains(n));
+		assertTrue(list.contains(r));
 		UserInfo.deleteMessages(r);
 		UserInfo.deleteMessages(c);
 		UserInfo.deleteMessages(n);
+	}
+	
+	@Test
+	public void testQuiz(){
+		String[] answers = {"hello", "hola", "bonjour", "tag"};
+		String question1 = "How do you say hello in Spanish?";
+		String question2 = "How do you say hello?";
+		MultipleChoiceQuestion q = new MultipleChoiceQuestion(question1, answers, "hola");
+		PictureQuestion pq = new PictureQuestion(question1, answers, true, 1);
+		ResponseQuestion rq = new ResponseQuestion(question2, answers);
+		Question[] questions = {rq, pq};
+		Quiz quiz = new Quiz("TestQuiz", "mrg1", "This is a test quiz", questions, false, true, true, false);
+		Quiz quiz2 = new Quiz("TestQuiz", "mrg1", "This is a test quiz", questions, false, true, true, false);
+		int qid = UserInfo.addQuiz(quiz);		
+		int qid2 = UserInfo.addQuiz(quiz2);	
+		Quiz gotQuiz = UserInfo.getQuiz(qid);
+		assertTrue(gotQuiz.equals(quiz));
+	}
+	
+	@Test
+	public void testScoring(){
+		Score s1 = new Score(76, 99, "mrg1");
+		Score s2 = new Score(66, 100, "mrg1");
+		Score s3 = new Score(79, 99, "aKlein1");
+		UserInfo.addScore(s1);
+		UserInfo.addScore(s2);
+		UserInfo.addScore(s3);
+		List<Score> scores = UserInfo.getHistory("mrg1");
+		assertTrue(scores.contains(s1));
+		assertTrue(scores.contains(s2));
+		assertTrue(!scores.contains(s3));
+		scores = UserInfo.getTopTen(99);
+		assertTrue(scores.contains(s1));
+		assertTrue(!scores.contains(s2));
+		assertTrue(scores.contains(s3));
+		UserInfo.deleteHistory("mrg1");
+		UserInfo.deleteHistory("aKlein1");
+		scores = UserInfo.getHistory("mrg1");
+		assertTrue(!scores.contains(s1));
+		assertTrue(!scores.contains(s2));
+		assertTrue(!scores.contains(s3));
+	}
+	
+	@Test
+	public void testQuizDelete(){
+		String[] answers = {"hello", "hola", "bonjour", "tag"};
+		String question1 = "How do you say hello in Spanish?";
+		String question2 = "How do you say hello?";
+		MultipleChoiceQuestion q = new MultipleChoiceQuestion(question1, answers, "hola");
+		ResponseQuestion rq = new ResponseQuestion(question2, answers);
+		Question[] questions = {rq, q};
+		Quiz quiz = new Quiz("TestQuiz", "mrg1", "This is a test quiz", questions, false, true, true, false);
+		int qId = UserInfo.addQuiz(quiz);	
+		UserInfo.deleteQuiz(qId);
+		assertTrue(UserInfo.getQuiz(qId) == (null));
 	}
 }

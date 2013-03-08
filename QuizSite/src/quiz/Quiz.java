@@ -1,5 +1,7 @@
 package quiz;
 
+import java.util.Arrays;
+
 import question.Question;
 
 /*
@@ -9,7 +11,7 @@ import question.Question;
  * removeQuiz(String id)
  * clearHistory(String username)
  * getUserHistory(String username) //from scores table
- * recordScore(String username, int score) //how do we represent timestamp?
+ * recordScore(String username, int score) //how do we represent timestamp? 
  * 
  * Extension Ideas:
  * Author (and/or administrator?) can go in and edit quiz after it's been made.
@@ -21,7 +23,7 @@ public class Quiz {
 	private String name, author, desc;
 	private Question[] questions;
 	private boolean random, onePage, immediateCorrection, practice;
-	
+	private int quizId;
 	/**
 	 * Constructor for a new quiz. 
 	 * @param name Quiz name
@@ -121,4 +123,73 @@ public class Quiz {
 	public void setPractice(boolean bool) {
 		practice = bool;
 	}
+
+	public int getQuizId() {
+		return quizId;
+	}
+
+	public void setQuizId(int quizId) {
+		this.quizId = quizId;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((author == null) ? 0 : author.hashCode());
+		result = prime * result + ((desc == null) ? 0 : desc.hashCode());
+		result = prime * result + (immediateCorrection ? 1231 : 1237);
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + (onePage ? 1231 : 1237);
+		result = prime * result + (practice ? 1231 : 1237);
+		result = prime * result + Arrays.hashCode(questions);
+		result = prime * result + quizId;
+		result = prime * result + (random ? 1231 : 1237);
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Quiz other = (Quiz) obj;
+		if (author == null) {
+			if (other.author != null)
+				return false;
+		} else if (!author.equals(other.author))
+			return false;
+		if (desc == null) {
+			if (other.desc != null)
+				return false;
+		} else if (!desc.equals(other.desc))
+			return false;
+		if (immediateCorrection != other.immediateCorrection)
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		if (onePage != other.onePage)
+			return false;
+		if (practice != other.practice)
+			return false;
+		if (!Arrays.equals(questions, other.questions))
+			return false;
+		if (quizId != other.quizId)
+			return false;
+		if (random != other.random)
+			return false;
+		return true;
+	}
+
+	
+
+
+
+
 }
