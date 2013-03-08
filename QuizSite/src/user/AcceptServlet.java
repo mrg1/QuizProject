@@ -39,6 +39,7 @@ public class AcceptServlet extends HttpServlet {
 		String from = request.getParameter("from");
 		int id = Integer.parseInt(request.getParameter("id"));
 		UserInfo.addFriend(to, from);
+		UserInfo.deleteMessages(id);
 		request.setAttribute("alert", "You and " + from + " are now friends!");
 		request.getRequestDispatcher("homepage.jsp").forward(request, response);
 	}
