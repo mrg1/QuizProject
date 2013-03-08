@@ -48,7 +48,12 @@
 	<% List<Message> messages = UserInfo.getMessages(username); %>
 	<% if(messages.isEmpty()) %><li>Nothing yet!</li><%; %>
 	<% for(Message cur : messages) {%>
-		<li class="message"><%= cur.getHtml() %></li>
+		<li class="message"><%= cur.getHtml() %>
+		<form action="DeleteMessageServlet" method="post">
+           <input type="hidden" name="id" value="<%=cur.getMessageId() %>" />
+           <input type="submit" value="Remove" />
+     	</form>    
+		</li>
 	<% } %>
 </ul>
 

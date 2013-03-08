@@ -7,20 +7,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import message.*;
 import db.UserInfo;
 
 /**
- * Servlet implementation class SendRequestServlet
+ * Servlet implementation class DeleteMessageServlet
  */
-@WebServlet("/SendRequestServlet")
-public class SendRequestServlet extends HttpServlet {
+@WebServlet("/DeleteMessageServlet")
+public class DeleteMessageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SendRequestServlet() {
+    public DeleteMessageServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,19 +35,9 @@ public class SendRequestServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String from = (String)request.getSession().getAttribute("username");
-		String to = request.getParameter("to");
-		if(UserInfo.userExists(to)) {
-			UserInfo.addMessage(new Request(to,from,""));
-			request.setAttribute("alert", "Request successfully sent!");
-			request.getRequestDispatcher("friends.jsp").forward(request, response);
-		} else if(UserInfo.getFriends(from).contains(to)) {
-			request.setAttribute("alert", "Request couldn't be sent, you and " + to + " are already friends.");
-			request.getRequestDispatcher("friends.jsp").forward(request, response);
-		} else {
-			request.setAttribute("alert", "Request couldn't be sent, user " + to + " doesn't exist.");
-			request.getRequestDispatcher("friends.jsp").forward(request, response);
-		}
+		UserInfo.deleteMessages(Integer.parseInt(request.getParameter("id")));
+		request.setAttribute("alert", "Message deleted!");
+		request.getRequestDispatcher("homepage.jsp").forward(request, response);
 	}
 
 }
