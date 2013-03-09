@@ -34,9 +34,9 @@
 	<% request.setAttribute("alert",null); %>
 <% } %>
 
-<% for(String a : UserInfo.getAnnouncements()) { %>
+<%-- <% for(String a : UserInfo.getAnnouncements()) { %>
 <p class="announce"><%=a %></p>
-<%} %>
+<%} %> --%>
 
 <div class="panel1">
 
