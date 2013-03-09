@@ -2,13 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 
-<%@ page import="db.*" %>
-<%@ page import="message.*" %>
-<%@ page import="quiz.*" %>
-<%@ page import="user.*" %>
-
 <head>
-<% Quiz quiz = UserInfo.getQuiz(Integer.parseInt(request.getParameter("id"))); %>
 <title>Quiz 1</title>
 <link href="stylesheet.css" rel="stylesheet" type="text/css"></link>
 </head>
@@ -23,7 +17,7 @@
 <li class="inline"><a href="about.asp">Messages</a></li>
 </ul>
 
-<h1><%= quiz.getName() %></h1>
+<h1>Quiz Title</h1>
 
 <p class="achievements">Created By Username. Summary goes of quiz goes here too.</p>
 
