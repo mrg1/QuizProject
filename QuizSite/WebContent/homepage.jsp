@@ -70,31 +70,38 @@
 <td>
 <table class="table2">
 <tr>
-<th>Name</th>
+<th>Title</th>
 <th>Score</th>
 </tr>
 
 <% List<Score> history = UserInfo.getHistory(username); %>
+<% if (history != null) { %>
 <% for(int i = 0; i < 5; i++) { %>
 <% if(history.size() > i) { %>
 <%	Score score = history.get(i); %>
 <tr>
-<td><%= UserInfo.getQuiz(score.getQuizId()).getName() %></td>
+<td><%--= UserInfo.getQuiz(score.getQuizId()).getName() --%></td>
 <td><%= score.getScore()%></td>
-<% } } %></tr>
+<% } } } %>
+</tr>
 </table>
 </td>
 
 <td>
 <table class="table2">
 <tr>
-<th>Name</th>
+<th>Title</th>
 <th>Date</th>
 </tr>
+<% List<Integer> historyCreated = UserInfo.getAuthorHistory(username); %>
+<% for(int i = 0; i < 5; i++) { %>
 <tr>
-<td>Name 1</td>
-<td>Date 1</td>
+<% if(historyCreated.size() > i) { %>
+<%	int id = historyCreated.get(i); %>
+<td><%= UserInfo.getQuiz(id).getName() %></td>
+<td><%= UserInfo.getQuiz(id).getAuthor()%></td>
 </tr>
+<% } } %>
 </table>
 </td>
 
@@ -136,14 +143,20 @@
 <p class="inline"><a href="friends.jsp">(See Friends)</a></p>
 <table class="table3">
 <tr>
-<th>Name</th>
-<th>Date</th>
+<th>Friend</th>
+<th>Quiz Title</th>
 <th>Score</th>
 </tr>
+
+<% List<Score> friendHistory = UserInfo.getFriendHistory(username); %>
+<% for(int i = 0; i < 5; i++) { %>
+<% if(friendHistory.size() > i) { %>
+<%	Score s = friendHistory.get(i); %>
 <tr>
-<td>Name 1</td>
-<td>Date 1</td>
-<td>Score 1</td>
+<td><%= s.getUsername() %></td>
+<td><%= UserInfo.getQuiz(s.getQuizId()).getName() %></td>
+<td><%= s.getScore()%></td>
+<% } } %>
 </tr>
 </table>
 

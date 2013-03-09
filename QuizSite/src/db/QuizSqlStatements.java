@@ -14,7 +14,7 @@ public class QuizSqlStatements {
 	public final static String SQL_ADD_FRIEND = "INSERT INTO " + FRIENDS_TABLE + " VALUES (?, ?);";
 	
 	
-	//Acheivments
+	//Achievements
 	private final static String ACHIEVMENTS_TABLE = "achievments";
 	public final static String SQL_ADD_ACH = "INSERT INTO " + ACHIEVMENTS_TABLE + " (username, achievment_id) VALUES (?, ?);";
 	public final static String SQL_GET_ACHS = "SELECT achievment_id FROM " + ACHIEVMENTS_TABLE + " WHERE username=?;";
