@@ -38,8 +38,9 @@ public class SendRequestServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String from = (String)request.getSession().getAttribute("username");
 		String to = request.getParameter("to");
+		String content = request.getParameter("content");
 		if(UserInfo.userExists(to)) {
-			UserInfo.addMessage(new Request(to,from,""));
+			UserInfo.addMessage(new Request(to,from,content));
 			request.setAttribute("alert", "Request successfully sent!");
 			request.getRequestDispatcher("friends.jsp").forward(request, response);
 		} else if(UserInfo.getFriends(from).contains(to)) {

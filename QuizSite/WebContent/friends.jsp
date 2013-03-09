@@ -27,6 +27,7 @@
 
 <form action="SendRequestServlet" method="post">
 	<p>Add Friend: <input type="text" name="to" /></p>
+	<p>Message: <textarea rows="4" cols="50" name="content"></textarea></p>
 	<p><input type="submit" value="Add" /></p>
 </form>
 
