@@ -9,7 +9,7 @@
 
 <head>
 <% Quiz quiz = UserInfo.getQuiz(Integer.parseInt(request.getParameter("id"))); %>
-<title>Quiz 1</title>
+<title><%= quiz.getName() %></title>
 <link href="stylesheet.css" rel="stylesheet" type="text/css"></link>
 </head>
 
@@ -25,7 +25,7 @@
 
 <h1><%= quiz.getName() %></h1>
 
-<p class="achievements">Created By Username. Summary goes of quiz goes here too.</p>
+<p class="achievements">Created By <%=quiz.getAuthor() %>. <%=quiz.getDescription() %></p>
 
 <div class="panel3">
 <table class="table5">
