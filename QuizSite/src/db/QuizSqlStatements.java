@@ -58,11 +58,16 @@ public class QuizSqlStatements {
 	public final static String SQL_MOST_PLAYED_QUIZ = "SELECT quizId FROM (SELECT quizId, count(*) as c FROM " +  SCORES_TABLE + " GROUP BY quizId ORDER BY c DESC) as temp_table;";
 	public final static String SQL_GET_USER_QUIZ_HISTORY = "SELECT score FROM " + SCORES_TABLE + " where username=? AND quizId=?;";
 	
+	//Anouncements
+	private final static String ANN_TABLE = "announcements";
+	public final static String SQL_ADD_ANNOUNCEMENT = "INSERT INTO " + ANN_TABLE + " (user, content) VALUES(?, ?)";
+	public final static String SQL_GET_ANNOUNCEMENTS = "Select * FROM " + ANN_TABLE + ";";
+	public final static String SQL_DELETE_ANNOUNCEMENTS = "DELETE FROM " + ANN_TABLE + " WHERE annId=?;";
 	
 	//Some multi-table stuff
 	public final static String SQL_DELETE_QUIZ = "DELETE FROM " + ANSWER_TABLE + " WHERE questionId IN (SELECT questionId FROM " + QUESTION_TABLE + " WHERE quizId=?);";
 	public final static String SQL_DELETE_QUIZ_2 = "DELETE FROM " + QUESTION_TABLE + " WHERE quizId=?;";
 	public final static String SQL_DELETE_QUIZ_3 = "DELETE FROM " + QUIZ_TABLE + " WHERE quizId=?;";
 	public final static String SQL_GET_FRIEND_HISTORY = "SELECT quizId, f, score FROM " + SCORES_TABLE + " , (SELECT friend as f FROM friends WHERE user=?) as f_table WHERE scores.username = f_table.f ORDER BY scoreTimeStamp DESC;";
-	
+
 }
