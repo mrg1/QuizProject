@@ -80,7 +80,7 @@
 <% if(history.size() > i) { %>
 <%	Score score = history.get(i); %>
 <tr>
-<td><%--= UserInfo.getQuiz(score.getQuizId()).getName() --%></td>
+<td>UserInfo.getQuiz(score.getQuizId()).getName()</td>
 <td><%= score.getScore()%></td>
 <% } } } %>
 </tr>
