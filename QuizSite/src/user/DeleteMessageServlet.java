@@ -37,7 +37,7 @@ public class DeleteMessageServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		UserInfo.deleteMessages(Integer.parseInt(request.getParameter("id")));
 		request.setAttribute("alert", "Message deleted!");
-		request.getRequestDispatcher("homepage.jsp").forward(request, response);
+		request.getRequestDispatcher("inbox.jsp").forward(request, response);
 	}
 
 }

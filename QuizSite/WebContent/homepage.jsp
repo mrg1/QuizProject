@@ -4,7 +4,7 @@
 
 <%@ page import="db.*" %>
 <%@ page import="message.*" %>
-<%@ page import="java.util.List" %>
+<%@ page import="java.util.*" %>
 <%@ page import="quiz.*" %>
 
 <head>
@@ -47,21 +47,15 @@
 	<%} %>
 </div>
 
-<h3 class="inline">Recent Inbox</h3>
-<a href="sendMessage.jsp" class="inline">(Create Message)</a>
+<h3 class="inline">Message Activity</h3>
 <ul class="list">
 	<% List<Message> messages = UserInfo.getMessages(username); %>
-	<% if(messages.isEmpty()) %><li>Nothing yet!</li><%; %>
-	<% int counter = 0; %>
-	<% for(Message cur : messages) {%>
-		<% if(counter > 3) break; %>
-		<% counter++; %>
-		<li class="message"><%= cur.getHtml() %>
-		<form action="DeleteMessageServlet" method="post">
-           <input type="hidden" name="id" value="<%=cur.getMessageId() %>" />
-           <input type="submit" value="Remove" />
-     	</form>    
-		</li>
+	<% if(messages.isEmpty()) %><li>No new messages!</li><%; %>
+	<% Iterator<Message> messageIter = messages.iterator(); %>
+	<% for(int i = 0; i < 5; i++) {%>
+		<% if(!messageIter.hasNext()) break; %>
+		<% Message cur = messageIter.next(); %>
+		<li><%=cur.getFrom() %> sent you a <%=cur.getTypeName() %>!</li>
 	<% } %>
 </ul>
 
