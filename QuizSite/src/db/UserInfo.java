@@ -181,8 +181,7 @@ public class UserInfo {
 				boolean mp = rs.getBoolean(6);
 				boolean ic = rs.getBoolean(7);
 				boolean pm = rs.getBoolean(8);
-				result = new Quiz(name, author, description, questions, rq, mp, ic, pm);
-				result.setQuizId(quizId);
+				result = new Quiz(name, author, description, questions, rq, mp, ic, pm, quizId);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
