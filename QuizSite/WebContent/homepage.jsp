@@ -4,7 +4,7 @@
 
 <%@ page import="db.*" %>
 <%@ page import="message.*" %>
-<%@ page import="java.util.*" %>
+<%@ page import="java.util.List" %>
 <%@ page import="quiz.*" %>
 
 <head>
@@ -21,11 +21,6 @@
 <li class="inline"><a href="homepage.jsp">Home</a></li>
 <li class="inline"><a href="quizzes.jsp">Quizzes</a></li>
 <li class="inline"><a href="inbox.jsp">Inbox</a></li>
-<li class="inline">
-	<form action="LogoutServlet" method="post" class="inline">
-		<input type="submit" value="Logout" />
-	</form>
-</li>
 </ul>
 
 <% Object message = request.getAttribute("alert"); %>
@@ -49,15 +44,21 @@
 	<%} %>
 </div>
 
-<h3 class="inline">Message Activity</h3>
+<h3 class="inline">Recent Inbox</h3>
+<a href="sendMessage.jsp" class="inline">(Create Message)</a>
 <ul class="list">
 	<% List<Message> messages = UserInfo.getMessages(username); %>
-	<% if(messages.isEmpty()) %><li>No new messages!</li><%; %>
-	<% Iterator<Message> messageIter = messages.iterator(); %>
-	<% for(int i = 0; i < 5; i++) {%>
-		<% if(!messageIter.hasNext()) break; %>
-		<% Message cur = messageIter.next(); %>
-		<li><%=cur.getFrom() %> sent you a <%=cur.getTypeName() %>!</li>
+	<% if(messages.isEmpty()) %><li>Nothing yet!</li><%; %>
+	<% int counter = 0; %>
+	<% for(Message cur : messages) {%>
+		<% if(counter > 3) break; %>
+		<% counter++; %>
+		<li class="message"><%= cur.getHtml() %>
+		<form action="DeleteMessageServlet" method="post">
+           <input type="hidden" name="id" value="<%=cur.getMessageId() %>" />
+           <input type="submit" value="Remove" />
+     	</form>    
+		</li>
 	<% } %>
 </ul>
 

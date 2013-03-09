@@ -40,14 +40,7 @@ public abstract class Message implements MessageInter{
 			return false;
 		return true;
 	}
-	public String getTypeName() {
-		switch(getType()) {
-		case 0:return "Friend Request";
-		case 1:return "Challenge";
-		case 2:return "Note";
-		}
-		return "";
-	}
+	
 	
 	public String getTo() {
 		return to;

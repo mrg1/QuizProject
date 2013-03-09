@@ -411,7 +411,7 @@ public class UserInfo {
 			selectStatement.setInt(1, quizId);
 			ResultSet rs = selectStatement.executeQuery();
 			while(rs.next()){
-				result.add(new Score(rs.getInt(2), quizId, rs.getString(1), rs.getLong(3)));
+				result.add(new Score(rs.getInt(2), quizId, rs.getString(1), 0));
 			}
 		}
 	    catch (SQLException e) {
@@ -428,7 +428,7 @@ public class UserInfo {
 			selectStatement.setString(1, username);
 			ResultSet rs = selectStatement.executeQuery();
 			while(rs.next()){
-				result.add(new Score(rs.getInt(2), rs.getInt(1), username, rs.getInt(3)));
+				result.add(new Score(rs.getInt(2), rs.getInt(1), username, 0));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -443,7 +443,6 @@ public class UserInfo {
 			addStatement.setString(1, s.getUsername());
 			addStatement.setInt(2, s.getQuizId());
 			addStatement.setInt(3, s.getScore());
-			addStatement.setInt(4, s.getElapsed());
 			addStatement.execute();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -517,7 +516,7 @@ public class UserInfo {
 			selectStatement.setString(1, username);
 			ResultSet rs = selectStatement.executeQuery();
 			while(rs.next()){
-				history.add(new Score(rs.getInt(3), rs.getInt(1),rs.getString(2), rs.getInt(4)));
+				history.add(new Score(rs.getInt(3), rs.getInt(1),rs.getString(2), 0));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -534,7 +533,7 @@ public class UserInfo {
 			selectStatement.setInt(2, quizId);
 			ResultSet rs = selectStatement.executeQuery();
 			while(rs.next()){
-				history.add(new Score(rs.getInt(1), quizId, username, rs.getInt(2)));
+				history.add(new Score(rs.getInt(1), quizId, username, 0));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
