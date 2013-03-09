@@ -50,19 +50,24 @@ public class QuizSqlStatements {
 	
 	//Scores
 	private final static String SCORES_TABLE = "scores";
-	public final static String SQL_GET_SCORES = "SELECT quizId, score FROM " + SCORES_TABLE + " WHERE username=? ORDER BY scoreTimeStamp;";
-	public final static String SQL_GET_TOP_TEN = "SELECT username, score FROM " + SCORES_TABLE + " WHERE quizId=? ORDER BY score LIMIT 10";
-	public final static String SQL_ADD_SCORE = "INSERT INTO " + SCORES_TABLE + " (username, quizId, score) VALUES (?, ?, ?);";
+	public final static String SQL_GET_SCORES = "SELECT quizId, score, elapsed FROM " + SCORES_TABLE + " WHERE username=? ORDER BY scoreTimeStamp;";
+	public final static String SQL_GET_TOP_TEN = "SELECT username, score, elapsed FROM " + SCORES_TABLE + " WHERE quizId=? ORDER BY score LIMIT 10";
+	public final static String SQL_ADD_SCORE = "INSERT INTO " + SCORES_TABLE + " (username, quizId, score, elapsed) VALUES (?, ?, ?, ?);";
 	public final static String SQL_REMOVE_USER_HISTORY = "DELETE FROM " + SCORES_TABLE + " where username=?;";
 	public final static String SQL_REMOVE_USER_HISTORY_ON_QUIZ = "DELETE FROM " + SCORES_TABLE + " where username=? AND quizId=?;";
 	public final static String SQL_MOST_PLAYED_QUIZ = "SELECT quizId FROM (SELECT quizId, count(*) as c FROM " +  SCORES_TABLE + " GROUP BY quizId ORDER BY c DESC) as temp_table;";
-	public final static String SQL_GET_USER_QUIZ_HISTORY = "SELECT score FROM " + SCORES_TABLE + " where username=? AND quizId=?;";
+	public final static String SQL_GET_USER_QUIZ_HISTORY = "SELECT score, elapsed FROM " + SCORES_TABLE + " where username=? AND quizId=?;";
 	
+	//Anouncements
+	private final static String ANN_TABLE = "announcements";
+	public final static String SQL_ADD_ANNOUNCEMENT = "INSERT INTO " + ANN_TABLE + " (user, content) VALUES(?, ?)";
+	public final static String SQL_GET_ANNOUNCEMENTS = "Select * FROM " + ANN_TABLE + ";";
+	public final static String SQL_DELETE_ANNOUNCEMENTS = "DELETE FROM " + ANN_TABLE + " WHERE annId=?;";
 	
 	//Some multi-table stuff
 	public final static String SQL_DELETE_QUIZ = "DELETE FROM " + ANSWER_TABLE + " WHERE questionId IN (SELECT questionId FROM " + QUESTION_TABLE + " WHERE quizId=?);";
 	public final static String SQL_DELETE_QUIZ_2 = "DELETE FROM " + QUESTION_TABLE + " WHERE quizId=?;";
 	public final static String SQL_DELETE_QUIZ_3 = "DELETE FROM " + QUIZ_TABLE + " WHERE quizId=?;";
-	public final static String SQL_GET_FRIEND_HISTORY = "SELECT quizId, f, score FROM " + SCORES_TABLE + " , (SELECT friend as f FROM friends WHERE user=?) as f_table WHERE scores.username = f_table.f ORDER BY scoreTimeStamp DESC;";
-	
+	public final static String SQL_GET_FRIEND_HISTORY = "SELECT quizId, f, score, elapsed FROM " + SCORES_TABLE + " , (SELECT friend as f FROM friends WHERE user=?) as f_table WHERE scores.username = f_table.f ORDER BY scoreTimeStamp DESC;";
+
 }
