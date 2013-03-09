@@ -4,7 +4,7 @@
 
 <%@ page import="db.*" %>
 <%@ page import="message.*" %>
-<%@ page import="java.util.List" %>
+<%@ page import="java.util.*" %>
 <%@ page import="quiz.*" %>
 
 <head>
@@ -21,6 +21,11 @@
 <li class="inline"><a href="homepage.jsp">Home</a></li>
 <li class="inline"><a href="quizzes.jsp">Quizzes</a></li>
 <li class="inline"><a href="inbox.jsp">Inbox</a></li>
+<li class="inline">
+	<form action="LogoutServlet" method="post" class="inline">
+		<input type="submit" value="Logout" />
+	</form>
+</li>
 </ul>
 
 <% Object message = request.getAttribute("alert"); %>
@@ -29,9 +34,7 @@
 	<% request.setAttribute("alert",null); %>
 <% } %>
 
-<% for(String a : UserInfo.getAnnouncements()) { %>
-<p class="announce"><%=a %></p>
-<%} %>
+<p class="announce">ANNOUNCE: Important Site Announcement</p>
 
 <div class="panel1">
 
@@ -44,21 +47,15 @@
 	<%} %>
 </div>
 
-<h3 class="inline">Recent Inbox</h3>
-<a href="sendMessage.jsp" class="inline">(Create Message)</a>
+<h3 class="inline">Message Activity</h3>
 <ul class="list">
 	<% List<Message> messages = UserInfo.getMessages(username); %>
-	<% if(messages.isEmpty()) %><li>Nothing yet!</li><%; %>
-	<% int counter = 0; %>
-	<% for(Message cur : messages) {%>
-		<% if(counter > 3) break; %>
-		<% counter++; %>
-		<li class="message"><%= cur.getHtml() %>
-		<form action="DeleteMessageServlet" method="post">
-           <input type="hidden" name="id" value="<%=cur.getMessageId() %>" />
-           <input type="submit" value="Remove" />
-     	</form>    
-		</li>
+	<% if(messages.isEmpty()) %><li>No new messages!</li><%; %>
+	<% Iterator<Message> messageIter = messages.iterator(); %>
+	<% for(int i = 0; i < 5; i++) {%>
+		<% if(!messageIter.hasNext()) break; %>
+		<% Message cur = messageIter.next(); %>
+		<li><%=cur.getFrom() %> sent you a <%=cur.getTypeName() %>!</li>
 	<% } %>
 </ul>
 
@@ -75,38 +72,31 @@
 <td>
 <table class="table2">
 <tr>
-<th>Title</th>
+<th>Name</th>
 <th>Score</th>
 </tr>
 
 <% List<Score> history = UserInfo.getHistory(username); %>
-<% if (history != null) { %>
 <% for(int i = 0; i < 5; i++) { %>
 <% if(history.size() > i) { %>
 <%	Score score = history.get(i); %>
 <tr>
 <td><%= UserInfo.getQuiz(score.getQuizId()).getName() %></td>
 <td><%= score.getScore()%></td>
-<% } } } %>
-</tr>
+<% } } %></tr>
 </table>
 </td>
 
 <td>
 <table class="table2">
 <tr>
-<th>Title</th>
+<th>Name</th>
 <th>Date</th>
 </tr>
-<% List<Integer> historyCreated = UserInfo.getAuthorHistory(username); %>
-<% for(int i = 0; i < 5; i++) { %>
 <tr>
-<% if(historyCreated.size() > i) { %>
-<%	int id = historyCreated.get(i); %>
-<td><%= UserInfo.getQuiz(id).getName() %></td>
-<td><%= UserInfo.getQuiz(id).getAuthor()%></td>
+<td>Name 1</td>
+<td>Date 1</td>
 </tr>
-<% } } %>
 </table>
 </td>
 
@@ -148,20 +138,14 @@
 <p class="inline"><a href="friends.jsp">(See Friends)</a></p>
 <table class="table3">
 <tr>
-<th>Friend</th>
-<th>Quiz Title</th>
+<th>Name</th>
+<th>Date</th>
 <th>Score</th>
 </tr>
-
-<% List<Score> friendHistory = UserInfo.getFriendHistory(username); %>
-<% for(int i = 0; i < 5; i++) { %>
-<% if(friendHistory.size() > i) { %>
-<%	Score s = friendHistory.get(i); %>
 <tr>
-<td><%= s.getUsername() %></td>
-<td><%= UserInfo.getQuiz(s.getQuizId()).getName() %></td>
-<td><%= s.getScore()%></td>
-<% } } %>
+<td>Name 1</td>
+<td>Date 1</td>
+<td>Score 1</td>
 </tr>
 </table>
 

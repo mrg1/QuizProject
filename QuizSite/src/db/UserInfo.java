@@ -12,11 +12,11 @@ import quiz.Score;
 import message.*;
 public class UserInfo {
 	private static Connection con;
-	
+
 	public static void getUser(String username){
 		con = QuizDB.getConnection();
 	}
-	
+
 	public static void addUser(String username, String password, String salt, boolean admin){
 		con = QuizDB.getConnection();
 		try {
@@ -30,7 +30,7 @@ public class UserInfo {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public static void deleteUser(String user){
 		con = QuizDB.getConnection();
 		try {
@@ -41,7 +41,7 @@ public class UserInfo {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public static boolean userExists(String username){
 		boolean result = false;
 		con = QuizDB.getConnection();
@@ -57,7 +57,7 @@ public class UserInfo {
 		}
 		return result;
 	}
-	
+
 	public static boolean checkPassword(String username, String password){
 		boolean result = false;
 		con = QuizDB.getConnection();
@@ -76,7 +76,7 @@ public class UserInfo {
 		}
 		return result;
 	}
-	
+
 	public static void addFriend(String user, String friend) {
 		con = QuizDB.getConnection();
 		try {
@@ -92,7 +92,7 @@ public class UserInfo {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public static ArrayList<String> getFriends(String user) {
 		ArrayList<String> friends = new ArrayList<String>();
 		con = QuizDB.getConnection();
@@ -108,7 +108,7 @@ public class UserInfo {
 		}
 		return friends;
 	}
-	
+
 	public static void addAchievment(String user, int ach_id){
 		con = QuizDB.getConnection();
 		try {
@@ -120,7 +120,7 @@ public class UserInfo {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public static ArrayList<Integer> getAchievements(String user){
 		ArrayList<Integer> achs = new ArrayList<Integer>();
 		con = QuizDB.getConnection();
@@ -136,7 +136,7 @@ public class UserInfo {
 		}
 		return achs;
 	}
-	
+
 	public static int addQuiz(Quiz q){
 		con = QuizDB.getConnection();
 		int quizId = -1;
@@ -164,7 +164,7 @@ public class UserInfo {
 		q.setQuizId(quizId);
 		return quizId;
 	}
-	
+
 	public static Quiz getQuiz(int quizId){
 		Quiz result = null;
 		con = QuizDB.getConnection();
@@ -187,9 +187,9 @@ public class UserInfo {
 			e.printStackTrace();
 		}
 		return result;
-		
+
 	}
-	
+
 	public static void deleteQuiz(int quizId){
 		con = QuizDB.getConnection();
 		try {
@@ -206,7 +206,7 @@ public class UserInfo {
 			e.printStackTrace();
 		}
 	}
-	
+
 	private static Question[] getQuestions(int quizId) {
 		List<Question> result = new ArrayList<Question>();
 		con = QuizDB.getConnection();
@@ -241,7 +241,7 @@ public class UserInfo {
 		}
 		return result.toArray(new Question[result.size()]);
 	}
-	
+
 	private static String getCorrectAnswer(int questionId) {
 		String result = "";
 		con = QuizDB.getConnection();
@@ -257,7 +257,7 @@ public class UserInfo {
 		}
 		return result;
 	}
-	
+
 	private static List<String> getAnswers(int questionId) {
 		List<String> result = new ArrayList<String>();
 		con = QuizDB.getConnection();
@@ -292,7 +292,7 @@ public class UserInfo {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public static List<Message> getMessages(String toWhom){
 		List<Message> result = new ArrayList<Message>();
 		con = QuizDB.getConnection();
@@ -325,7 +325,7 @@ public class UserInfo {
 		}
 		return result;
 	}
-	
+
 	public static void deleteMessages(int messageId){
 		con = QuizDB.getConnection();
 		try {
@@ -336,7 +336,7 @@ public class UserInfo {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public static void addQuestion(int quizId, Question q){
 		con = QuizDB.getConnection();
 		boolean caseOrRandomize = false;
@@ -363,7 +363,7 @@ public class UserInfo {
 				questionContent = rq.getText();
 				break;
 		}
-		
+
 		try {
 			PreparedStatement addStatement = con.prepareStatement(QuizSqlStatements.SQL_ADD_QUESTION);
 			addStatement.setInt(1, quizId);
@@ -388,7 +388,7 @@ public class UserInfo {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public static void addAnswer(int questionId, String answerContent, boolean correct){
 		con = QuizDB.getConnection();
 		try {
@@ -401,8 +401,8 @@ public class UserInfo {
 			e.printStackTrace();
 		}
 	}
-	
-	
+
+
 	public static List<Score> getTopTen(int quizId){
 		List<Score> result = new ArrayList<Score>();
 		con = QuizDB.getConnection();
@@ -411,7 +411,7 @@ public class UserInfo {
 			selectStatement.setInt(1, quizId);
 			ResultSet rs = selectStatement.executeQuery();
 			while(rs.next()){
-				result.add(new Score(rs.getInt(2), quizId, rs.getString(1), rs.getInt(3)));
+				result.add(new Score(rs.getInt(2), quizId, rs.getString(1), rs.getLong(3)));
 			}
 		}
 	    catch (SQLException e) {
@@ -419,7 +419,7 @@ public class UserInfo {
 		}
 		return result;
 	}
-	
+
 	public static List<Score> getHistory(String username){
 		List<Score> result = new ArrayList<Score>();
 		con = QuizDB.getConnection();
@@ -443,13 +443,14 @@ public class UserInfo {
 			addStatement.setString(1, s.getUsername());
 			addStatement.setInt(2, s.getQuizId());
 			addStatement.setInt(3, s.getScore());
+			addStatement.setInt(4, s.getElapsed());
 			addStatement.execute();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 	}
-	
+
 	public static void deleteHistory(String username){
 		con = QuizDB.getConnection();
 		try {
@@ -459,9 +460,9 @@ public class UserInfo {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 	}
-	
+
 	public static List<Integer> popularQuizIds(){
 		List<Integer> popular = new ArrayList<Integer>();
 		con = QuizDB.getConnection();
@@ -476,7 +477,7 @@ public class UserInfo {
 		}
 		return popular;
 	}
-	
+
 	public static List<Integer> recentlyCreatedQuizIds(){
 		List<Integer> recent = new ArrayList<Integer>();
 		con = QuizDB.getConnection();
@@ -491,7 +492,7 @@ public class UserInfo {
 		}
 		return recent;
 	}
-	
+
 	public static List<Integer> getAuthorHistory(String username){
 		List<Integer> history = new ArrayList<Integer>();
 		con = QuizDB.getConnection();
@@ -507,7 +508,7 @@ public class UserInfo {
 		}
 		return history;
 	}
-	
+
 	public static List<Score> getFriendHistory(String username){
 		List<Score> history = new ArrayList<Score>();
 		con = QuizDB.getConnection();
@@ -523,7 +524,7 @@ public class UserInfo {
 		}
 		return history;
 	}
-	
+
 	public static List<Score> getUserHistoryOnQuiz(String username, int quizId){
 		List<Score> history = new ArrayList<Score>();
 		con = QuizDB.getConnection();
@@ -540,7 +541,7 @@ public class UserInfo {
 		}
 		return history;
 	}
-	
+
 	public static void deleteUserHistoryOnQuiz(String username, int quizId){
 		con = QuizDB.getConnection();
 		try {
@@ -551,20 +552,5 @@ public class UserInfo {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-	}
-	
-	public static List<String> getAnnouncements() {
-		List<String> announcements = new ArrayList<String>();
-		con = QuizDB.getConnection();
-		try {
-			PreparedStatement selectStatement = con.prepareStatement(QuizSqlStatements.SQL_GET_ANNOUNCEMENTS);
-			ResultSet rs = selectStatement.executeQuery();
-			while(rs.next()){
-				announcements.add(rs.getString(3));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return announcements;
 	}
 }
