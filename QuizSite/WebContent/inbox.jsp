@@ -2,9 +2,13 @@
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+<%@ page import="db.*" %>
+<%@ page import="message.*" %>
+<%@ page import="java.util.List" %>
 <head>
+<% String username = (String)session.getAttribute("username"); %>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Send Message</title>
+<title>Inbox</title>
 <link href="stylesheet.css" rel="stylesheet" type="text/css">
 </head>
 
@@ -28,12 +32,20 @@
 	<% request.setAttribute("alert",null); %>
 <% } %>
 
-<h1>Send Message</h1>
-<form action="SendNoteServlet" method="post">
-	<p>To: <input type="text" name="to"/></p>
-	<p>Content: <textarea rows="4" cols="50" name="content"></textarea></p>
-	<p><input type="submit" value="Send"/></p>
-</form>
+<h1>Inbox</h1>
+<a href="sendMessage.jsp" class="inline">(Create Message)</a>
+<ul class="list">
+	<% List<Message> messages = UserInfo.getMessages(username); %>
+	<% if(messages.isEmpty()) %><li>Nothing yet!</li><%; %>
+	<% for(Message cur : messages) {%>
+		<li class="message"><%= cur.getHtml() %>
+		<form action="DeleteMessageServlet" method="post">
+           <input type="hidden" name="id" value="<%=cur.getMessageId() %>" />
+           <input type="submit" value="Remove" />
+     	</form>    
+		</li>
+	<% } %>
+</ul>
 </body>
 
 </html>
