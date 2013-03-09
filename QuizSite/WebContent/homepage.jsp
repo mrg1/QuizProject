@@ -34,7 +34,9 @@
 	<% request.setAttribute("alert",null); %>
 <% } %>
 
-<p class="announce">ANNOUNCE: Important Site Announcement</p>
+<% for(String a : UserInfo.getAnnouncements()) { %>
+<p class="announce"><%=a %></p>
+<%} %>
 
 <div class="panel1">
 

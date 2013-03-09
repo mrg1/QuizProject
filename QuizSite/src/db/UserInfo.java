@@ -411,7 +411,7 @@ public class UserInfo {
 			selectStatement.setInt(1, quizId);
 			ResultSet rs = selectStatement.executeQuery();
 			while(rs.next()){
-				result.add(new Score(rs.getInt(2), quizId, rs.getString(1), rs.getLong(3)));
+				result.add(new Score(rs.getInt(2), quizId, rs.getString(1), rs.getInt(3)));
 			}
 		}
 	    catch (SQLException e) {
