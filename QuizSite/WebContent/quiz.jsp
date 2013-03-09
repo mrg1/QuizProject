@@ -5,9 +5,11 @@
 <%@ page import="db.*" %>
 <%@ page import="message.*" %>
 <%@ page import="quiz.*" %>
+<%@ page import="java.util.*" %>
 
 <head>
 <% Quiz quiz = UserInfo.getQuiz(Integer.parseInt(request.getParameter("id"))); %>
+<% String username = (String)session.getAttribute("username"); %>
 <title><%= quiz.getName() %></title>
 <link href="stylesheet.css" rel="stylesheet" type="text/css"></link>
 </head>
@@ -22,20 +24,30 @@
 <li class="inline"><a href="about.asp">Messages</a></li>
 </ul>
 
-<h1>Quiz Title</h1>
+<h1><%= quiz.getName() %></h1>
 
 <p class="achievements">Created By <%=quiz.getAuthor() %>. <%=quiz.getDescription() %></p>
 
 <div class="panel3">
 <table class="table5">
 <tr>
+<th>Past Scores</th>
 <th>Date</th>
-<th>Score</th>
 </tr>
+
+
+<% List<Score> quizHistory = UserInfo.getUserHistoryOnQuiz(username, quiz.getQuizId()); %>
+<% if (quizHistory != null) { %>
+<% for(int i = 0; i < 5; i++) { %>
+<% if(quizHistory.size() > i) { %>
+<%	Score score = quizHistory.get(i); %>
 <tr>
-<td>Date 1</td>
-<td>Score 1</td>
+<td><%= score.getScore()%></td>
+<td>Date here?</td>
 </tr>
+<% } } } %>
+
+
 </table>
 </div>
 

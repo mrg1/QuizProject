@@ -15,7 +15,7 @@
 
 <body>
 
-<h3 class="inline title">Awesome Quiz Site</h3>
+<h3 class="title inline">Awesome Quiz Site</h3>
 
 <ul class="navbar">
 <li class="inline"><a href="homepage.jsp">Home</a></li>
@@ -74,31 +74,38 @@
 <td>
 <table class="table2">
 <tr>
-<th>Name</th>
+<th>Title</th>
 <th>Score</th>
 </tr>
 
 <% List<Score> history = UserInfo.getHistory(username); %>
+<% if (history != null) { %>
 <% for(int i = 0; i < 5; i++) { %>
 <% if(history.size() > i) { %>
 <%	Score score = history.get(i); %>
 <tr>
-<td><%= UserInfo.getQuiz(score.getQuizId()).getName() %></td>
+<td><a href="quiz.jsp?id=<%=score.getQuizId()%>"><%= UserInfo.getQuiz(score.getQuizId()).getName() %></a></td>
 <td><%= score.getScore()%></td>
-<% } } %></tr>
+<% } } } %>
+</tr>
 </table>
 </td>
 
 <td>
 <table class="table2">
 <tr>
-<th>Name</th>
+<th>Title</th>
 <th>Date</th>
 </tr>
+<% List<Integer> historyCreated = UserInfo.getAuthorHistory(username); %>
+<% for(int i = 0; i < 5; i++) { %>
 <tr>
-<td>Name 1</td>
-<td>Date 1</td>
+<% if(historyCreated.size() > i) { %>
+<%	int id = historyCreated.get(i); %>
+<td><a href="quiz.jsp?id=<%=id%>"><%= UserInfo.getQuiz(id).getName() %></a></td>
+<td>Date Here?</td>
 </tr>
+<% } } %>
 </table>
 </td>
 
@@ -117,7 +124,7 @@
 <% for (int i = 0; i < 10; i++) {%>
 <% if(popular.size() > i) { %>
 <% int id = popular.get(i); %>
-<li><%=i + 1 %>. <%=UserInfo.getQuiz(id).getName() %></li>
+<li><%=i + 1 %>. <a href="quiz.jsp?id=<%=id%>"><%=UserInfo.getQuiz(id).getName() %></a></li>
 <% } } } %>
 
 </ul>
@@ -131,7 +138,7 @@
 <% for (int i = 0; i < 5; i++) {%>
 <% if(recent.size() > i) { %>
 <% int id = recent.get(i); %>
-<li><%=UserInfo.getQuiz(id).getName() %></li>
+<li><a href="quiz.jsp?id=<%=id%>"><%=UserInfo.getQuiz(id).getName() %></a></li>
 <% } } } %>
 
 </ul>
@@ -140,14 +147,20 @@
 <p class="inline"><a href="friends.jsp">(See Friends)</a></p>
 <table class="table3">
 <tr>
-<th>Name</th>
-<th>Date</th>
+<th>Friend</th>
+<th>Quiz Title</th>
 <th>Score</th>
 </tr>
+
+<% List<Score> friendHistory = UserInfo.getFriendHistory(username); %>
+<% for(int i = 0; i < 5; i++) { %>
+<% if(friendHistory.size() > i) { %>
+<%	Score s = friendHistory.get(i); %>
 <tr>
-<td>Name 1</td>
-<td>Date 1</td>
-<td>Score 1</td>
+<td><%= s.getUsername() %></td>
+<td><a href="quiz.jsp?id=<%=s.getQuizId()%>"><%= UserInfo.getQuiz(s.getQuizId()).getName() %></a></td>
+<td><%= s.getScore()%></td>
+<% } } %>
 </tr>
 </table>
 
