@@ -14,13 +14,15 @@
 <ul class="navbar">
 <li class="inline"><a href="homepage.jsp">Home</a></li>
 <li class="inline"><a href="quizzes.jsp">Quizzes</a></li>
-<li class="inline"><a href="messages.jsp">Messages</a></li>
+<li class="inline"><a href="inbox.jsp">Inbox</a></li>
 </ul>
+
 <% Object message = request.getAttribute("alert"); %>
 <% if(message != null) { %>
 	<p><%=(String)message %></p>
 	<% request.setAttribute("alert",null); %>
 <% } %>
+
 <h1>Send Message</h1>
 <form action="SendNoteServlet" method="post">
 	<p>To: <input type="text" name="to"/></p>

@@ -6,10 +6,8 @@ import db.UserInfo;
 public class Challenge extends Message {
 	private int score;
 	private int quizID;
-	public Challenge(String to, String from, String content, int score, int quizID) {
+	public Challenge(String to, String from, String content) {
 		super(to, from, content);
-		this.score = score;
-		this.quizID = quizID;
 	}
 
 	private static final int type = MessageInfo.CHALLENGE_ID;
