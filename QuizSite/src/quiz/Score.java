@@ -4,11 +4,13 @@ public class Score {
 	private int score;
 	private int quizId;
 	private String username;
+	private int seconds;
 	
-	public Score(int score, int quizId, String username){
+	public Score(int score, int quizId, String username, long elapsed){
 		this.score = score;
 		this.quizId = quizId;
 		this.username = username;
+		this.seconds = (int) (elapsed/1000);
 	}
 	
 	public int getScore() {
@@ -33,6 +35,14 @@ public class Score {
 
 	public void setUsername(String username) {
 		this.username = username;
+	}
+	
+	public int getElapsed() {
+		return seconds;
+	}
+	
+	public void setElapsed(int sec) {
+		seconds = sec;
 	}
 
 	@Override
