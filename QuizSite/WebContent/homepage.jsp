@@ -30,7 +30,7 @@
 <% } %>
 
 <% for(String a : UserInfo.getAnnouncements()) { %>
-<p class="announce"><%=a %></p>
+<h3 class="announce">ANNOUCEMENT: <%=a %></h3>
 <%} %>
 
 <div class="panel1">
