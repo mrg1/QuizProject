@@ -89,9 +89,9 @@ public class DbTest extends TestCase {
 	
 	@Test
 	public void testScoring(){
-		Score s1 = new Score(76, 99, "mrg1");
-		Score s2 = new Score(66, 100, "mrg1");
-		Score s3 = new Score(79, 99, "aKlein1");
+		Score s1 = new Score(76, 99, "mrg1", 1);
+		Score s2 = new Score(66, 100, "mrg1", 3);
+		Score s3 = new Score(79, 99, "aKlein1", 2);
 		UserInfo.addScore(s1);
 		UserInfo.addScore(s2);
 		UserInfo.addScore(s3);
