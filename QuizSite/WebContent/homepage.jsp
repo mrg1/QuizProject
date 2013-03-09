@@ -20,7 +20,7 @@
 <ul class="navbar">
 <li class="inline"><a href="homepage.jsp">Home</a></li>
 <li class="inline"><a href="quizzes.jsp">Quizzes</a></li>
-<li class="inline"><a href="messages.jsp">Messages</a></li>
+<li class="inline"><a href="inbox.jsp">Inbox</a></li>
 </ul>
 
 <% Object message = request.getAttribute("alert"); %>
@@ -42,12 +42,15 @@
 	<%} %>
 </div>
 
-<h3 class="inline">Inbox</h3>
+<h3 class="inline">Recent Inbox</h3>
 <a href="sendMessage.jsp" class="inline">(Create Message)</a>
 <ul class="list">
 	<% List<Message> messages = UserInfo.getMessages(username); %>
 	<% if(messages.isEmpty()) %><li>Nothing yet!</li><%; %>
+	<% int counter = 0; %>
 	<% for(Message cur : messages) {%>
+		<% if(counter > 3) break; %>
+		<% counter++; %>
 		<li class="message"><%= cur.getHtml() %>
 		<form action="DeleteMessageServlet" method="post">
            <input type="hidden" name="id" value="<%=cur.getMessageId() %>" />

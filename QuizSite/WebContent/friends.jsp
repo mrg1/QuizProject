@@ -16,7 +16,7 @@
 <ul class="navbar">
 <li class="inline"><a href="homepage.jsp">Home</a></li>
 <li class="inline"><a href="quizzes.jsp">Quizzes</a></li>
-<li class="inline"><a href="about.asp">Messages</a></li>
+<li class="inline"><a href="inbox.jsp">Inbox</a></li>
 </ul>
 
 <% Object message = request.getAttribute("alert"); %>
