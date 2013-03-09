@@ -22,7 +22,7 @@ import question.Question;
  */
 public class Quiz {
 
-	private String name, author, desc;
+	private String name, author, desc, timestamp;
 	private Question[] questions;
 	private boolean random, onePage, immediateCorrection, practice;
 	private int quizId;
@@ -70,8 +70,8 @@ public class Quiz {
 		//TODO Delete scores out of table.
 	}
 	
-	public void recordScore(String user, int score) {
-		Score s = new Score(score, this.getQuizId(), user);
+	public void recordScore(String user, int score, long elapsed) {
+		Score s = new Score(score, this.getQuizId(), user, elapsed);
 		UserInfo.addScore(s);
 	}
 	
@@ -106,6 +106,14 @@ public class Quiz {
 	public Question[] getQuestions() {
 		return questions;
 	}
+	
+	/**
+	 * 
+	 * @return Date quiz was created in yyyy-mm-dd format
+	 */
+//	public String getDateCreated() {
+//		return null;
+//	}
 	
 	public boolean isRandom() {
 		return random;
