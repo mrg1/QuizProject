@@ -5,7 +5,6 @@
 <%@ page import="db.*" %>
 <%@ page import="message.*" %>
 <%@ page import="quiz.*" %>
-<%@ page import="user.*" %>
 
 <head>
 <% Quiz quiz = UserInfo.getQuiz(Integer.parseInt(request.getParameter("id"))); %>
@@ -23,7 +22,7 @@
 <li class="inline"><a href="about.asp">Messages</a></li>
 </ul>
 
-<h1><%= quiz.getName() %></h1>
+<h1>Quiz Title</h1>
 
 <p class="achievements">Created By <%=quiz.getAuthor() %>. <%=quiz.getDescription() %></p>
 
