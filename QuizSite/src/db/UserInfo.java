@@ -552,4 +552,19 @@ public class UserInfo {
 			e.printStackTrace();
 		}
 	}
+	
+	public static List<String> getAnnouncements() {
+		List<String> announcements = new ArrayList<String>();
+		con = QuizDB.getConnection();
+		try {
+			PreparedStatement selectStatement = con.prepareStatement(QuizSqlStatements.SQL_GET_ANNOUNCEMENTS);
+			ResultSet rs = selectStatement.executeQuery();
+			while(rs.next()){
+				announcements.add(rs.getString(3));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return announcements;
+	}
 }
