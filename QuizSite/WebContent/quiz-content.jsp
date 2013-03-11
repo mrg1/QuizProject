@@ -27,13 +27,10 @@
 <h1><%= quiz.getName() %></h1>
 
 <form action="quiz-summary.jsp?id=<%= quiz.getQuizId() %>" method="post">
-
 <% Question[] questions = quiz.getQuestions(); %>
-<% for (Question q : questions) { %>
-<p><%= q.getDisplayName() %><%= q.getHTML() %></p>
-<% } %>
-
-
+<% for (Question q : questions) {%>
+<%=q.getHTML() %>
+<%} %>
 <input type="submit" value="Submit!"></input>
 </form>
 

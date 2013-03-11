@@ -71,7 +71,7 @@ public class PictureQuestion implements Question {
 	@Override
 	public String getHTML() {
 		// TODO Auto-generated method stub
-		return null;
+		return "test4";
 	}
 	
 	@Override

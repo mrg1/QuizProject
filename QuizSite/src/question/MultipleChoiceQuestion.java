@@ -78,7 +78,7 @@ public class MultipleChoiceQuestion implements Question {
 	@Override
 	public String getHTML() {
 		// TODO Auto-generated method stub
-		return null;
+		return "test3";
 	}
 	
 	@Override

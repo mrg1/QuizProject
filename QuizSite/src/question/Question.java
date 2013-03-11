@@ -37,7 +37,7 @@ public interface Question {
 	String getHTML();
 
 	String getDisplayName();
-	
+		
 	boolean equals(Object obj);
 	
 	public int hashCode();
