@@ -53,17 +53,16 @@ public class ResponseQuestion implements Question {
 
 	@Override
 	public String getHTML() {
-		return "<p>Hello World!</p>";
-//		StringBuilder sb = new StringBuilder();
-//		sb.append("<p>" + this.getText() + "</p>\n");
-//		sb.append("<p>Answer: <input type=\"text\" name=\"answer\" /></p>");
-//		return sb.toString();
+		String html = "<p>" + this.getText() + "</p>\n" + 
+				"<p>Answer: <input type=\"text\" name=\"answer\" /></p>";
+		return html;
 	}
 	
+	@Override
 	public int getID() {
 		return id;
 	}
-	
+	@Override
 	public void setID(int id) {
 		this.id = id;
 	}

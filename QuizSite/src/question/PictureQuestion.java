@@ -8,7 +8,7 @@ public class PictureQuestion implements Question {
 
 	public static final String DISPLAY_NAME = "Picture-Response Question";
 	private String url;
-	private int weight;
+	private int id, weight;
 	private boolean caseSensitive;
 	List<String> answers;
 	
@@ -59,7 +59,11 @@ public class PictureQuestion implements Question {
 	
 	@Override
 	public int checkAnswer(String userAnswer) {
-		// TODO Auto-generated method stub
+		if(caseSensitive) {
+			if(answers.contains(userAnswer)) return weight;
+		} else {
+			if(answers.contains(userAnswer.toLowerCase())) return weight;
+		}
 		return 0;
 	}
 
@@ -70,8 +74,9 @@ public class PictureQuestion implements Question {
 
 	@Override
 	public String getHTML() {
-		// TODO Auto-generated method stub
-		return "test4";
+		String html = "<img src=\"" + url + "\" alt=\"Picture-Response Question\">\n";
+		html += "<p>Answer: <input type=\"text\" name=\"answer\" /></p>";
+		return html;
 	}
 	
 	@Override
@@ -134,5 +139,14 @@ public class PictureQuestion implements Question {
 		return true;
 	}
 	
+	@Override
+	public int getID() {
+		return id;
+	}
+
+	@Override
+	public void setID(int id) {
+		this.id = id;
+	}
 	
 }
