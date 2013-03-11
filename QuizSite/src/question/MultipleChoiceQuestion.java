@@ -9,7 +9,7 @@ public class MultipleChoiceQuestion implements Question {
 	
 	private String question;
 	private boolean randomize;
-	private int weight;
+	private int id, weight;
 	private ArrayList<String> answers;
 	private String answer;
 	
@@ -158,6 +158,16 @@ public class MultipleChoiceQuestion implements Question {
 		if (weight != other.weight)
 			return false;
 		return true;
+	}
+	
+	@Override
+	public int getID() {
+		return id;
+	}
+
+	@Override
+	public void setID(int id) {
+		this.id = id;
 	}
 	
 }

@@ -8,7 +8,7 @@ public class FillBlankQuestion implements Question {
 	public static final String DISPLAY_NAME = "Fill in the Blank Question";
 	
 	private String pre, post;
-	private int weight;
+	private int id, weight;
 	private boolean caseSensitive;
 	private ArrayList<String> answers;
 	
@@ -150,6 +150,16 @@ public class FillBlankQuestion implements Question {
 		if (weight != other.weight)
 			return false;
 		return true;
+	}
+
+	@Override
+	public int getID() {
+		return id;
+	}
+
+	@Override
+	public void setID(int id) {
+		this.id = id;
 	}
 	
 	

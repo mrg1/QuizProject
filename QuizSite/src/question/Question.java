@@ -27,6 +27,10 @@ public interface Question {
 	
 	int getWeight();
 	
+	int getID();
+	
+	void setID(int id);
+	
 	List<String> getIncorrectAnswers();
 	
 	List<String> getCorrectAnswers();

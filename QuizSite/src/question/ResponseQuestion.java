@@ -59,10 +59,11 @@ public class ResponseQuestion implements Question {
 		return sb.toString();
 	}
 	
+	@Override
 	public int getID() {
 		return id;
 	}
-	
+	@Override
 	public void setID(int id) {
 		this.id = id;
 	}

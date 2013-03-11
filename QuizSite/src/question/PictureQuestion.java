@@ -8,7 +8,7 @@ public class PictureQuestion implements Question {
 
 	public static final String DISPLAY_NAME = "Picture-Response Question";
 	private String url;
-	private int weight;
+	private int id, weight;
 	private boolean caseSensitive;
 	List<String> answers;
 	
@@ -134,5 +134,14 @@ public class PictureQuestion implements Question {
 		return true;
 	}
 	
+	@Override
+	public int getID() {
+		return id;
+	}
+
+	@Override
+	public void setID(int id) {
+		this.id = id;
+	}
 	
 }
