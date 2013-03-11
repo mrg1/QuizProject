@@ -107,7 +107,7 @@
 
 <p class="quiz-buttons">
 <button onclick="window.location = 'quiz-summary.jsp'">Practice</button>
-<button onclick="window.location = 'quiz-summary.jsp'">Take</button>
+<button onclick="window.location = 'quiz-content.jsp?id=<%=quiz.getQuizId()%>'">Take</button>
 <button onclick="window.location = 'quiz-summary.jsp'">Edit</button>
 </p>
 

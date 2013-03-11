@@ -4,12 +4,13 @@
 
 <%@ page import="db.*" %>
 <%@ page import="quiz.*" %>
+<%@ page import="question.*" %>
 <%@ page import="java.util.*" %>
 
 <head>
 <% Quiz quiz = UserInfo.getQuiz(Integer.parseInt(request.getParameter("id"))); %>
 <% String username = (String)session.getAttribute("username"); %>
-<title><%= quiz.getName() %> Summary</title>
+<title><%= quiz.getName() %></title>
 <link href="stylesheet.css" rel="stylesheet" type="text/css"></link>
 </head>
 
@@ -23,13 +24,20 @@
 <li class="inline"><a href="about.asp">Messages</a></li>
 </ul>
 
-<h1><%=quiz.getName() %> Summary</h1>
+<h1><%= quiz.getName() %></h1>
 
-<h1>You got 79%!!!</h1>
+<form action="quiz-summary.jsp?id=<%= quiz.getQuizId() %>" method="post">
 
-<p class="quiz-buttons">
-<button onclick="window.location = 'quiz.jsp?id=<%= quiz.getQuizId() %>'">Back To Quiz</button>
-</p>
+<% Question[] questions = quiz.getQuestions(); %>
+<% for (Question q : questions) { %>
+<p><%= q.getDisplayName() %><%= q.getHTML() %></p>
+<% } %>
+
+
+<input type="submit" value="Submit!"></input>
+</form>
+
+
 
 </body>
 
