@@ -5,7 +5,6 @@ import java.sql.*;
 import java.util.*;
 
 import question.*;
-
 import quiz.Quiz;
 import quiz.Score;
 

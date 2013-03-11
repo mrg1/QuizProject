@@ -8,7 +8,7 @@ public class ResponseQuestion implements Question {
 	
 	private String question;
 	private boolean caseSensitive;
-	private int weight;
+	private int id, weight;
 	private ArrayList<String> answers;
 	
 	public ResponseQuestion(String question, String[] answers) {
@@ -53,10 +53,20 @@ public class ResponseQuestion implements Question {
 
 	@Override
 	public String getHTML() {
-		// TODO Auto-generated method stub
+		StringBuilder sb = new StringBuilder();
+		sb.append("<p>" + this.getText() + "</p>\n");
+		sb.append("<p>Answer: <input type=\"text\" name=\"answer\" /></p>");
 		return null;
 	}
 	
+	public int getID() {
+		return id;
+	}
+	
+	public void setID(int id) {
+		this.id = id;
+	}
+
 	@Override
 	public String getDisplayName() {
 		return DISPLAY_NAME;
