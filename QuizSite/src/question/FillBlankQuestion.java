@@ -82,8 +82,8 @@ public class FillBlankQuestion implements Question {
 	
 	@Override
 	public String getHTML() {
-		// TODO Auto-generated method stub
-		return null;
+		String html = "";
+		return html;
 	}
 	
 	@Override

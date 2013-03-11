@@ -59,7 +59,11 @@ public class PictureQuestion implements Question {
 	
 	@Override
 	public int checkAnswer(String userAnswer) {
-		// TODO Auto-generated method stub
+		if(caseSensitive) {
+			if(answers.contains(userAnswer)) return weight;
+		} else {
+			if(answers.contains(userAnswer.toLowerCase())) return weight;
+		}
 		return 0;
 	}
 
@@ -70,8 +74,9 @@ public class PictureQuestion implements Question {
 
 	@Override
 	public String getHTML() {
-		// TODO Auto-generated method stub
-		return null;
+		String html = "<img src=\"" + url + "\" alt=\"Picture-Response Question\">\n";
+		html += "<p>Answer: <input type=\"text\" name=\"answer\" /></p>";
+		return html;
 	}
 	
 	@Override

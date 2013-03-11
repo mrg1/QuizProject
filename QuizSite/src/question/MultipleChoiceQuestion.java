@@ -2,6 +2,7 @@ package question;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class MultipleChoiceQuestion implements Question {
 
@@ -77,8 +78,27 @@ public class MultipleChoiceQuestion implements Question {
 	
 	@Override
 	public String getHTML() {
-		// TODO Auto-generated method stub
-		return null;
+		String html = "<p>" + this.getText() + "</p>\n<p>";
+		if(randomize) {
+			Random rand = new Random();
+			boolean[] used = new boolean[answers.size()];
+			for(int i = 0; i < answers.size(); i++) {
+				used[i] = false;
+			}
+			for(int j = 0; j < answers.size(); j++) {
+				int index = rand.nextInt(answers.size());
+				while(used[index]) index = rand.nextInt(answers.size());
+				html += "<p><input type=\"radio\" name=\"question1\" value=\"" + answers.get(index) +"\" />" + 
+						answers.get(index) + "<br />";
+			}
+		} else {
+			for(int i = 0; i < answers.size(); i++) {
+				html += "<p><input type=\"radio\" name=\"question1\" value=\"" + answers.get(i) +"\" />" + 
+						answers.get(i) + "<br />";
+			}
+		}
+		html += "</p>";
+		return html;
 	}
 	
 	@Override
@@ -100,9 +120,6 @@ public class MultipleChoiceQuestion implements Question {
 		answers.clear();
 		for(int i = 0; i < choices.length; i++) {
 			answers.add(choices[i].toLowerCase());
-		}
-		if(!answers.contains(answer)) {
-			System.err.println("Answer is not one of the choices. This question will now be impossible to answer correctly.");
 		}
 	}
 	

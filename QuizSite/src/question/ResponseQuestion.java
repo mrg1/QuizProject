@@ -53,10 +53,9 @@ public class ResponseQuestion implements Question {
 
 	@Override
 	public String getHTML() {
-		StringBuilder sb = new StringBuilder();
-		sb.append("<p>" + this.getText() + "</p>\n");
-		sb.append("<p>Answer: <input type=\"text\" name=\"answer\" /></p>");
-		return sb.toString();
+		String html = "<p>" + this.getText() + "</p>\n" + 
+				"<p>Answer: <input type=\"text\" name=\"answer\" /></p>";
+		return html;
 	}
 	
 	@Override
