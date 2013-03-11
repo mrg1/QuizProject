@@ -56,7 +56,7 @@ public class ResponseQuestion implements Question {
 		StringBuilder sb = new StringBuilder();
 		sb.append("<p>" + this.getText() + "</p>\n");
 		sb.append("<p>Answer: <input type=\"text\" name=\"answer\" /></p>");
-		return null;
+		return sb.toString();
 	}
 	
 	public int getID() {
