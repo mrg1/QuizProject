@@ -82,25 +82,35 @@ public class MultipleChoiceQuestion implements Question {
 		if(randomize) {
 			Random rand = new Random();
 			boolean[] used = new boolean[answers.size()];
-			for(int i = 0; i < answers.size(); i++) {
-				used[i] = false;
+			for(boolean b : used) {
+				b = false;
 			}
 			for(int j = 0; j < answers.size(); j++) {
 				int index = rand.nextInt(answers.size());
-				while(used[index]) index = rand.nextInt(answers.size());
-				html += "<p><input type=\"radio\" name=\"question1\" value=\"" + answers.get(index) +"\" />" + 
-						answers.get(index) + "<br />";
+				while(used[index]) {
+					index = rand.nextInt(answers.size());
+					if(allChecked(used)) break;
+				}
+				html += "<p><input type=\"radio\" name=\"answer" + this.getID() + "\" value=\"" 
+						+ answers.get(index) +"\" />" + answers.get(index) + "<br />";
 			}
 		} else {
 			for(int i = 0; i < answers.size(); i++) {
-				html += "<p><input type=\"radio\" name=\"question1\" value=\"" + answers.get(i) +"\" />" + 
-						answers.get(i) + "<br />";
+				html += "<p><input type=\"radio\" name=\"answer" + this.getID() + "\" value=\"" 
+						+ answers.get(i) +"\" />" + answers.get(i) + "<br />";
 			}
 		}
 		html += "</p>";
 		return html;
 	}
 	
+	private boolean allChecked(boolean[] used) {
+		for(boolean bool : used) {
+			if(!bool) return false; 
+		}
+		return true;
+	}
+
 	@Override
 	public String getDisplayName() {
 		return DISPLAY_NAME;

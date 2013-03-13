@@ -75,7 +75,7 @@ public class PictureQuestion implements Question {
 	@Override
 	public String getHTML() {
 		String html = "<img src=\"" + url + "\" alt=\"Picture-Response Question\">\n";
-		html += "<p>Answer: <input type=\"text\" name=\"answer\" /></p>";
+		html += "<p>Answer: <input type=\"text\" name=\"answer" + this.getID() + "\" /></p>";
 		return html;
 	}
 	

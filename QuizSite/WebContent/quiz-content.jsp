@@ -26,11 +26,13 @@
 
 <h1><%= quiz.getName() %></h1>
 
-<form action="quiz-summary.jsp?id=<%= quiz.getQuizId() %>" method="post">
+<form action="QuizServlet" method="post">
+<input type="hidden" name="startTime" value="<%= System.currentTimeMillis() %>"></input>
 <% Question[] questions = quiz.getQuestions(); %>
 <% for (Question q : questions) {%>
 <%=q.getHTML() %>
 <%} %>
+<input type="hidden" name="quizId" value="<%= request.getParameter("id") %>"></input> 
 <input type="submit" value="Submit!"></input>
 </form>
 

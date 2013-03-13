@@ -7,7 +7,7 @@
 <%@ page import="java.util.*" %>
 
 <head>
-<% Quiz quiz = UserInfo.getQuiz(Integer.parseInt(request.getParameter("id"))); %>
+<% Quiz quiz = UserInfo.getQuiz((Integer) request.getAttribute("quizId")); %>
 <% String username = (String)session.getAttribute("username"); %>
 <title><%= quiz.getName() %> Summary</title>
 <link href="stylesheet.css" rel="stylesheet" type="text/css"></link>
@@ -25,7 +25,8 @@
 
 <h1><%=quiz.getName() %> Summary</h1>
 
-<h1>You got 79%!!!</h1>
+<h1>You got <%= request.getAttribute("percent") %>!!!</h1>
+<h2><%= request.getAttribute("elapsed") %> seconds elapsed.</h2>
 
 <p class="quiz-buttons">
 <button onclick="window.location = 'quiz.jsp?id=<%= quiz.getQuizId() %>'">Back To Quiz</button>

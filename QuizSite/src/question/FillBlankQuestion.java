@@ -83,7 +83,7 @@ public class FillBlankQuestion implements Question {
 	@Override
 	public String getHTML() {
 		String html = "<p>" + this.getPre() + "________" + this.getPost() + "</p>\n" + 
-				"<p>Answer: <input type=\"text\" name=\"answer\" /></p>";
+				"<p>Answer: <input type=\"text\" name=\"answer" + this.getID() + "\" /></p>";
 		return html;
 	}
 	

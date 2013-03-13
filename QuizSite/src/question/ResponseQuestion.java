@@ -54,7 +54,7 @@ public class ResponseQuestion implements Question {
 	@Override
 	public String getHTML() {
 		String html = "<p>" + this.getText() + "</p>\n" + 
-				"<p>Answer: <input type=\"text\" name=\"answer\" /></p>";
+				"<p>Answer: <input type=\"text\" name=\"answer" + this.getID() + "\" /></p>";
 		return html;
 	}
 	

@@ -70,7 +70,7 @@ public class Quiz {
 		//TODO Delete scores out of table.
 	}
 	
-	public void recordScore(String user, int score, long elapsed) {
+	public void recordScore(String user, int score, int elapsed) {
 		Score s = new Score(score, this.getQuizId(), user, elapsed);
 		UserInfo.addScore(s);
 	}

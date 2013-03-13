@@ -225,13 +225,21 @@ public class UserInfo {
 				String correctAnswer = getCorrectAnswer(questionId);
 				String[] answerArray = answers.toArray(new String[answers.size()]);
 				switch(questionType){
-					case QuestionInfo.FILL_BLANK_ID: result.add(new FillBlankQuestion(questionContent, questionContent2, answerArray, caseOrRandomize, weight));
+					case QuestionInfo.FILL_BLANK_ID: question = new FillBlankQuestion(questionContent, questionContent2, answerArray, caseOrRandomize, weight);
+						question.setID(questionId);
+						result.add(question);
 						break;
-					case QuestionInfo.MULTIPLE_CHOICE_ID: result.add(new MultipleChoiceQuestion(questionContent, answerArray, correctAnswer, caseOrRandomize, weight));
+					case QuestionInfo.MULTIPLE_CHOICE_ID: question = new MultipleChoiceQuestion(questionContent, answerArray, correctAnswer, caseOrRandomize, weight);
+						question.setID(questionId);
+						result.add(question);
 						break;
-					case QuestionInfo.PICTURE_QUESTION_ID: result.add(new PictureQuestion(questionContent, answerArray, caseOrRandomize, weight));
+					case QuestionInfo.PICTURE_QUESTION_ID: question = new PictureQuestion(questionContent, answerArray, caseOrRandomize, weight);
+						question.setID(questionId);
+						result.add(question);
 						break;
-					case QuestionInfo.RESPONSE_QUESTION_ID: result.add(new ResponseQuestion(questionContent, answerArray, caseOrRandomize, weight));
+					case QuestionInfo.RESPONSE_QUESTION_ID: question = new ResponseQuestion(questionContent, answerArray, caseOrRandomize, weight);
+						question.setID(questionId);
+						result.add(question);
 						break;
 				}
 			}
@@ -376,6 +384,7 @@ public class UserInfo {
 			ResultSet rs = selectStatement.executeQuery();
 			if(rs.next()){
 				int questionId = rs.getInt(1);
+				q.setID(questionId);
 				for(String answer: q.getCorrectAnswers()){
 					addAnswer(questionId, answer, true);
 				}
