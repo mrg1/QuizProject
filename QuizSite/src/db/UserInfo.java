@@ -2,7 +2,9 @@ package db;
 
 import user.*;
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.Date;
 
 import question.*;
 import quiz.Quiz;
@@ -560,5 +562,70 @@ public class UserInfo {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	//Returns a list of quizIds
+	public static List<Integer> getQuizzesByTitle(){
+		List<Integer> quizzes = new ArrayList<Integer>();
+		con = QuizDB.getConnection();
+		try {
+			PreparedStatement selectStatement = con.prepareStatement(QuizSqlStatements.SQL_GET_QUIZZES_BY_TITLE);
+			ResultSet rs = selectStatement.executeQuery();
+			while(rs.next()){
+				quizzes.add(rs.getInt(1));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return quizzes;
+	}
+	
+	public static String getDateForQuiz(int quizId){
+		String result = "";
+		con = QuizDB.getConnection();
+		try {
+			PreparedStatement selectStatement = con.prepareStatement(QuizSqlStatements.SQL_GET_QUIZ_DATE);
+			selectStatement.setInt(1, quizId);
+			ResultSet rs = selectStatement.executeQuery();
+			if(rs.next()){
+				Date d = rs.getDate(1);
+				result = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(d);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	public static List<Score> getRecentQuizAttempts(int quizId){
+		List<Score> history = new ArrayList<Score>();
+		con = QuizDB.getConnection();
+		try {
+			PreparedStatement selectStatement = con.prepareStatement(QuizSqlStatements.SQL_GET_RECENT_QUIZ_ARREMPTS);
+			selectStatement.setInt(1, quizId);
+			ResultSet rs = selectStatement.executeQuery();
+			while(rs.next()){
+				history.add(new Score(rs.getInt(1), quizId,rs.getString(2), rs.getInt(3)));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return history;
+	}
+	
+	public static List<Score> getDaysQuizAttempts(int quizId){
+		List<Score> history = new ArrayList<Score>();
+		con = QuizDB.getConnection();
+		try {
+			PreparedStatement selectStatement = con.prepareStatement(QuizSqlStatements.SQL_GET_DAYS_SCORES_ON_QUIZ);
+			selectStatement.setInt(1, quizId);
+			ResultSet rs = selectStatement.executeQuery();
+			while(rs.next()){
+				history.add(new Score(rs.getInt(1), quizId,rs.getString(2), rs.getInt(3)));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return history;
 	}
 }
