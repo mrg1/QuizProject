@@ -1,26 +1,48 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<?xml version="1.0" encoding="UTF-8" ?><!-- <?xml version="1.0" encoding="ISO-8859-1" ?> -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<%@ page import="db.UserInfo" %>
+
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Create a New Quiz</title>
+<title>Friends</title>
+<link href="stylesheet.css" rel="stylesheet" type="text/css"></link>
 </head>
+
 <body>
+
 <%@include file="navbar.html" %>
-<img class="centeredImage" src="http://imageshack.us/a/img7/1496/quizzsitelogo.png">
+
+
+<% Object message = request.getAttribute("alert"); %>
+<% if(message != null) { %>
+	<p><%=(String)message %></p>
+	<% request.setAttribute("alert",null); %>
+<% } %>
 
 <div class="centered">
-<h1>Create New Account</h1>
-<p>Please enter proposed name and password.</p>
+<h1>Create New Quiz</h1>
+<p>Please enter the information for your new quiz:</p>
 <form action="CreateServlet" method="post">
-<p>User Name: <input type="text" name="username" /></p>
-<p>Password: <input type="password" name="password"/><p>
-<input class="loginButton" type="submit" value="Create Account"/>
+<p>Quiz Name: <input type="text" name="quizname" /></p>
+<p>Description: <input type="text" name="description"/><p>
+<p>Would you like your quiz to have randomly ordered questions? <input type="checkbox" name="random" value="random"/> </p>
+<p>Would you like your quiz to have a separate page for each question? <input type="checkbox" name="multipage" value="multipage"/> </p>
+<p>Would you like your quiz to give immediate correction? <input type="checkbox" name="immediate" value="immediate"/> </p>
+<p>Would you like your quiz to allow practice mode? <input type="checkbox" name="practice" value="practice"/> </p>
+<p><input type="submit" value="Add New Question"/> 
+<select name="questionType">
+<option value="0">Multiple Choice</option>
+<option value="1">Picture Question</option>
+<option value="3">Response Question</option>
+<option value="2">Fill in the Blank Question</option>
+</select>
+</p>
 </form>
-
-<p class="centered"><a href="index.html">Return To Login</a></p>
-
 </div>
+
 </body>
+
 </html>
+
+

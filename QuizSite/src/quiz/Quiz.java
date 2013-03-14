@@ -63,6 +63,17 @@ public class Quiz {
 		this.quizId = quizId;
 	}
 	
+	public Quiz(String name, String author, String description, boolean random, boolean onePage, boolean immediateCorrection, boolean practice){
+		this.name = name;
+		this.author = author;
+		this.desc = description;
+		this.random = random; 
+		this.onePage = onePage; 
+		this.immediateCorrection = immediateCorrection; 
+		this.practice = practice;
+		this.questions = new Question[0];
+	}
+	
 	public void remove() {
 		this.clearHistory();
 		UserInfo.deleteQuiz(this.getQuizId());
