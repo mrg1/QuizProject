@@ -39,6 +39,8 @@ public interface Question {
 	 * @return HTML representation of the question for quiz view.
 	 */
 	String getHTML();
+	
+	String getCorrectedHTML(String userAnswer);
 
 	String getDisplayName();
 		

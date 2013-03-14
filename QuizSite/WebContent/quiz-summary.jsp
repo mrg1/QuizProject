@@ -4,6 +4,7 @@
 
 <%@ page import="db.*" %>
 <%@ page import="quiz.*" %>
+<%@ page import="question.*" %>
 <%@ page import="java.util.*" %>
 
 <head>
@@ -25,8 +26,25 @@
 
 <h1><%=quiz.getName() %> Summary</h1>
 
-<h1>You got <%= request.getAttribute("percent") %>!!!</h1>
+<h1>You got <%= request.getAttribute("percent") %>%!!!</h1>
 <h2><%= request.getAttribute("elapsed") %> seconds elapsed.</h2>
+
+<%
+Question[] questions = quiz.getQuestions();
+/* for(int i = 0; i < questions.length; i++) {
+	int index = (Integer) request.getAttribute("question" + i);
+	Question q = questions[index];
+	String ans = (String) request.getAttribute("answer" + q.getID());
+	out.println("<p></p><hr>");
+	out.println(q.getCorrectedHTML(ans));
+} */
+
+for(Question q : questions) {
+	String ans = (String) request.getAttribute("answer" + q.getID());
+	out.println("<p></p><hr>");
+	out.println(q.getCorrectedHTML(ans));
+}
+%>
 
 <p class="quiz-buttons">
 <button onclick="window.location = 'quiz.jsp?id=<%= quiz.getQuizId() %>'">Back To Quiz</button>
