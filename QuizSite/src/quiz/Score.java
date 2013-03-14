@@ -6,11 +6,11 @@ public class Score {
 	private String username;
 	private int seconds;
 	
-	public Score(int score, int quizId, String username, long elapsed){
+	public Score(int score, int quizId, String username, int elapsed){
 		this.score = score;
 		this.quizId = quizId;
 		this.username = username;
-		this.seconds = (int) (elapsed/1000);
+		this.seconds = elapsed;
 	}
 	
 	public int getScore() {

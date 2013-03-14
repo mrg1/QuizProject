@@ -9,39 +9,38 @@ public class ResponseQuestion implements Question {
 	private String question;
 	private boolean caseSensitive;
 	private int id, weight;
-	private ArrayList<String> answers;
+	private List<String> answers;
 	
 	public ResponseQuestion(String question, String[] answers) {
 		this.question = question;
 		weight = 1;
 		caseSensitive = false;
-		this.answers = new ArrayList<String>();
-		storeAnswers(answers);
+		this.answers = Arrays.asList(answers);
 	}
 	
 	public ResponseQuestion(String question, String[] answers, int weight) {
 		this.question = question;
 		this.weight = weight;
 		caseSensitive = false;
-		this.answers = new ArrayList<String>();
-		storeAnswers(answers);
+		this.answers = Arrays.asList(answers);
 	}
 	
 	public ResponseQuestion(String question, String[] answers, boolean caseSensitive, int weight) {
 		this.question = question;
 		this.weight = weight;
 		this.caseSensitive = caseSensitive;
-		this.answers = new ArrayList<String>();
-		storeAnswers(answers);
+		this.answers = Arrays.asList(answers);
 	}
 	
 	
 	@Override
 	public int checkAnswer(String userAnswer) {
 		if(caseSensitive) {
-			if(answers.contains(userAnswer)) return weight;
+			if(answers.contains(userAnswer.trim())) return weight;
 		} else {
-			if(answers.contains(userAnswer.toLowerCase())) return weight;
+			for(String ans : answers) {
+				if(ans.equalsIgnoreCase(userAnswer.trim())) return weight;
+			}
 		}
 		return 0;
 	}
@@ -54,7 +53,24 @@ public class ResponseQuestion implements Question {
 	@Override
 	public String getHTML() {
 		String html = "<p>" + this.getText() + "</p>\n" + 
-				"<p>Answer: <input type=\"text\" name=\"answer\" /></p>";
+				"<p>Answer: <input type=\"text\" name=\"answer" + this.getID() + "\" /></p>";
+		return html;
+	}
+	
+	@Override
+	public String getCorrectedHTML(String userAnswer) {
+		String html = "<p>" + this.getText() + "</p>\n" + 
+				"<p>Answer: <input type=\"text\" name=\"answer" + this.getID() + "\" value=\"" + userAnswer + "\" disabled /></p>";
+		if(this.checkAnswer(userAnswer) == this.getMaxScore()) {
+			html += "<p style=\"color: green; font-weight: bold\">Answer Correct!</p>";
+		} else {
+			html += "<p style=\"color: red; font-weight: bold\">Correct Answer(s): ";
+			for(int i = 0; i < answers.size(); i++) {
+				html += answers.get(i);
+				if(i != (answers.size()-1)) html += ", ";
+			}
+			html += ".</p>";
+		}
 		return html;
 	}
 	
@@ -100,17 +116,6 @@ public class ResponseQuestion implements Question {
 	
 	public String getText() {
 		return question;
-	}
-	
-	private void storeAnswers(String[] ans) {
-		answers.clear();
-		for(int i = 0; i < ans.length; i++) {
-			if(caseSensitive) {
-				answers.add(ans[i]);
-			} else {
-				answers.add(ans[i].toLowerCase());
-			}
-		}
 	}
 	
 	public int getQuestionType(){

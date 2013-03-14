@@ -85,6 +85,8 @@ public class DbTest extends TestCase {
 		int qid2 = UserInfo.addQuiz(quiz2);	
 		Quiz gotQuiz = UserInfo.getQuiz(qid);
 		assertTrue(gotQuiz.equals(quiz));
+		UserInfo.deleteQuiz(qid);
+		UserInfo.deleteQuiz(qid2);
 	}
 	
 	@Test

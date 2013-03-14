@@ -9,13 +9,9 @@
 </head>
 
 <body>
-<h3 class="inline title">Awesome Quiz Site</h3>
 
-<ul class="navbar">
-<li class="inline"><a href="homepage.jsp">Home</a></li>
-<li class="inline"><a href="quizzes.jsp">Quizzes</a></li>
-<li class="inline"><a href="inbox.jsp">Inbox</a></li>
-</ul>
+<%@include file="navbar.html" %>
+
 
 <% Object message = request.getAttribute("alert"); %>
 <% if(message != null) { %>

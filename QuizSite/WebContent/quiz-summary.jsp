@@ -4,10 +4,11 @@
 
 <%@ page import="db.*" %>
 <%@ page import="quiz.*" %>
+<%@ page import="question.*" %>
 <%@ page import="java.util.*" %>
 
 <head>
-<% Quiz quiz = UserInfo.getQuiz(Integer.parseInt(request.getParameter("id"))); %>
+<% Quiz quiz = UserInfo.getQuiz((Integer) request.getAttribute("quizId")); %>
 <% String username = (String)session.getAttribute("username"); %>
 <title><%= quiz.getName() %> Summary</title>
 <link href="stylesheet.css" rel="stylesheet" type="text/css"></link>
@@ -15,17 +16,30 @@
 
 <body>
 
-<h3 class="inline title">Awesome Quiz Site</h3>
+<%@include file="navbar.html" %>
 
-<ul class="navbar">
-<li class="inline"><a href="homepage.jsp">Home</a></li>
-<li class="inline"><a href="quizzes.jsp">Quizzes</a></li>
-<li class="inline"><a href="about.asp">Messages</a></li>
-</ul>
 
 <h1><%=quiz.getName() %> Summary</h1>
 
-<h1>You got 79%!!!</h1>
+<h1>You got <%= request.getAttribute("percent") %>%!!!</h1>
+<h2><%= request.getAttribute("elapsed") %> seconds elapsed.</h2>
+
+<%
+Question[] questions = quiz.getQuestions();
+/* for(int i = 0; i < questions.length; i++) {
+	int index = (Integer) request.getAttribute("question" + i);
+	Question q = questions[index];
+	String ans = (String) request.getAttribute("answer" + q.getID());
+	out.println("<p></p><hr>");
+	out.println(q.getCorrectedHTML(ans));
+} */
+
+for(Question q : questions) {
+	String ans = (String) request.getAttribute("answer" + q.getID());
+	out.println("<p></p><hr>");
+	out.println(q.getCorrectedHTML(ans));
+}
+%>
 
 <p class="quiz-buttons">
 <button onclick="window.location = 'quiz.jsp?id=<%= quiz.getQuizId() %>'">Back To Quiz</button>

@@ -2,7 +2,9 @@ package db;
 
 import user.*;
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.Date;
 
 import question.*;
 import quiz.Quiz;
@@ -12,8 +14,35 @@ import message.*;
 public class UserInfo {
 	private static Connection con;
 
-	public static void getUser(String username){
+	public static User getUser(String username){
 		con = QuizDB.getConnection();
+		User result = null;
+		try {
+			PreparedStatement getStatement = con.prepareStatement(QuizSqlStatements.SQL_GET_USER);
+			getStatement.setString(1, username);
+			ResultSet rs = getStatement.executeQuery();
+			if(rs.next()){
+				result = new User(rs.getString(1), rs.getString(2));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	public static List<User> getUsers(){
+		con = QuizDB.getConnection();
+		List<User> result = new ArrayList<User>();
+		try {
+			PreparedStatement getStatement = con.prepareStatement(QuizSqlStatements.SQL_GET_USERS);
+			ResultSet rs = getStatement.executeQuery();
+			while(rs.next()){
+				result.add(new User(rs.getString(1), rs.getString(2)));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 
 	public static void addUser(String username, String password, String salt, boolean admin){
@@ -144,7 +173,7 @@ public class UserInfo {
 			addStatement.setString(1, q.getName());
 			addStatement.setString(2, q.getAuthor());
 			addStatement.setString(3, q.getDescription());
-			addStatement.setBoolean(4, q.isRandom());
+			addStatement.setBoolean(4, q.getRandom());
 			addStatement.setBoolean(5, q.isOnePage());
 			addStatement.setBoolean(6, q.immediateCorrection());
 			addStatement.setBoolean(7, q.canPractice());
@@ -225,13 +254,21 @@ public class UserInfo {
 				String correctAnswer = getCorrectAnswer(questionId);
 				String[] answerArray = answers.toArray(new String[answers.size()]);
 				switch(questionType){
-					case QuestionInfo.FILL_BLANK_ID: result.add(new FillBlankQuestion(questionContent, questionContent2, answerArray, caseOrRandomize, weight));
+					case QuestionInfo.FILL_BLANK_ID: question = new FillBlankQuestion(questionContent, questionContent2, answerArray, caseOrRandomize, weight);
+						question.setID(questionId);
+						result.add(question);
 						break;
-					case QuestionInfo.MULTIPLE_CHOICE_ID: result.add(new MultipleChoiceQuestion(questionContent, answerArray, correctAnswer, caseOrRandomize, weight));
+					case QuestionInfo.MULTIPLE_CHOICE_ID: question = new MultipleChoiceQuestion(questionContent, answerArray, correctAnswer, caseOrRandomize, weight);
+						question.setID(questionId);
+						result.add(question);
 						break;
-					case QuestionInfo.PICTURE_QUESTION_ID: result.add(new PictureQuestion(questionContent, answerArray, caseOrRandomize, weight));
+					case QuestionInfo.PICTURE_QUESTION_ID: question = new PictureQuestion(questionContent, answerArray, caseOrRandomize, weight);
+						question.setID(questionId);
+						result.add(question);
 						break;
-					case QuestionInfo.RESPONSE_QUESTION_ID: result.add(new ResponseQuestion(questionContent, answerArray, caseOrRandomize, weight));
+					case QuestionInfo.RESPONSE_QUESTION_ID: question = new ResponseQuestion(questionContent, answerArray, caseOrRandomize, weight);
+						question.setID(questionId);
+						result.add(question);
 						break;
 				}
 			}
@@ -376,6 +413,7 @@ public class UserInfo {
 			ResultSet rs = selectStatement.executeQuery();
 			if(rs.next()){
 				int questionId = rs.getInt(1);
+				q.setID(questionId);
 				for(String answer: q.getCorrectAnswers()){
 					addAnswer(questionId, answer, true);
 				}
@@ -456,6 +494,18 @@ public class UserInfo {
 			PreparedStatement addStatement = con.prepareStatement(QuizSqlStatements.SQL_REMOVE_USER_HISTORY);
 			addStatement.setString(1, username);
 			addStatement.execute();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+	}
+	
+	public static void deleteHistoryForQuiz(int quizId){
+		con = QuizDB.getConnection();
+		try {
+			PreparedStatement deleteStatement = con.prepareStatement(QuizSqlStatements.SQL_REMOVE_QUIZ_HISTORY);
+			deleteStatement.setInt(1, quizId);
+			deleteStatement.execute();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -552,4 +602,152 @@ public class UserInfo {
 			e.printStackTrace();
 		}
 	}
+	
+	//Returns a list of quizIds
+	public static List<Integer> getQuizzesByTitle(){
+		List<Integer> quizzes = new ArrayList<Integer>();
+		con = QuizDB.getConnection();
+		try {
+			PreparedStatement selectStatement = con.prepareStatement(QuizSqlStatements.SQL_GET_QUIZZES_BY_TITLE);
+			ResultSet rs = selectStatement.executeQuery();
+			while(rs.next()){
+				quizzes.add(rs.getInt(1));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return quizzes;
+	}
+	
+	public static String getDateForQuiz(int quizId){
+		String result = "";
+		con = QuizDB.getConnection();
+		try {
+			PreparedStatement selectStatement = con.prepareStatement(QuizSqlStatements.SQL_GET_QUIZ_DATE);
+			selectStatement.setInt(1, quizId);
+			ResultSet rs = selectStatement.executeQuery();
+			if(rs.next()){
+				Date d = rs.getDate(1);
+				result = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(d);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	public static List<Score> getRecentQuizAttempts(int quizId){
+		List<Score> history = new ArrayList<Score>();
+		con = QuizDB.getConnection();
+		try {
+			PreparedStatement selectStatement = con.prepareStatement(QuizSqlStatements.SQL_GET_RECENT_QUIZ_ARREMPTS);
+			selectStatement.setInt(1, quizId);
+			ResultSet rs = selectStatement.executeQuery();
+			while(rs.next()){
+				history.add(new Score(rs.getInt(1), quizId,rs.getString(2), rs.getInt(3)));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return history;
+	}
+	
+	public static List<Score> getDaysQuizAttempts(int quizId){
+		List<Score> history = new ArrayList<Score>();
+		con = QuizDB.getConnection();
+		try {
+			PreparedStatement selectStatement = con.prepareStatement(QuizSqlStatements.SQL_GET_DAYS_SCORES_ON_QUIZ);
+			selectStatement.setInt(1, quizId);
+			ResultSet rs = selectStatement.executeQuery();
+			while(rs.next()){
+				history.add(new Score(rs.getInt(1), quizId,rs.getString(2), rs.getInt(3)));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return history;
+	}
+	
+	public static void deleteAnnouncement(int announcementId){
+		con = QuizDB.getConnection();
+		try {
+			PreparedStatement deleteStatement = con.prepareStatement(QuizSqlStatements.SQL_DELETE_ANNOUNCEMENT);
+			deleteStatement.setInt(1, announcementId);
+			deleteStatement.execute();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void addAnnouncement(String username, String content){
+		con = QuizDB.getConnection();
+		try {
+			PreparedStatement addStatement = con.prepareStatement(QuizSqlStatements.SQL_ADD_ANNOUNCEMENT);
+			addStatement.setString(1, username);
+			addStatement.setString(2, content);
+			addStatement.execute();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static List<Announcement> getAnnouncments(){
+		List<Announcement> announcements = new ArrayList<Announcement>();
+		con = QuizDB.getConnection();
+		try {
+			PreparedStatement selectStatement = con.prepareStatement(QuizSqlStatements.SQL_GET_ANNOUNCEMENTS);
+			ResultSet rs = selectStatement.executeQuery();
+			while(rs.next()){
+				announcements.add(new Announcement(rs.getString(1), rs.getString(2), rs.getInt(3)));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return announcements;
+	}
+	
+	public static boolean quizExists(int quizId){
+		boolean result = false;
+		con = QuizDB.getConnection();
+		try {
+			PreparedStatement selectStatement = con.prepareStatement(QuizSqlStatements.SQL_GET_QUIZ);
+			selectStatement.setInt(1, quizId);
+			ResultSet rs = selectStatement.executeQuery();
+			if(rs.next()){
+				result = true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	public static boolean isAdmin(String username){
+		boolean result = false;
+		con = QuizDB.getConnection();
+		try {
+			PreparedStatement selectStatement = con.prepareStatement(QuizSqlStatements.SQL_GET_ADMIN);
+			selectStatement.setString(1, username);
+			ResultSet rs = selectStatement.executeQuery();
+			if(rs.next()){
+				result = true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	public static void changeAdmin(String username, boolean admin){
+		con = QuizDB.getConnection();
+		try {
+			PreparedStatement updateStatement = con.prepareStatement(QuizSqlStatements.SQL_CHANGE_USER_ADMIN);
+			updateStatement.setString(2, username);
+			updateStatement.setBoolean(1, admin);
+			updateStatement.execute();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
 }

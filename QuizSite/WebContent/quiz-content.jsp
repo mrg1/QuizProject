@@ -16,21 +16,30 @@
 
 <body>
 
-<h3 class="inline title">Awesome Quiz Site</h3>
+<%@include file="navbar.html" %>
 
-<ul class="navbar">
-<li class="inline"><a href="homepage.jsp">Home</a></li>
-<li class="inline"><a href="quizzes.jsp">Quizzes</a></li>
-<li class="inline"><a href="about.asp">Messages</a></li>
-</ul>
 
 <h1><%= quiz.getName() %></h1>
 
-<form action="quiz-summary.jsp?id=<%= quiz.getQuizId() %>" method="post">
-<% Question[] questions = quiz.getQuestions(); %>
-<% for (Question q : questions) {%>
-<%=q.getHTML() %>
-<%} %>
+<form action="QuizServlet" method="post">
+<input type="hidden" name="startTime" value="<%= System.currentTimeMillis() %>"></input>
+<% 
+Question[] questions = quiz.getQuestions();
+/* int[] order = quiz.getQuestionOrder();
+for(int i = 0; i < order.length; i++) {
+	Question q = questions[order[i]];
+	out.println("<hr>");
+	out.println(q.getHTML());
+	String paramInput = "<input type=\"hidden\" name=\"question" + i + "\" value=\"" + order[i] + "\" ></input>";
+	System.out.println("Parameter question" + i + " = " + order[i]);
+} */
+
+for (Question q : questions) {
+	out.println("<hr>");
+	out.println(q.getHTML());
+}
+%>
+<input type="hidden" name="quizId" value="<%= request.getParameter("id") %>"></input> 
 <input type="submit" value="Submit!"></input>
 </form>
 

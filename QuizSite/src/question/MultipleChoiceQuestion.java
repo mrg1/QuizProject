@@ -1,6 +1,7 @@
 package question;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -11,34 +12,31 @@ public class MultipleChoiceQuestion implements Question {
 	private String question;
 	private boolean randomize;
 	private int id, weight;
-	private ArrayList<String> answers;
+	private List<String> choices;
 	private String answer;
 	
 	public MultipleChoiceQuestion(String question, String[] choices, String answer) {
 		this.question = question;
 		weight = 1;
 		randomize = false;
-		this.answers = new ArrayList<String>();
+		this.choices = Arrays.asList(choices);
 		this.answer = answer;
-		storeAnswers(choices);
 	}
 	
 	public MultipleChoiceQuestion(String question, String[] choices, String answer, int weight) {
 		this.question = question;
 		this.weight = weight;
 		randomize = false;
-		this.answers = new ArrayList<String>();
+		this.choices = Arrays.asList(choices);
 		this.answer = answer;
-		storeAnswers(choices);
 	}
 	
 	public MultipleChoiceQuestion(String question, String[] choices, String answer, boolean randomize, int weight) {
 		this.question = question;
 		this.weight = weight;
 		this.randomize = randomize;
-		this.answers = new ArrayList<String>();
+		this.choices = Arrays.asList(choices);
 		this.answer = answer;
-		storeAnswers(choices);
 	}
 	
 	@Override
@@ -56,8 +54,8 @@ public class MultipleChoiceQuestion implements Question {
 		return question;
 	}
 	
-	public String[] getChoices() {
-		return (String[]) answers.toArray();
+	public List<String> getChoices() {
+		return choices;
 	}
 
 	public void setWeight(int weight) {
@@ -81,26 +79,51 @@ public class MultipleChoiceQuestion implements Question {
 		String html = "<p>" + this.getText() + "</p>\n<p>";
 		if(randomize) {
 			Random rand = new Random();
-			boolean[] used = new boolean[answers.size()];
-			for(int i = 0; i < answers.size(); i++) {
+			boolean[] used = new boolean[choices.size()];
+			for(int i = 0; i < used.length; i++) {
 				used[i] = false;
 			}
-			for(int j = 0; j < answers.size(); j++) {
-				int index = rand.nextInt(answers.size());
-				while(used[index]) index = rand.nextInt(answers.size());
-				html += "<p><input type=\"radio\" name=\"question1\" value=\"" + answers.get(index) +"\" />" + 
-						answers.get(index) + "<br />";
+			for(int j = 0; j < choices.size(); j++) {
+				int index = rand.nextInt(choices.size());
+				while(used[index]) {
+					index = rand.nextInt(choices.size());
+					if(allChecked(used)) break;
+				}
+				html += "<p><input type=\"radio\" name=\"answer" + this.getID() + "\" value=\"" 
+						+ choices.get(index) +"\" />" + choices.get(index) + "<br />";
 			}
 		} else {
-			for(int i = 0; i < answers.size(); i++) {
-				html += "<p><input type=\"radio\" name=\"question1\" value=\"" + answers.get(i) +"\" />" + 
-						answers.get(i) + "<br />";
+			for(int i = 0; i < choices.size(); i++) {
+				html += "<p><input type=\"radio\" name=\"answer" + this.getID() + "\" value=\"" 
+						+ choices.get(i) +"\" />" + choices.get(i) + "<br />";
 			}
 		}
 		html += "</p>";
 		return html;
 	}
 	
+	public String getCorrectedHTML(String userAnswer) {
+		String html = "<p>" + this.getText() + "</p>\n"; 
+				for(int i = 0; i < choices.size(); i++) {
+					html += "<p><input type=\"radio\" name=\"answer" + this.getID() + "\" value=\"" + choices.get(i) +"\" ";
+					if(choices.get(i).equals(userAnswer)) html += "checked";
+					html +=	" disabled />" + choices.get(i) + "<br />";
+				};
+		if(this.checkAnswer(userAnswer) == this.getMaxScore()) {
+			html += "<p style=\"color: green; font-weight: bold\">Answer Correct!</p>";
+		} else {
+			html += "<p style=\"color: red; font-weight: bold\">Correct Answer: " + answer + "</p>";
+		}
+		return html;
+	}
+	
+	private boolean allChecked(boolean[] used) {
+		for(boolean bool : used) {
+			if(!bool) return false; 
+		}
+		return true;
+	}
+
 	@Override
 	public String getDisplayName() {
 		return DISPLAY_NAME;
@@ -115,13 +138,6 @@ public class MultipleChoiceQuestion implements Question {
 		//TODO
 		return null;
 	}
-
-	private void storeAnswers(String [] choices) {
-		answers.clear();
-		for(int i = 0; i < choices.length; i++) {
-			answers.add(choices[i].toLowerCase());
-		}
-	}
 	
 	public int getQuestionType(){
 		return QuestionInfo.MULTIPLE_CHOICE_ID;
@@ -134,7 +150,7 @@ public class MultipleChoiceQuestion implements Question {
 	}
 	
 	public List<String> getIncorrectAnswers(){
-		List<String> result = new ArrayList<String>(answers);
+		List<String> result = new ArrayList<String>(choices);
 		result.remove(answer);
 		return result;
 	}
