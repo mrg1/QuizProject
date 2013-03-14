@@ -72,3 +72,20 @@ table.table5 th {
 .quiz-buttons {
 	float:right;
 }
+.centeredImage {
+	display:block;
+	margin-left:auto;
+	margin-right:auto;
+}
+.centered {
+	margin-left:auto;
+	margin-right:auto;
+	width:325px;
+}
+.loginButton {
+	padding:5px;
+	background-color:whitesmoke;
+	border: 1px solid #666;
+  	color:#000;
+  	width:250px;
+}
