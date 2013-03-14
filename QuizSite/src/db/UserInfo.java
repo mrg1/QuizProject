@@ -14,8 +14,35 @@ import message.*;
 public class UserInfo {
 	private static Connection con;
 
-	public static void getUser(String username){
+	public static User getUser(String username){
 		con = QuizDB.getConnection();
+		User result = null;
+		try {
+			PreparedStatement getStatement = con.prepareStatement(QuizSqlStatements.SQL_GET_USER);
+			getStatement.setString(1, username);
+			ResultSet rs = getStatement.executeQuery();
+			if(rs.next()){
+				result = new User(rs.getString(1), rs.getString(2));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	public static List<User> getUsers(){
+		con = QuizDB.getConnection();
+		List<User> result = new ArrayList<User>();
+		try {
+			PreparedStatement getStatement = con.prepareStatement(QuizSqlStatements.SQL_GET_USERS);
+			ResultSet rs = getStatement.executeQuery();
+			while(rs.next()){
+				result.add(new User(rs.getString(1), rs.getString(2)));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 
 	public static void addUser(String username, String password, String salt, boolean admin){
@@ -472,6 +499,18 @@ public class UserInfo {
 		}
 
 	}
+	
+	public static void deleteHistoryForQuiz(int quizId){
+		con = QuizDB.getConnection();
+		try {
+			PreparedStatement deleteStatement = con.prepareStatement(QuizSqlStatements.SQL_REMOVE_QUIZ_HISTORY);
+			deleteStatement.setInt(1, quizId);
+			deleteStatement.execute();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+	}
 
 	public static List<Integer> popularQuizIds(){
 		List<Integer> popular = new ArrayList<Integer>();
@@ -627,5 +666,87 @@ public class UserInfo {
 			e.printStackTrace();
 		}
 		return history;
+	}
+	
+	public static void deleteAnnouncement(int announcementId){
+		con = QuizDB.getConnection();
+		try {
+			PreparedStatement deleteStatement = con.prepareStatement(QuizSqlStatements.SQL_DELETE_ANNOUNCEMENT);
+			deleteStatement.setInt(1, announcementId);
+			deleteStatement.execute();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void addAnnouncement(String username, String content){
+		con = QuizDB.getConnection();
+		try {
+			PreparedStatement addStatement = con.prepareStatement(QuizSqlStatements.SQL_ADD_ANNOUNCEMENT);
+			addStatement.setString(1, username);
+			addStatement.setString(2, content);
+			addStatement.execute();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static List<Announcement> getAnnouncments(){
+		List<Announcement> announcements = new ArrayList<Announcement>();
+		con = QuizDB.getConnection();
+		try {
+			PreparedStatement selectStatement = con.prepareStatement(QuizSqlStatements.SQL_GET_ANNOUNCEMENTS);
+			ResultSet rs = selectStatement.executeQuery();
+			while(rs.next()){
+				announcements.add(new Announcement(rs.getString(1), rs.getString(2), rs.getInt(3)));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return announcements;
+	}
+	
+	public static boolean quizExists(int quizId){
+		boolean result = false;
+		con = QuizDB.getConnection();
+		try {
+			PreparedStatement selectStatement = con.prepareStatement(QuizSqlStatements.SQL_GET_QUIZ);
+			selectStatement.setInt(1, quizId);
+			ResultSet rs = selectStatement.executeQuery();
+			if(rs.next()){
+				result = true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	public static boolean isAdmin(String username){
+		boolean result = false;
+		con = QuizDB.getConnection();
+		try {
+			PreparedStatement selectStatement = con.prepareStatement(QuizSqlStatements.SQL_GET_ADMIN);
+			selectStatement.setString(1, username);
+			ResultSet rs = selectStatement.executeQuery();
+			if(rs.next()){
+				result = true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	public static void changeAdmin(String username, boolean admin){
+		con = QuizDB.getConnection();
+		try {
+			PreparedStatement updateStatement = con.prepareStatement(QuizSqlStatements.SQL_CHANGE_USER_ADMIN);
+			updateStatement.setString(2, username);
+			updateStatement.setBoolean(1, admin);
+			updateStatement.execute();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 }
