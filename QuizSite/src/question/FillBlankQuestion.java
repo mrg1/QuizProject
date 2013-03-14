@@ -1,6 +1,7 @@
 package question;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class FillBlankQuestion implements Question {
@@ -10,43 +11,40 @@ public class FillBlankQuestion implements Question {
 	private String pre, post;
 	private int id, weight;
 	private boolean caseSensitive;
-	private ArrayList<String> answers;
+	private List<String> answers;
+	
+	public FillBlankQuestion(String pre, String post, String[] answers) {
+		this.pre = pre.trim();
+		this.post = post.trim();
+		weight = 1;
+		caseSensitive = false;
+		this.answers = Arrays.asList(answers);
+	}
 	
 	public FillBlankQuestion(String pre, String post, String[] answers, boolean sensitive) {
-		this.pre = pre;
-		this.post = post;
+		this.pre = pre.trim();
+		this.post = post.trim();
 		weight = 1;
 		caseSensitive = sensitive;
-		this.answers = new ArrayList<String>();
-		storeAnswers(answers);
+		this.answers = Arrays.asList(answers);
 	}
 	
 	public FillBlankQuestion(String pre, String post, String[] answers, boolean sensitive, int weight) {
-		this.pre = pre;
-		this.post = post;
+		this.pre = pre.trim();
+		this.post = post.trim();
 		this.weight = weight;
 		caseSensitive = sensitive;
-		this.answers = new ArrayList<String>();
-		storeAnswers(answers);
-	}
-	
-	private void storeAnswers(String[] ans) {
-		answers.clear();
-		for(int i = 0; i < ans.length; i++) {
-			if(caseSensitive) {
-				answers.add(ans[i]);
-			} else {
-				answers.add(ans[i].toLowerCase());
-			}
-		}
+		this.answers = Arrays.asList(answers);
 	}
 
 	@Override
 	public int checkAnswer(String userAnswer) {
 		if(caseSensitive) {
-			if(answers.contains(userAnswer)) return weight;
+			if(answers.contains(userAnswer.trim())) return weight;
 		} else {
-			if(answers.contains(userAnswer.toLowerCase())) return weight;
+			for(String ans : answers) {
+				if(ans.equalsIgnoreCase(userAnswer.trim())) return weight;
+			}
 		}
 		return 0;
 	}
@@ -82,8 +80,25 @@ public class FillBlankQuestion implements Question {
 	
 	@Override
 	public String getHTML() {
-		String html = "<p>" + this.getPre() + "________" + this.getPost() + "</p>\n" + 
-				"<p>Answer: <input type=\"text\" name=\"answer\" /></p>";
+		String html = "<p>" + this.getPre() + " ________ " + this.getPost() + "</p>\n" + 
+				"<p>Answer: <input type=\"text\" name=\"answer" + this.getID() + "\" /></p>";
+		return html;
+	}
+	
+	@Override
+	public String getCorrectedHTML(String userAnswer) {
+		String html = "<p>" + this.getPre() + " ________ " + this.getPost() + "</p>\n" + 
+				"<p>Answer: <input type=\"text\" name=\"answer" + this.getID() + "\" value=\"" + userAnswer + "\" disabled /></p>";
+		if(this.checkAnswer(userAnswer) == this.getMaxScore()) {
+			html += "<p style=\"color: green; font-weight: bold\">Answer Correct!</p>";
+		} else {
+			html += "<p style=\"color: red; font-weight: bold\">Correct Answer(s): ";
+			for(int i = 0; i < answers.size(); i++) {
+				html += answers.get(i);
+				if(i != (answers.size()-1)) html += ", ";
+			}
+			html += ".</p>";
+		}
 		return html;
 	}
 	

@@ -1,6 +1,8 @@
 package quiz;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
 
 import db.UserInfo;
 
@@ -70,21 +72,17 @@ public class Quiz {
 		//TODO Delete scores out of table.
 	}
 	
-	public void recordScore(String user, int score, long elapsed) {
+	public void recordScore(String user, int score, int elapsed) {
 		Score s = new Score(score, this.getQuizId(), user, elapsed);
 		UserInfo.addScore(s);
 	}
 	
-	/**
-	 * Retrieves a user's past scores on this quiz in the form of
-	 * a two-dimensional array. 
-	 * @param user
-	 * @return A two-dimensional array containing a given record's score, 
-	 * date, and time elapsed.
-	 */
-	public int[][] getUserHistory(String user) {
-		//TODO get out of scores table
-		return null;
+	public List<Score> getUserHistory(String user) {
+		return UserInfo.getUserHistoryOnQuiz(user, this.getQuizId());
+	}
+	
+	public void clearUserHistory(String user) {
+		UserInfo.deleteUserHistoryOnQuiz(user, this.getQuizId());
 	}
 	
 	public static Quiz parseXML(String XML) {
@@ -109,13 +107,48 @@ public class Quiz {
 	
 	/**
 	 * 
+	 * @return an array listing the questions[] index in the order they should be presented
+	 * (i.e. [3, 1, 2] means questions[3] then questions[1] then questions[2])
+	 */
+	public int[] getQuestionOrder() {
+		int[] result = new int[questions.length];
+		if(random) {
+			Random rand = new Random();
+			boolean[] used = new boolean[result.length];
+			for(int i = 0; i < used.length; i++) {
+				used[i] = false;
+			}
+			for(int j = 0; j < result.length; j++) {
+				int index = rand.nextInt(result.length);
+				while(used[index]) {
+					index = rand.nextInt(result.length);
+					if(allChecked(used)) break;
+				}
+				result[index] = j;
+			}
+			
+		} else {
+			for(int i = 0; i < result.length; i++) result[i] = i;
+		}
+		return result;
+	}
+	
+	private boolean allChecked(boolean[] used) {
+		for(boolean bool : used) {
+			if(!bool) return false; 
+		}
+		return true;
+	}
+	
+	/**
+	 * 
 	 * @return Date quiz was created in yyyy-mm-dd format
 	 */
 //	public String getDateCreated() {
 //		return null;
 //	}
 	
-	public boolean isRandom() {
+	public boolean getRandom() {
 		return random;
 	}
 	
