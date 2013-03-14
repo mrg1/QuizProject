@@ -46,7 +46,7 @@ public class Quiz {
 		this.onePage = onePage; 
 		this.immediateCorrection = immediateCorrection; 
 		this.practice = practice;
-		UserInfo.addQuiz(this);
+		//UserInfo.addQuiz(this);
 	}
 	
 	public Quiz(String name, String author, String description, Question[] questions, boolean random, boolean onePage, boolean immediateCorrection, boolean practice, int quizId) {
