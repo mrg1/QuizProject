@@ -16,17 +16,30 @@
 
 <body>
 
-<h3 class="inline title">Awesome Quiz Site</h3>
+<div class="navbarPanel">
 
+
+<div class="right">
 <ul class="navbar">
-<li class="inline"><a href="homepage.jsp">Home</a></li>
-<li class="inline"><a href="quizzes.jsp">Quizzes</a></li>
-<li class="inline"><a href="about.asp">Messages</a></li>
+<li class="inline navbarItem"><a href="homepage.jsp">Home</a></li>
+<li class="inline navbarItem"><a href="quizzes.jsp">Quizzes</a></li>
+<li class="inline navbarItem"><a href="inbox.jsp">Inbox</a></li>
+<li class="inline navbarItem logoutButton">
+	<form action="LogoutServlet" method="post" class="inline">
+		<p class="inline"><input type="submit" value="Logout" /></p>
+	</form>
+</li>
 </ul>
+</div>
+
+<div class="inline">
+<p><img class="logo" src="http://imageshack.us/a/img7/1496/quizzsitelogo.png"></img></p>
+</div>
+</div>
 
 <h1><%= quiz.getName() %></h1>
 
-<p class="achievements">Created By <%=quiz.getAuthor() %>. <%=quiz.getDescription() %></p>
+<p class="achievements">Created by <a href="user.jsp?user=<%=quiz.getAuthor()%>"><%= quiz.getAuthor() %></a>. <%=quiz.getDescription() %></p>
 
 <div class="panel3">
 <table class="table5">
@@ -54,13 +67,23 @@
 <div class="panel4">
 
 <h3>Recent Attempts</h3>
-<ul class="list1">
-<li>1. Attempt 1</li>
-<li>2. Attempt 2</li>
-<li>3. Attempt 3</li>
-<li>4. Attempt 4</li>
-<li>5. Attempt 5</li>
-</ul>
+<table class="table2">
+<tr>
+<th>User</th>
+<th>Score</th>
+</tr>
+
+<% List<Score> recent = UserInfo.getRecentQuizAttempts(quiz.getQuizId()); %>
+<% if (recent != null) { %>
+<% for(int i = 0; i < 10; i++) { %>
+<% if(recent.size() > i) { %>
+<%	Score score = recent.get(i); %>
+<tr>
+<td><a href="user.jsp?user=<%=score.getUsername()%>"><%= score.getUsername() %></a></td>
+<td><%= score.getScore()%></td>
+</tr>
+<% } } } %>
+</table>
 
 <h3>Top Scores</h3>
 <table class="table1">
@@ -77,11 +100,17 @@
 <th>Date</th>
 <th>Score</th>
 </tr>
+
+<% List<Score> dayHistory = UserInfo.getDaysQuizAttempts(quiz.getQuizId()); %>
+<% if (dayHistory != null) { %>
+<% for(int i = 0; i < 10; i++) { %>
+<% if(dayHistory.size() > i) { %>
+<%	Score score = dayHistory.get(i); %>
 <tr>
-<td>Name 1</td>
-<td>Date 1</td>
-<td>Score 1</td>
+<td><a href="user.jsp?user=<%=score.getUsername()%>"><%= score.getUsername() %></a></td>
+<td><%= score.getScore()%></td>
 </tr>
+<% } } } %>
 </table>
 </td>
 
@@ -92,11 +121,18 @@
 <th>Date</th>
 <th>Score</th>
 </tr>
+
+<% List<Score> totalHistory = UserInfo.getTopTen(quiz.getQuizId()); %>
+<% if (totalHistory != null) { %>
+<% for(int i = 0; i < 10; i++) { %>
+<% if(totalHistory.size() > i) { %>
+<%	Score score = totalHistory.get(i); %>
 <tr>
-<td>Name 1</td>
-<td>Date 1</td>
-<td>Score 1</td>
+<td><a href="user.jsp?user=<%=score.getUsername()%>"><%= score.getUsername() %></a></td>
+<td><%= score.getScore()%></td>
 </tr>
+<% } } } %>
+
 </table>
 </td>
 

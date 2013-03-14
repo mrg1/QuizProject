@@ -173,7 +173,7 @@ public class UserInfo {
 			addStatement.setString(1, q.getName());
 			addStatement.setString(2, q.getAuthor());
 			addStatement.setString(3, q.getDescription());
-			addStatement.setBoolean(4, q.isRandom());
+			addStatement.setBoolean(4, q.getRandom());
 			addStatement.setBoolean(5, q.isOnePage());
 			addStatement.setBoolean(6, q.immediateCorrection());
 			addStatement.setBoolean(7, q.canPractice());

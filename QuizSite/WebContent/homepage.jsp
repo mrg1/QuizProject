@@ -15,18 +15,26 @@
 
 <body>
 
-<h3 class="title inline">Awesome Quiz Site</h3>
+<div class="navbarPanel">
 
+
+<div class="right">
 <ul class="navbar">
-<li class="inline"><a href="homepage.jsp">Home</a></li>
-<li class="inline"><a href="quizzes.jsp">Quizzes</a></li>
-<li class="inline"><a href="inbox.jsp">Inbox</a></li>
-<li class="inline">
+<li class="inline navbarItem"><a href="homepage.jsp">Home</a></li>
+<li class="inline navbarItem"><a href="quizzes.jsp">Quizzes</a></li>
+<li class="inline navbarItem"><a href="inbox.jsp">Inbox</a></li>
+<li class="inline navbarItem logoutButton">
 	<form action="LogoutServlet" method="post" class="inline">
-		<input type="submit" value="Logout" />
+		<p class="inline"><input type="submit" value="Logout" /></p>
 	</form>
 </li>
 </ul>
+</div>
+
+<div class="inline">
+<p><img class="logo" src="http://imageshack.us/a/img7/1496/quizzsitelogo.png"></img></p>
+</div>
+</div>
 
 <% Object message = request.getAttribute("alert"); %>
 <% if(message != null) { %>
@@ -40,7 +48,7 @@
 
 <div class="panel1">
 
-<p class="welcome">Welcome <%= username %></p>
+<p class="welcome">Welcome <a href="user.jsp?user=<%=username%>"><%= username %></a></p>
 
 <div class="achievements">
 <% List<Integer> achievements = UserInfo.getAchievements(username); %>
@@ -61,7 +69,7 @@
 	<% } %>
 </ul>
 
-<h3 class="inline">User's Recent Activity</h3>
+<h3 class="inline">Your Recent Activity</h3>
 <p class="inline"><a href="history.jsp">(See Full History)</a></p>
 
 <table class="table1">
@@ -86,8 +94,8 @@
 <tr>
 <td><a href="quiz.jsp?id=<%=score.getQuizId()%>"><%= UserInfo.getQuiz(score.getQuizId()).getName() %></a></td>
 <td><%= score.getScore()%></td>
-<% } } } %>
 </tr>
+<% } } } %>
 </table>
 </td>
 
@@ -103,7 +111,7 @@
 <% if(historyCreated.size() > i) { %>
 <%	int id = historyCreated.get(i); %>
 <td><a href="quiz.jsp?id=<%=id%>"><%= UserInfo.getQuiz(id).getName() %></a></td>
-<td>Date Here?</td>
+<td><%=UserInfo.getDateForQuiz(id)%></td>
 </tr>
 <% } } %>
 </table>
@@ -157,7 +165,7 @@
 <% if(friendHistory.size() > i) { %>
 <%	Score s = friendHistory.get(i); %>
 <tr>
-<td><%= s.getUsername() %></td>
+<td><a href="user.jsp?user=<%=s.getUsername()%>"><%= s.getUsername() %></a></td>
 <td><a href="quiz.jsp?id=<%=s.getQuizId()%>"><%= UserInfo.getQuiz(s.getQuizId()).getName() %></a></td>
 <td><%= s.getScore()%></td>
 <% } } %>

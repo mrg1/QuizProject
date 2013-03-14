@@ -47,18 +47,23 @@ public class QuizServlet extends HttpServlet {
 		Quiz quiz = UserInfo.getQuiz(quizId);
 		int score = 0;
 		int maxScore = 0;
-		System.out.println("about to start checking questions");
 		for(Question question : quiz.getQuestions()) {
 			int questionId = question.getID();
-			score += question.checkAnswer((String) request.getParameter("answer" + questionId));
-			System.out.println("checking question id# " + question.getID());
-			System.out.println("total score = " + score);
+			String ans = request.getParameter("answer" + questionId);
+			score += question.checkAnswer(ans);
+			request.setAttribute("answer" + questionId, ans);
 			maxScore += question.getMaxScore();
 		}
+//		for(int i = 0; i < quiz.getQuestions().length; i++) {
+//			String param = request.getParameter("question" + i);
+//			System.out.println("Trying to parse "+param);
+//			int index = Integer.parseInt(param);
+//			request.setAttribute("question" + i, index);
+//		}
 		quiz.recordScore(username, score, elapsed);
-		int percent = (score*100)/maxScore;		request.setAttribute("percent", Integer.toString(percent));
+		int percent = (score*100)/maxScore;		
+		request.setAttribute("percent", Integer.toString(percent));
 		request.setAttribute("elapsed", Integer.toString(elapsed));
-		System.out.println("Percent correct: " + percent + "%\n" + elapsed + " seconds elapsed.");
 		RequestDispatcher dispatch = request.getRequestDispatcher("quiz-summary.jsp");
 		dispatch.forward(request, response);
 	}

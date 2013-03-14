@@ -16,22 +16,47 @@
 
 <body>
 
-<h3 class="inline title">Awesome Quiz Site</h3>
+<div class="navbarPanel">
 
+
+<div class="right">
 <ul class="navbar">
-<li class="inline"><a href="homepage.jsp">Home</a></li>
-<li class="inline"><a href="quizzes.jsp">Quizzes</a></li>
-<li class="inline"><a href="about.asp">Messages</a></li>
+<li class="inline navbarItem"><a href="homepage.jsp">Home</a></li>
+<li class="inline navbarItem"><a href="quizzes.jsp">Quizzes</a></li>
+<li class="inline navbarItem"><a href="inbox.jsp">Inbox</a></li>
+<li class="inline navbarItem logoutButton">
+	<form action="LogoutServlet" method="post" class="inline">
+		<p class="inline"><input type="submit" value="Logout" /></p>
+	</form>
+</li>
 </ul>
+</div>
+
+<div class="inline">
+<p><img class="logo" src="http://imageshack.us/a/img7/1496/quizzsitelogo.png"></img></p>
+</div>
+</div>
 
 <h1><%= quiz.getName() %></h1>
 
 <form action="QuizServlet" method="post">
 <input type="hidden" name="startTime" value="<%= System.currentTimeMillis() %>"></input>
-<% Question[] questions = quiz.getQuestions(); %>
-<% for (Question q : questions) {%>
-<%=q.getHTML() %>
-<%} %>
+<% 
+Question[] questions = quiz.getQuestions();
+/* int[] order = quiz.getQuestionOrder();
+for(int i = 0; i < order.length; i++) {
+	Question q = questions[order[i]];
+	out.println("<hr>");
+	out.println(q.getHTML());
+	String paramInput = "<input type=\"hidden\" name=\"question" + i + "\" value=\"" + order[i] + "\" ></input>";
+	System.out.println("Parameter question" + i + " = " + order[i]);
+} */
+
+for (Question q : questions) {
+	out.println("<hr>");
+	out.println(q.getHTML());
+}
+%>
 <input type="hidden" name="quizId" value="<%= request.getParameter("id") %>"></input> 
 <input type="submit" value="Submit!"></input>
 </form>
