@@ -20,7 +20,12 @@
 <ul class="navbar">
 <li class="inline"><a href="homepage.jsp">Home</a></li>
 <li class="inline"><a href="quizzes.jsp">Quizzes</a></li>
-<li class="inline"><a href="messages.jsp">Messages</a></li>
+<li class="inline"><a href="inbox.jsp">Inbox</a></li>
+<li class="inline">
+	<form action="LogoutServlet" method="post" class="inline">
+		<input type="submit" value="Logout" />
+	</form>
+</li>
 </ul>
 
 <% Object message = request.getAttribute("alert"); %>

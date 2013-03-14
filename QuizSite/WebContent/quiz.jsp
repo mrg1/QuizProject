@@ -21,7 +21,12 @@
 <ul class="navbar">
 <li class="inline"><a href="homepage.jsp">Home</a></li>
 <li class="inline"><a href="quizzes.jsp">Quizzes</a></li>
-<li class="inline"><a href="about.asp">Messages</a></li>
+<li class="inline"><a href="inbox.jsp">Inbox</a></li>
+<li class="inline">
+	<form action="LogoutServlet" method="post" class="inline">
+		<input type="submit" value="Logout" />
+	</form>
+</li>
 </ul>
 
 <h1><%= quiz.getName() %></h1>

@@ -40,7 +40,7 @@
 
 <div class="panel1">
 
-<p class="welcome">Welcome <%= username %></p>
+<p class="welcome">Welcome <a href="quiz.jsp?user=<%=username%>"><%= username %></a></p>
 
 <div class="achievements">
 <% List<Integer> achievements = UserInfo.getAchievements(username); %>
@@ -157,7 +157,7 @@
 <% if(friendHistory.size() > i) { %>
 <%	Score s = friendHistory.get(i); %>
 <tr>
-<td><%= s.getUsername() %></td>
+<td><a href="quiz.jsp?user=<%=s.getUsername()%>"><%= s.getUsername() %></a></td>
 <td><a href="quiz.jsp?id=<%=s.getQuizId()%>"><%= UserInfo.getQuiz(s.getQuizId()).getName() %></a></td>
 <td><%= s.getScore()%></td>
 <% } } %>
