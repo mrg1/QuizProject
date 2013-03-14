@@ -56,7 +56,7 @@ public class QuizSqlStatements {
 	//Scores
 	private final static String SCORES_TABLE = "scores";
 	public final static String SQL_GET_SCORES = "SELECT quizId, score, elapsed FROM " + SCORES_TABLE + " WHERE username=? ORDER BY scoreTimeStamp DESC;";
-	public final static String SQL_GET_TOP_TEN = "SELECT username, score, elapsed FROM " + SCORES_TABLE + " WHERE quizId=? ORDER BY score LIMIT 10 DESC";
+	public final static String SQL_GET_TOP_TEN = "SELECT username, score, elapsed FROM " + SCORES_TABLE + " WHERE quizId=? ORDER BY score LIMIT 10 DESC;";
 	public final static String SQL_ADD_SCORE = "INSERT INTO " + SCORES_TABLE + " (username, quizId, score, elapsed) VALUES (?, ?, ?, ?);";
 	public final static String SQL_REMOVE_USER_HISTORY = "DELETE FROM " + SCORES_TABLE + " where username=?;";
 	public static final String SQL_REMOVE_QUIZ_HISTORY = "DELETE FROM " + SCORES_TABLE + " where quizId=?;";

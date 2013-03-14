@@ -52,7 +52,7 @@
 <% for(String friend : UserInfo.getFriends((String) session.getAttribute("username"))) { %>
 
 <tr>
-<td><a href="quiz.jsp?user=<%=friend%>"><%= friend %></a></td>
+<td><a href="user.jsp?user=<%=friend%>"><%= friend %></a></td>
 <td><a href="friends.jsp">Remove</a></td>
 </tr>
 
