@@ -17,11 +17,6 @@
 
 <%@include file="navbar.html" %>
 
-<div class="inline">
-<p><img class="logo" src="http://imageshack.us/a/img7/1496/quizzsitelogo.png"></img></p>
-</div>
-</div>
-
 <% Object message = request.getAttribute("alert"); %>
 <% if(message != null) { %>
 	<p><%=(String)message %></p>
