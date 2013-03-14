@@ -52,7 +52,7 @@
 <h3 class="inline">Message Activity</h3>
 <ul class="list">
 	<% List<Message> messages = UserInfo.getMessages(username); %>
-	<% if(messages.isEmpty()) %><li>No new messages!</li><%; %>
+	<% if(messages.isEmpty()) %><li>No messages!</li><%; %>
 	<% Iterator<Message> messageIter = messages.iterator(); %>
 	<% for(int i = 0; i < 5; i++) {%>
 		<% if(!messageIter.hasNext()) break; %>
