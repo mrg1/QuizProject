@@ -1,15 +1,9 @@
 .navbar {
 	float:right;
-	margin:0px;
 	padding:0px;
 }
 .inline {
 	display:inline;
-}
-.title {
-	font-style:italic;
-	font-family:'Trebuchet MS';
-	color:olivedrab;
 }
 .achievements {
 	margin-left:50px;
@@ -88,4 +82,16 @@ table.table5 th {
 	border: 1px solid #666;
   	color:#000;
   	width:250px;
+}
+.logo {
+	height:75px;
+}
+.right {
+	float:right;
+}
+.navbarItem {
+	padding:3px;
+}
+.navbarPanel {
+	background-color:ghostwhite;
 }

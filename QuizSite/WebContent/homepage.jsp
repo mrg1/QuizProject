@@ -15,18 +15,26 @@
 
 <body>
 
-<h3 class="title inline">Awesome Quiz Site</h3>
+<div class="navbarPanel">
 
+
+<div class="right">
 <ul class="navbar">
-<li class="inline"><a href="homepage.jsp">Home</a></li>
-<li class="inline"><a href="quizzes.jsp">Quizzes</a></li>
-<li class="inline"><a href="inbox.jsp">Inbox</a></li>
-<li class="inline">
+<li class="inline navbarItem"><a href="homepage.jsp">Home</a></li>
+<li class="inline navbarItem"><a href="quizzes.jsp">Quizzes</a></li>
+<li class="inline navbarItem"><a href="inbox.jsp">Inbox</a></li>
+<li class="inline navbarItem logoutButton">
 	<form action="LogoutServlet" method="post" class="inline">
-		<input type="submit" value="Logout" />
+		<p class="inline"><input type="submit" value="Logout" /></p>
 	</form>
 </li>
 </ul>
+</div>
+
+<div class="inline">
+<p><img class="logo" src="http://imageshack.us/a/img7/1496/quizzsitelogo.png"></img></p>
+</div>
+</div>
 
 <% Object message = request.getAttribute("alert"); %>
 <% if(message != null) { %>
@@ -61,7 +69,7 @@
 	<% } %>
 </ul>
 
-<h3 class="inline">User's Recent Activity</h3>
+<h3 class="inline">Your Recent Activity</h3>
 <p class="inline"><a href="history.jsp">(See Full History)</a></p>
 
 <table class="table1">
