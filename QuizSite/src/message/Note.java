@@ -12,7 +12,7 @@ public class Note extends Message {
 	
 	public String getHtml(){
 		String out = "";
-		out += "<p>From: " + from + "</p>\n";
+		out += "<p>From: <a href='user.jsp?user="+from+"'>"+from+"</a></p>\n";
 		out += "<p>" + content + "</p>";
 		return out;
 	}

@@ -25,7 +25,7 @@
 <% } %>
 
 
-<p class="welcome">History for <%= username %></p>
+<p class="welcome">History</p>
 
 <table class="table5">
 <tr>
@@ -35,7 +35,7 @@
 
 <% for(Score score : UserInfo.getHistory(username)) { %>
 <tr>
-<td><%= UserInfo.getQuiz(score.getQuizId()).getName() %></td>
+<td><a href="quiz.jsp?id=<%= score.getQuizId() %>"><%= UserInfo.getQuiz(score.getQuizId()).getName() %></a></td>
 <td><%= score.getScore()%>%</td>
 <% } %></tr>
 </table>

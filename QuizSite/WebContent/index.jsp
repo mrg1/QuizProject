@@ -1,18 +1,19 @@
 <html>
 
 <head>
+<title>Welcome</title>
+<link href="stylesheet.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<% if(request.getCookies() != null) { %>
 <% for(Cookie cookie : request.getCookies()) { %>
 	<% if(cookie.getName().equals("username") && cookie.getValue()!=null) { %>
 		<% session.setAttribute("username",cookie.getValue()); %>
 		<% response.sendRedirect("homepage.jsp"); %>
 	<% } %>
 <% } %>
-<title>Welcome</title>
-<link href="stylesheet.css" rel="stylesheet" type="text/css">
-</head>
-
-<body>
-
+<% } %>
 <img class="centeredImage" src="http://imageshack.us/a/img7/1496/quizzsitelogo.png">
 
 <form class="centered" action="LoginServlet" method="post">
