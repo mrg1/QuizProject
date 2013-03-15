@@ -5,7 +5,7 @@
 <%@ page import="db.UserInfo" %>
 
 <head>
-<title>Friends</title>
+<title>Create Quiz</title>
 <link href="stylesheet.css" rel="stylesheet" type="text/css"></link>
 </head>
 

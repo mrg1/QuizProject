@@ -5,14 +5,31 @@ public class Score {
 	private int quizId;
 	private String username;
 	private int seconds;
-	
+	private int scoreId;
+	/*
 	public Score(int score, int quizId, String username, int elapsed){
 		this.score = score;
 		this.quizId = quizId;
 		this.username = username;
 		this.seconds = elapsed;
+	}*/
+	
+	public Score(int score, int quizId, String username, int elapsed, int scoreId){
+		this.score = score;
+		this.quizId = quizId;
+		this.username = username;
+		this.seconds = elapsed;
+		this.scoreId = scoreId;
 	}
 	
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
+	}
+
 	public int getScore() {
 		return score;
 	}
