@@ -40,7 +40,10 @@ public class DeleteUserServlet extends HttpServlet {
 			request.setAttribute("alert", user + " has been deleted.");
 			UserInfo.deleteHistory(user);
 			for(int id : UserInfo.getQuizzesByTitle()) {
-				if(UserInfo.getQuiz(id).getAuthor().equals(user)) UserInfo.deleteQuiz(id);
+				if(UserInfo.getQuiz(id).getAuthor().equals(user)) {
+					UserInfo.deleteHistoryForQuiz(id);
+					UserInfo.deleteQuiz(id);
+				}
 			}
 			for(String friend : UserInfo.getFriends(user)) {
 				UserInfo.deleteFriend(user,friend);
