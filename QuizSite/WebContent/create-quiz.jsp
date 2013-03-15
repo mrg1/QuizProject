@@ -20,16 +20,17 @@
 	<% request.setAttribute("alert",null); %>
 <% } %>
 
-<div class="centered">
+<div class="centered" style="width:500px">
 <h1>Create New Quiz</h1>
 <p>Please enter the information for your new quiz:</p>
 <form action="QuizCreationServlet" method="post">
 <table>
 <tr><td>Quiz Name:</td><td><input type="text" name="quizname" /></td></tr>
-<tr><td>Description:</td><td><textarea rows="4" cols="50" name="description"/></td></tr>
-<tr><td>Tags (Enter tags to describe your quiz content, like "Sports" or "General Knowledge"):</td><td><textarea rows="4" cols="50" name="tags"/></td></tr>
+<tr><td valign="top">Description:</td><td><textarea rows="4" cols="50" name="description"></textarea></td></tr>
+<tr><td colspan="2">Enter tags to describe your quiz, like "Sports" or "General Knowledge."<br />Please separate each tag with a new line.</td></tr>
+<tr><td valign="top">Tags:</td><td><textarea rows="4" cols="50" name="tags"></textarea></td></tr>
 </table>
-<br/>
+<br />
 <table>
 <tr>
 <td><input type="checkbox" name="random" value="random"/></td><td>Would you like your quiz to have randomly ordered questions?</td>

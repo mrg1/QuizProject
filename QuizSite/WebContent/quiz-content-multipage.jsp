@@ -14,6 +14,20 @@
 <% Question[] questions = quiz.getQuestions(); %>
 <% String username = (String)session.getAttribute("username"); %>
 <% int questionIndex = Integer.parseInt(request.getParameter("q")); %>
+<% 
+String qOrder;
+if(questionIndex==0) {
+	quiz.shuffleQuestions();
+	questions = quiz.getQuestions();
+	qOrder = "";
+	for(Question q : questions) {
+		qOrder += (q.getID() + ",");
+	}
+} else {
+	qOrder = request.getParameter("qOrder");
+}
+%>
+
 <title><%= quiz.getName() %></title>
 <link href="stylesheet.css" rel="stylesheet" type="text/css"></link>
 </head>
@@ -42,12 +56,20 @@ if(questionIndex < (quiz.getQuestions().length-1)) { //not last question
 	out.println("<form action=\"QuizServlet\" method=\"post\">");
 }
 if(questionIndex==0) {
-	quiz.shuffleQuestions();
  	out.println("<input type=\"hidden\" name=\"startTime\" value=\""+System.currentTimeMillis()+"\"></input>");
 } else {
  	out.println("<input type=\"hidden\" name=\"startTime\" value=\""+request.getParameter("startTime")+"\"></input>");
 }
+out.println("<input type=\"hidden\" name=\"qOrder\" value=\""+qOrder+"\"></input>");
+String[] idStrings = qOrder.split(",");
+int[] idOrder = new int[idStrings.length];
+for(int i = 0; i < idStrings.length; i++) {
+	idOrder[i] = Integer.parseInt(idStrings[i]);
+}
 
+for(int i = 0; i < idStrings.length; i++) {
+	questions[i] = UserInfo.getQuestion(idOrder[i]);
+}
 
 for(Question ques : questions) {
 	if(request.getParameter("answer"+ques.getID()) != null) {

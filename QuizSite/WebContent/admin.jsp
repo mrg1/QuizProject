@@ -42,7 +42,6 @@ List<User> admins = new ArrayList<User>();
 for(User u : users) {
 	if(UserInfo.isAdmin(u.getUsername())) {
 		admins.add(u);
-		System.out.println(u.getUsername() + " recorded as admin");
 	}
 } %>
 <table>
