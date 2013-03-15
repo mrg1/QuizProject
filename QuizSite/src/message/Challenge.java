@@ -20,7 +20,7 @@ public class Challenge extends Message {
 		realContent = realContent.substring(secondSpace+1);
 
 		String out = "";
-		out += "<p>" + from + " received a score of "+score+" on "+UserInfo.getQuiz(quizID).getName() + ". What do you got?</p>\n";
+		out += "<p>" + from + " received a score of "+score+"% on "+UserInfo.getQuiz(quizID).getName() + ". Whatchu got?</p>\n";
 		out += "<p>He/she says: "+realContent+"</p>\n";
 		out += "<a href=\"quiz-content.jsp?id="+quizID+"\">Accept Challenge</a>";
 		return out;
