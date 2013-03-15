@@ -39,6 +39,7 @@ public class DeleteQuizServlet extends HttpServlet {
 		String username = (String)request.getSession().getAttribute("username");
 		if(UserInfo.isAdmin(username)) {
 			request.setAttribute("alert", UserInfo.getQuiz(quizID).getName() + " has been deleted.");
+			UserInfo.deleteHistoryForQuiz(quizID);
 			UserInfo.deleteQuiz(quizID);
 			request.getRequestDispatcher("admin.jsp").forward(request, response);
 		} else {
