@@ -12,6 +12,7 @@
 <% String username = (String)session.getAttribute("username"); %>
 <title><%= quiz.getName() %></title>
 <link href="stylesheet.css" rel="stylesheet" type="text/css"></link>
+<script src="sorttable.js"></script>
 </head>
 
 <body>
@@ -29,9 +30,10 @@
 <p class="achievements">Created by <a href="user.jsp?user=<%=quiz.getAuthor()%>"><%= quiz.getAuthor() %></a>. <%=quiz.getDescription() %></p>
 
 <div class="panel3">
-<table class="table5">
+<table class="table5 sortable">
 <tr>
 <th>Past Scores</th>
+<th>Elapsed</th>
 <th>Date</th>
 </tr>
 
@@ -42,8 +44,9 @@
 <% if(quizHistory.size() > i) { %>
 <%	Score score = quizHistory.get(i); %>
 <tr>
-<td><%= score.getScore()%></td>
 <td><%= UserInfo.getDateForScore(score.getScoreId()) %></td>
+<td><%= score.getElapsed() %></td>
+<td><%= score.getScore()%>%</td>
 </tr>
 <% } } } %>
 
@@ -54,7 +57,7 @@
 <div class="panel4">
 
 <h3>Recent Attempts</h3>
-<table class="table2">
+<table class="table2 sortable">
 <tr>
 <th>User</th>
 <th>Score</th>
@@ -67,7 +70,7 @@
 <%	Score score = recent.get(i); %>
 <tr>
 <td><a href="user.jsp?user=<%=score.getUsername()%>"><%= score.getUsername() %></a></td>
-<td><%= score.getScore()%></td>
+<td><%= score.getScore()%>%</td>
 </tr>
 <% } } } %>
 </table>

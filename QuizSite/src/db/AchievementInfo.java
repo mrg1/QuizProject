@@ -56,7 +56,11 @@ public class AchievementInfo {
 		if (quizzes.size() == QUIZ_MACHINE_VALUE && !achs.contains(QUIZ_MACHINE_ID)) {
 			UserInfo.addAchievment(username, QUIZ_MACHINE_ID);
 		}
-		if ((top.get(0).getScore() < percent || (top.get(0).getScore() == percent && top.get(0).getElapsed() > elapsed)) && !achs.contains(THE_GREATEST_ID)) {
+		if (top.size() > 0) {
+			if ((top.get(0).getScore() < percent || (top.get(0).getScore() == percent && top.get(0).getElapsed() > elapsed)) && !achs.contains(THE_GREATEST_ID)) {
+				UserInfo.addAchievment(username, THE_GREATEST_ID);
+			}
+		} else {
 			UserInfo.addAchievment(username, THE_GREATEST_ID);
 		}
 		
