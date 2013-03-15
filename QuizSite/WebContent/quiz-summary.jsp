@@ -11,8 +11,18 @@
 <head>
 <% 
 Quiz quiz = UserInfo.getQuiz((Integer) request.getAttribute("quizId"));
-quiz.calcOrder();
 String username = (String)session.getAttribute("username"); 
+Question[] questions = quiz.getQuestions();
+String qOrder = (String) request.getAttribute("qOrder");
+String[] idStrings = qOrder.split(",");
+int[] idOrder = new int[idStrings.length];
+for(int i = 0; i < idStrings.length; i++) {
+	idOrder[i] = Integer.parseInt(idStrings[i]);
+}
+for(int i = 0; i < idStrings.length; i++) {
+	questions[i] = UserInfo.getQuestion(idOrder[i]);
+}
+
 %>
 <title><%= quiz.getName() %> Summary</title>
 <link href="stylesheet.css" rel="stylesheet" type="text/css"></link>
@@ -56,7 +66,7 @@ String username = (String)session.getAttribute("username");
 <h2><%= request.getAttribute("elapsed") %> seconds elapsed.</h2>
 
 <%
-Question[] questions = quiz.getQuestions();
+
 
 
 for(Question q : questions) {
