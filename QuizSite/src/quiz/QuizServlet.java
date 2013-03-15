@@ -10,9 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import question.*;
-import quiz.*;
 
-import db.AchievementChecks;
 import db.AchievementInfo;
 import db.UserInfo;
 
