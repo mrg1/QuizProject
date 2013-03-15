@@ -37,7 +37,7 @@
 <% if(users.isEmpty()) %><tr><td>No users yet!</td></tr>
 <% for(User cur : users) { %>
 	<tr>
-	<td><%=cur.getUsername() %></td>
+	<td><a href="user.jsp?user=<%=cur.getUsername() %>"><%=cur.getUsername() %></a></td>
 	<td>
 	<form action="PromoteServlet" method="post">
 		<p><input type="hidden" name="user" value=<%=cur.getUsername() %> /></p>
@@ -60,7 +60,7 @@
 <% if(quizIDs.isEmpty()) %><tr><td>No quizzes yet!</td></tr>
 <% for(Integer id : quizIDs) { %>
 	<tr>
-	<td><%=UserInfo.getQuiz(id).getName() %>, id: <%=id %></td>
+	<td><a href="quiz.jsp?id=<%= id %>"><%=UserInfo.getQuiz(id).getName() %></a>, id: <%=id %></td>
 	<td>
 	<form action="ClearQuizHistoryServlet" method="post">
 		<p><input type="hidden" name="quizID" value=<%=id %> /></p>
