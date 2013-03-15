@@ -1,3 +1,6 @@
+.* {
+	font-family:"Georgia";
+}
 .navbar {
 	float:right;
 	padding:0px;
@@ -36,7 +39,7 @@ table.table4 th {
 	width: 300px;
 }
 table.table5 th {
-	width:150px;
+	width:80px;
 	border-bottom:1px dotted black;
 }
 .panel1 {
