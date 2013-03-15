@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import question.*;
 import quiz.*;
 
+import db.AchievementChecks;
+import db.AchievementInfo;
 import db.UserInfo;
 
 /**
@@ -60,8 +62,9 @@ public class QuizServlet extends HttpServlet {
 //			int index = Integer.parseInt(param);
 //			request.setAttribute("question" + i, index);
 //		}
-		int percent = (score*100)/maxScore;		
+		int percent = (score*100)/maxScore;
 		quiz.recordScore(username, percent, elapsed);
+		AchievementInfo.checkQuizTakingAchievements(username, percent, quizId, elapsed);
 		request.setAttribute("percent", Integer.toString(percent));
 		request.setAttribute("elapsed", Integer.toString(elapsed));
 		RequestDispatcher dispatch = request.getRequestDispatcher("quiz-summary.jsp");
