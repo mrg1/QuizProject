@@ -7,6 +7,7 @@
 <li class="inline navbarItem"><a href="homepage.jsp">Home</a></li>
 <li class="inline navbarItem"><a href="quizzes.jsp">Quizzes</a></li>
 <li class="inline navbarItem"><a href="inbox.jsp">Inbox</a></li>
+<li class="inline navbarItem"><a href="create-quiz.jsp">Create Quiz</a></li>
 <% if(UserInfo.isAdmin((String)session.getAttribute("username"))) { %>
 	<li class="inline navbarItem"><a href="admin.jsp">Admin</a></li>
 <% } %>
