@@ -67,17 +67,6 @@ public class AddQuestionServlet extends HttpServlet {
 				String answer = request.getParameter("answer");
 				UserInfo.addQuestion(quizId, new MultipleChoiceQuestion(question, answers, answer, caseOrRand, weight));
 				break;
-			case QuestionInfo.RESPONSE_QUESTION_ID:
-				boolString = request.getParameter("caseSensitive");
-				question = request.getParameter("question");
-				testWeight = Integer.parseInt(request.getParameter("weight"));
-				if(testWeight != null) weight = testWeight;
-				if(boolString != null){
-					caseOrRand = true;
-				}
-				answers = QuestionInfo.getAnswersFromString(request.getParameter("answers"));
-				UserInfo.addQuestion(quizId, new ResponseQuestion(question, answers, caseOrRand, weight));
-				break;
 			case QuestionInfo.PICTURE_QUESTION_ID:
 				boolString = request.getParameter("caseSensitive");
 				question = request.getParameter("question");
@@ -101,6 +90,18 @@ public class AddQuestionServlet extends HttpServlet {
 				answers = QuestionInfo.getAnswersFromString(request.getParameter("answers"));
 				UserInfo.addQuestion(quizId, new FillBlankQuestion(pre, post, answers, caseOrRand, weight));
 				break;
+			case QuestionInfo.RESPONSE_QUESTION_ID:
+				boolString = request.getParameter("caseSensitive");
+				question = request.getParameter("question");
+				testWeight = Integer.parseInt(request.getParameter("weight"));
+				if(testWeight != null) weight = testWeight;
+				if(boolString != null){
+					caseOrRand = true;
+				}
+				answers = QuestionInfo.getAnswersFromString(request.getParameter("answers"));
+				UserInfo.addQuestion(quizId, new ResponseQuestion(question, answers, caseOrRand, weight));
+				break;
+			
 		}
 		String htmlBuilder = "";
 		switch(nextQuestionType){
@@ -110,11 +111,11 @@ public class AddQuestionServlet extends HttpServlet {
 			case QuestionInfo.MULTIPLE_CHOICE_ID:
 				htmlBuilder = MultipleChoiceQuestion.getBuilderHTML();
 				break;
-			case QuestionInfo.FILL_BLANK_ID:
-				htmlBuilder = FillBlankQuestion.getBuilderHTML();
-				break;
 			case QuestionInfo.PICTURE_QUESTION_ID:
 				htmlBuilder = PictureQuestion.getBuilderHTML();
+				break;
+			case QuestionInfo.FILL_BLANK_ID:
+				htmlBuilder = FillBlankQuestion.getBuilderHTML();
 				break;
 			case QuestionInfo.RESPONSE_QUESTION_ID:
 				htmlBuilder = ResponseQuestion.getBuilderHTML();

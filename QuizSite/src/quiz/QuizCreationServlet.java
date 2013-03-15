@@ -76,11 +76,11 @@ public class QuizCreationServlet extends HttpServlet {
 			case QuestionInfo.MULTIPLE_CHOICE_ID:
 				htmlBuilder = MultipleChoiceQuestion.getBuilderHTML();
 				break;
-			case QuestionInfo.FILL_BLANK_ID:
-				htmlBuilder = FillBlankQuestion.getBuilderHTML();
-				break;
 			case QuestionInfo.PICTURE_QUESTION_ID:
 				htmlBuilder = PictureQuestion.getBuilderHTML();
+				break;
+			case QuestionInfo.FILL_BLANK_ID:
+				htmlBuilder = FillBlankQuestion.getBuilderHTML();
 				break;
 			case QuestionInfo.RESPONSE_QUESTION_ID:
 				htmlBuilder = ResponseQuestion.getBuilderHTML();
