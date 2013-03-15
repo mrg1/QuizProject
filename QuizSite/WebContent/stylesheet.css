@@ -1,5 +1,5 @@
 .* {
-	font-family:"Georgia";
+	font-family:"Tahoma", sans-serif;
 }
 .navbar {
 	float:right;
@@ -12,13 +12,7 @@
 	margin-left:50px;
 	margin-top:-20px;
 }
-.welcome {
-	font-weight:bold;
-	font-size:xx-large;
-}
-.announce {
-	font-weight:bold;
-}
+
 table.table1 td{ 
 	border-left:1px dotted black;
 	border-right:1px dotted black;
@@ -42,14 +36,7 @@ table.table5 th {
 	width:80px;
 	border-bottom:1px dotted black;
 }
-.panel1 {
-	width:65%;
-	float:left;
-}
-.panel2 {
-	width:35%;
-	float:left;
-}
+
 .panel3 {
 	width:40%;
 	float:left;
@@ -92,6 +79,7 @@ table.table5 th {
 .right {
 	float:right;
 }
+
 .navbarItem {
 	padding:3px;
 }
@@ -106,3 +94,42 @@ border: none;
 color: blue;
 cursor: pointer;
 }
+.announce {
+	font-weight:bold;
+	margin-left:25px;
+}
+.announceTitle {
+	margin-left:10px;
+}
+.announcementPanel {
+	background-color:yellow;
+	border-style:solid;
+	border-color:goldenrod;
+	border-width:2px;
+	-moz-border-radius: 15px;
+	border-radius: 15px;
+}
+
+.profile {
+	width:100px;
+	height:100px;
+	padding:20px;
+}
+
+.homepageLeft {
+	width:60%;
+	float:left;
+}
+.homepageRight {
+	width:40%;
+	float:left;
+}
+.welcomePanel {
+	max-width:100%;
+}
+.welcome {
+	font-weight:bold;
+	font-size:xx-large;
+	word-break:break-all;
+}
+

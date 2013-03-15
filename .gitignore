@@ -31,3 +31,9 @@ QuizSite/bin/question/Question.class
 QuizSite/bin/question/PictureQuestion.class
 
 QuizSite/bin/question/MultipleChoiceQuestion.class
+
+org.eclipse.jdt.core.prefs
+
+org.eclipse.wst.common.component
+
+org.eclipse.wst.common.common.project.facet.xml.core.xml

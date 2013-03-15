@@ -39,7 +39,7 @@ public class PromoteServlet extends HttpServlet {
 		String username = (String)request.getSession().getAttribute("username");
 		if(UserInfo.isAdmin(username)) {
 			UserInfo.changeAdmin(user,true);
-			request.setAttribute("alert", user + " has been promoted.");
+			request.setAttribute("alert", user + " has been promoted to admin.");
 			request.getRequestDispatcher("admin.jsp").forward(request, response);
 		} else {
 			request.setAttribute("alert", "Action not processed, you are not an admin.");

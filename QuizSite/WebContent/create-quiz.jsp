@@ -24,13 +24,27 @@
 <h1>Create New Quiz</h1>
 <p>Please enter the information for your new quiz:</p>
 <form action="QuizCreationServlet" method="post">
-<p>Quiz Name: <input type="text" name="quizname" /></p>
-<p>Description: <textarea rows="4" cols="50" name="description"></textarea><p>
-<p>Tags (Enter tags to describe your quiz content, like "Sports" or "General Knowledge"): <textarea rows="4" cols="50" name="tags"></textarea></p>
-<p>Would you like your quiz to have randomly ordered questions? <input type="checkbox" name="random" value="random"/> </p>
-<p>Would you like your quiz to have a separate page for each question? <input type="checkbox" name="multipage" value="multipage"/> </p>
-<p>Would you like your quiz to give immediate correction? <input type="checkbox" name="immediate" value="immediate"/> </p>
-<p>Would you like your quiz to allow practice mode? <input type="checkbox" name="practice" value="practice"/> </p>
+<table>
+<tr><td>Quiz Name:</td><td><input type="text" name="quizname" /></td></tr>
+<tr><td>Description:</td><td><textarea rows="4" cols="50" name="description"/></td></tr>
+<tr><td>Tags (Enter tags to describe your quiz content, like "Sports" or "General Knowledge"):</td><td><textarea rows="4" cols="50" name="tags"/></td></tr>
+</table>
+<br/>
+<table>
+<tr>
+<td><input type="checkbox" name="random" value="random"/></td><td>Would you like your quiz to have randomly ordered questions?</td>
+</tr>
+<tr>
+<td><input type="checkbox" name="multipage" value="multipage"/></td><td>Would you like your quiz to have a separate page for each question?</td>
+</tr>
+<tr>
+<td><input type="checkbox" name="immediate" value="immediate"/></td><td>Would you like your quiz to give immediate correction?</td>
+</tr>
+<tr>
+<td><input type="checkbox" name="practice" value="practice"/></td><td>Would you like your quiz to allow practice mode?</td>
+</tr>
+</table>
+
 <p><input type="submit" value="Add New Question"/> 
 <select name="questionType">
 <option value="0">Multiple Choice</option>

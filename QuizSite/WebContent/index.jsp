@@ -17,11 +17,16 @@
 <img class="centeredImage" src="http://imageshack.us/a/img7/1496/quizzsitelogo.png">
 
 <form class="centered" action="LoginServlet" method="post">
-<p>User Name: <input type="text" name="username" /></p>
-<p>Password: <input type="password" name="password"/></p>
+<table>
+<tr><td>User Name:</td><td><input type="text" name="username" /></td></tr>
+<tr><td>Password:</td><td><input type="password" name="password" /></td></tr>
+</table>
 <input class="loginButton" type="submit" value="Login"/>
+</form><br />
+<form class="centered" action="create-account.html" method="post">
+<input class="loginButton" type="submit" value="Create New Account"/>
 </form>
-<p class="centered"><a href="create-account.html">Create New Account</a></p>
+
 </body>
 
 </html>

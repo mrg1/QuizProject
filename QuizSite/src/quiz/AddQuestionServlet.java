@@ -46,7 +46,7 @@ public class AddQuestionServlet extends HttpServlet {
 		int quizId = Integer.parseInt(request.getParameter("quizId"));
 		int currQuestionType = Integer.parseInt(request.getParameter("currQuestionType"));
 		int nextQuestionType = Integer.parseInt(request.getParameter("nextQuestionType"));
-		System.out.print(nextQuestionType);
+//		System.out.print(nextQuestionType);
 		String nextPage = "create-question.jsp";
 		String question;
 		Integer weight = 1;

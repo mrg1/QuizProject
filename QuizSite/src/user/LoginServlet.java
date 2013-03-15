@@ -44,7 +44,7 @@ public class LoginServlet extends HttpServlet {
 			request.getRequestDispatcher("information-incorrect.html").forward(request, response);
 			return;
 		}
-		//password += UserInfo.getSalt(username));
+		password += UserInfo.getSalt(username);
 		try {
 			MessageDigest md = MessageDigest.getInstance("SHA");
 			password = hexToString(md.digest(password.getBytes()));

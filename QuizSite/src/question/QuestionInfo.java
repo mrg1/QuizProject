@@ -13,7 +13,7 @@ public class QuestionInfo {
 		List<String> result = new ArrayList<String>();
 		String[] tokens = answers.split("\n");
 		for(String s : tokens){
-			result.add(s);
+			result.add(s.trim());
 		}
 		String[] arrayResult = result.toArray(new String[result.size()]);
 		return arrayResult;

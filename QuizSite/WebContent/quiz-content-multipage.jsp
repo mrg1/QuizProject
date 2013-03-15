@@ -8,8 +8,10 @@
 <%@ page import="question.*" %>
 <%@ page import="java.util.*" %>
 
+
 <head>
 <% Quiz quiz = UserInfo.getQuiz(Integer.parseInt(request.getParameter("id"))); %>
+<% Question[] questions = quiz.getQuestions(); %>
 <% String username = (String)session.getAttribute("username"); %>
 <% int questionIndex = Integer.parseInt(request.getParameter("q")); %>
 <title><%= quiz.getName() %></title>
@@ -22,6 +24,15 @@
 
 <h1><%= quiz.getName() %></h1>
 <hr>
+<%
+if(quiz.immediateCorrection() && (questionIndex != 0)) {
+	Question lastQuestion = questions[questionIndex-1];
+	String lastAnswer = request.getParameter("answer"+lastQuestion.getID());
+	System.out.println(lastAnswer);
+	out.println(lastQuestion.getCorrectedHTML(lastAnswer));
+	out.println("<hr>");
+}
+%>
 
 <% 	
 
@@ -37,7 +48,7 @@ if(questionIndex==0) {
  	out.println("<input type=\"hidden\" name=\"startTime\" value=\""+request.getParameter("startTime")+"\"></input>");
 }
 
-Question[] questions = quiz.getQuestions();
+
 for(Question ques : questions) {
 	if(request.getParameter("answer"+ques.getID()) != null) {
 	 	out.println("<input type=\"hidden\" name=\"answer"+ques.getID()+"\" value=\""+request.getParameter("answer"+ques.getID())+"\"></input>");

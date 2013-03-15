@@ -38,6 +38,16 @@ public class DeleteUserServlet extends HttpServlet {
 		String username = (String)request.getSession().getAttribute("username");
 		if(UserInfo.isAdmin(username)) {
 			request.setAttribute("alert", user + " has been deleted.");
+			UserInfo.deleteHistory(user);
+			for(int id : UserInfo.getQuizzesByTitle()) {
+				if(UserInfo.getQuiz(id).getAuthor().equals(user)) {
+					UserInfo.deleteHistoryForQuiz(id);
+					UserInfo.deleteQuiz(id);
+				}
+			}
+			for(String friend : UserInfo.getFriends(user)) {
+				UserInfo.deleteFriend(user,friend);
+			}
 			UserInfo.deleteUser(user);
 			request.getRequestDispatcher("admin.jsp").forward(request, response);
 		} else {

@@ -18,7 +18,7 @@ public class DbTest extends TestCase {
 	public void testUser(){
 		String username = "mrg";
 		String password = "garland";
-		String salt = "blah";
+		int salt = 1;
 		boolean admin = true;
 		UserInfo.deleteUser(username);
 		UserInfo.addUser(username, password, salt, admin);
