@@ -15,7 +15,7 @@
 
 <body>
 
-<%@include file="navbar.html" %>
+<%@include file="navbar.jsp" %>
 
 
 <h1><%= user %></h1>

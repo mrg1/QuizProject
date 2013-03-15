@@ -11,7 +11,7 @@
 
 <body>
 
-<%@include file="navbar.html" %>
+<%@include file="navbar.jsp" %>
 
 
 <% Object message = request.getAttribute("alert"); %>
