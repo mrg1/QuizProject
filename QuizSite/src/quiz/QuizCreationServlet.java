@@ -1,6 +1,7 @@
 package quiz;
 
 import java.io.IOException;
+import java.util.*;
 
 
 import javax.servlet.RequestDispatcher;
@@ -55,6 +56,7 @@ public class QuizCreationServlet extends HttpServlet {
 		String immediateValue = request.getParameter("immediate");
 		String practiceValue = request.getParameter("practice");
 		String name = request.getParameter("quizname");
+		if(name.equals("")) name = "{no name}";
 		String description = request.getParameter("description");
 		String tagString = request.getParameter("tags");
 		String[] tags = QuestionInfo.getAnswersFromString(tagString);
@@ -74,7 +76,8 @@ public class QuizCreationServlet extends HttpServlet {
 		Quiz q = new Quiz(name, username, description, random, onepage, immediate, practice);
 		UserInfo.addQuiz(q);
 		AchievementInfo.checkQuizCreationAchievments(username);
-		for(String tag : tags){
+		Set<String> tagSet = new HashSet<String>(Arrays.asList(tags));
+		for(String tag : tagSet){
 			UserInfo.addTag(q.getQuizId(), tag);
 		}
 		String htmlBuilder = "";
