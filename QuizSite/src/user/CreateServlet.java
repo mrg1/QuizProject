@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Random;
 import db.*;
 
 /**
@@ -46,7 +47,8 @@ public class CreateServlet extends HttpServlet {
 				password = hexToString(md.digest(password.getBytes()));
 			} catch (NoSuchAlgorithmException ignored) {}
 			
-			UserInfo.addUser(username, password, "salt", false);
+			int salt = new Random().nextInt(100);
+			UserInfo.addUser(username, password, salt, false);
 			request.getSession().setAttribute("username", username);
 			request.getRequestDispatcher("homepage.jsp").forward(request, response);
 		}
