@@ -15,7 +15,7 @@ public class QuizSqlStatements {
 	private final static String FRIENDS_TABLE = "friends";
 	public final static String SQL_GET_FRIENDS = "SELECT friend FROM " + FRIENDS_TABLE + " WHERE " + "user=?;";
 	public final static String SQL_ADD_FRIEND = "INSERT INTO " + FRIENDS_TABLE + " VALUES (?, ?);";
-
+	public final static String SQL_DELETE_FRIEND = "DELETE FROM " + FRIENDS_TABLE + " WHERE (user=? AND friend=?) OR (user=? AND friend=?);";
 
 	//Acheivments
 	private final static String ACHIEVMENTS_TABLE = "achievments";

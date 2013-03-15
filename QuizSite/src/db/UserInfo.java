@@ -767,4 +767,18 @@ public class UserInfo {
 		}
 	}
 
+	public static void deleteFriend(String username, String friend){
+		con = QuizDB.getConnection();
+		try {
+			PreparedStatement deleteStatement = con.prepareStatement(QuizSqlStatements.SQL_DELETE_FRIEND);
+			deleteStatement.setString(1, friend);
+			deleteStatement.setString(2, username);
+			deleteStatement.setString(3, username);
+			deleteStatement.setString(4, friend);
+			deleteStatement.execute();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
 }
