@@ -31,6 +31,7 @@
 <tr><td valign="top">Tags:</td><td><textarea rows="4" cols="50" name="tags"></textarea></td></tr>
 </table>
 <br />
+
 <table>
 <tr>
 <td><input type="checkbox" name="random" value="random"/></td><td>Would you like your quiz to have randomly ordered questions?</td>
