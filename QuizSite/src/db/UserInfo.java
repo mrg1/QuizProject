@@ -45,13 +45,13 @@ public class UserInfo {
 		return result;
 	}
 
-	public static void addUser(String username, String password, String salt, boolean admin){
+	public static void addUser(String username, String password, int salt, boolean admin){
 		con = QuizDB.getConnection();
 		try {
 			PreparedStatement addStatement = con.prepareStatement(QuizSqlStatements.SQL_ADD_USER);
 			addStatement.setString(1, username);
 			addStatement.setString(2, password);
-			addStatement.setString(3, salt);
+			addStatement.setInt(3, salt);
 			addStatement.setBoolean(4, admin);
 			addStatement.execute();
 		} catch (SQLException e) {
@@ -381,11 +381,6 @@ public class UserInfo {
 		int questionType = q.getQuestionType();
 		//Consider taking out this switch and making changes to the question interface
 		switch(questionType){
-			case QuestionInfo.FILL_BLANK_ID: FillBlankQuestion fb = (FillBlankQuestion) q;
-				caseOrRandomize = fb.getCaseSensitive();
-				questionContent = fb.getPre();
-				questionContent2 = fb.getPost();
-				break;
 			case QuestionInfo.MULTIPLE_CHOICE_ID: MultipleChoiceQuestion mc = (MultipleChoiceQuestion) q;
 				caseOrRandomize = mc.getRandom();
 				questionContent = mc.getText();
@@ -393,6 +388,11 @@ public class UserInfo {
 			case QuestionInfo.PICTURE_QUESTION_ID: PictureQuestion pq = (PictureQuestion) q;
 				caseOrRandomize = pq.getCaseSensitive();
 				questionContent = pq.getPictureURL();
+				break;
+			case QuestionInfo.FILL_BLANK_ID: FillBlankQuestion fb = (FillBlankQuestion) q;
+				caseOrRandomize = fb.getCaseSensitive();
+				questionContent = fb.getPre();
+				questionContent2 = fb.getPost();
 				break;
 			case QuestionInfo.RESPONSE_QUESTION_ID: ResponseQuestion rq = (ResponseQuestion) q;
 				caseOrRandomize = rq.getCaseSensitive();

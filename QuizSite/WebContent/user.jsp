@@ -19,6 +19,13 @@
 
 
 <h1><%= user %></h1>
+<form action="SendRequestServlet" method="post">
+<div>
+<input type="hidden" name="to" value=<%=user %> />
+<input type="hidden" name="content" value="I would like to be your friend!" />
+<input type="submit" value="Add Friend" />
+</div>
+</form>
 
 <h3>Achievements:</h3>
 <div class="achievements">
