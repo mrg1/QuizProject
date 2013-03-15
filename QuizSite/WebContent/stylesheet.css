@@ -45,6 +45,7 @@ table.table5 th {
 }
 table.statsTable {
 	padding-top:10px;
+	float:left;
 }
 
 
