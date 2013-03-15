@@ -36,7 +36,8 @@ public class ReportServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int id = Integer.parseInt(request.getParameter("quizId"));
-		UserInfo.reportQuiz(id);
+		UserInfo.addReport(id);
+		request.setAttribute("alert","Quiz reported.");
 		request.getRequestDispatcher("quiz.jsp?id="+id).forward(request, response);
 	}
 

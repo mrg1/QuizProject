@@ -85,9 +85,9 @@ for(User u : users) {
 <h2>Quizzes</h2>
 <h3>Reported as Inappropriate</h3>
 <table>
-<%Map<Integer,Integer> reported = UserInfo.getReportedQuizzes(); %>
+<%Map<Integer,Integer> reported = UserInfo.getReports(); %>
 <%if(reported.isEmpty()) %><tr><td>No quizzes reported.</td></tr>
-<%for(int quizId : UserInfo.getReportedQuizzes()) {%>
+<%for(int id : reported.keySet()) {%>
 	<tr>
 	<td>
 	<form action="DeleteQuizServlet" method="post">
@@ -101,8 +101,9 @@ for(User u : users) {
 		<input type="submit" value="Mark Appropriate" />	
 	</form>
 	</td>
-	<td><a href="quiz.jsp?id=<%= id %>"><%=UserInfo.getQuiz(id).getName() %></a>, id: <%=id %>, # of reports: <%=UserInfo.getReportedQuizzes().get(id)%></td>
+	<td><a href="quiz.jsp?id=<%= id %>"><%=UserInfo.getQuiz(id).getName() %></a>, id: <%=id %>, # of reports: <%=reported.get(id)%></td>
 	</tr>
+<%} %>
 </table>
 <h3>All Quizzes</h3>
 <table>

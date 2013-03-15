@@ -36,8 +36,8 @@ public class UnreportServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int id = Integer.parseInt(request.getParameter("quizId"));
-		UserInfo.reportQuiz(id);
-		request.getRequestDispatcher("quiz.jsp?id="+id).forward(request, response);
+		UserInfo.deleteReport(id);
+		request.getRequestDispatcher("admin.jsp").forward(request, response);
 	}
 
 }
