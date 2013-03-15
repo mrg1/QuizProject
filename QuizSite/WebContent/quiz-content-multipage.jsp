@@ -12,12 +12,6 @@
 <% Quiz quiz = UserInfo.getQuiz(Integer.parseInt(request.getParameter("id"))); %>
 <% String username = (String)session.getAttribute("username"); %>
 <% int questionIndex = Integer.parseInt(request.getParameter("q")); %>
-<%-- <% String startTime; %>
- --%><%-- <% if (request.getParameter("time") == null) { %>
-<% startTime = Long.toString(System.currentTimeMillis()); %>
-<% } else { %>
-<% startTime = request.getParameter("time"); %>
-<% } %> --%>
 <title><%= quiz.getName() %></title>
 <link href="stylesheet.css" rel="stylesheet" type="text/css"></link>
 </head>
@@ -28,28 +22,27 @@
 
 <h1><%= quiz.getName() %></h1>
 <hr>
-<p><%=request.getParameter("answer5") %></p>
-<p><%=request.getParameter("answer7") %></p>
 
 <% 	
 
 if(questionIndex < (quiz.getQuestions().length-1)) { //not last question
-	out.println("<form action=\"quiz-content-multipage.jsp?id="+quiz.getQuizId()+"&q="+ (questionIndex+1) +"\" method=\"post\"");
-
-/* 	out.println("<form action=\"quiz-content-multipage.jsp?id="+quiz.getQuizId()+"&q="+ (questionIndex+1) +"&time="+startTime+"\" method=\"post\"");
- */} else { //last question --> servlet
-	out.println("<form action=\"QuizServlet\" method=\"post\"");
+	out.println("<form action=\"quiz-content-multipage.jsp?id="+quiz.getQuizId()+"&q="+ (questionIndex+1) +"\" method=\"post\">");
+} else { //last question --> servlet
+	out.println("<form action=\"QuizServlet\" method=\"post\">");
+}
+if(questionIndex==0) {
+ 	out.println("<input type=\"hidden\" name=\"startTime\" value=\""+System.currentTimeMillis()+"\"></input>");
+} else {
+ 	out.println("<input type=\"hidden\" name=\"startTime\" value=\""+request.getParameter("startTime")+"\"></input>");
 }
 
 
 Question[] questions = quiz.getQuestions();
-
 for(Question ques : questions) {
 	if(request.getParameter("answer"+ques.getID()) != null) {
-		out.println("<input type=\"hidden\" name=\"answer"+ques.getID()+"\" value=\""+request.getParameter("answer"+ques.getID())+"\"></input>");
+	 	out.println("<input type=\"hidden\" name=\"answer"+ques.getID()+"\" value=\""+request.getParameter("answer"+ques.getID())+"\"></input>");
 	} 
 }
-
 %>
 <%= questions[questionIndex].getHTML() %>
 <input type="hidden" name="quizId" value="<%= request.getParameter("id") %>"></input> 
