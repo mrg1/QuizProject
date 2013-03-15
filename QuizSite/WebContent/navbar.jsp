@@ -21,6 +21,6 @@
 </div>
 
 <div class="inline">
-<p><img class="logo" src="http://imageshack.us/a/img7/1496/quizzsitelogo.png"></img></p>
+<p><a href="homepage.jsp"><img class="logo" src="http://imageshack.us/a/img7/1496/quizzsitelogo.png"></img></a></p>
 </div>
 </div>

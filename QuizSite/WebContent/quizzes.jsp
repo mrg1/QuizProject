@@ -36,7 +36,6 @@
 <td><%= UserInfo.getDateForQuiz(id) %></td>
 </tr>
 <% } } %>
-<tr>
 
 </table>
 
