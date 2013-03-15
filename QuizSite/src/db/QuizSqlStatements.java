@@ -89,6 +89,11 @@ public class QuizSqlStatements {
 	public final static String SQL_SET_TAG = "INSERT INTO " + TAG_TABLE + " (quizId, tagType) VALUES (?, ?);";
 	public final static String SQL_GET_ALL_TAGS = "SELECT DISTINCT tagType FROM " + TAG_TABLE + ";";
 
+	//Reporting
+	private final static String REPORT_TABLE = "reports";
+	public final static String SQL_ADD_REPORT = "INSERT INTO " + REPORT_TABLE + " (quizId) VALUES(?);";
+	public final static String SQL_DELETE_REPORTS = "DELETE FROM " + REPORT_TABLE + "WHERE quizId=?;";
+	public final static String SQL_GET_REPORTS = "SELECT quizId, count(*) as c FROM " + REPORT_TABLE + " GROUP BY quizId ORDER BY c DESC;";
 	
 
 
