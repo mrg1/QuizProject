@@ -28,7 +28,16 @@
 <div class="leftQuiz">
 <h1><%= quiz.getName() %></h1>
 <p class="achievements">Created by <a href="user.jsp?user=<%=quiz.getAuthor()%>"><%= quiz.getAuthor() %></a>. <%=quiz.getDescription() %></p>
+<p class="achievements inline">Tags: </p>
+<% List<String> tags = UserInfo.getTagsForQuiz(quiz.getQuizId()); %>
+<% for (String s : tags) { %>
+<form class="inline" action="display-quizzes-for-tag.jsp">
+	<input type="hidden" name="tagType" value="<%=s %>"/>
+	<input class="sumbitLink" type="submit" value="<%=s %>"/>
+</form>
+<% } %>
 </div>
+
 
 <div class="rightQuiz">
 <% if(quiz.isOnePage()) { %>
