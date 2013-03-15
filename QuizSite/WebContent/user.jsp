@@ -20,6 +20,7 @@
 
 <h1><%= user %></h1>
 
+<h3>Achievements:</h3>
 <div class="achievements">
 <% List<Integer> achievements = UserInfo.getAchievements(user); %>
 <% for(Integer i : achievements) {%>
@@ -69,7 +70,7 @@
 <% if(historyCreated.size() > i) { %>
 <%	int id = historyCreated.get(i); %>
 <td><a href="quiz.jsp?id=<%=id%>"><%= UserInfo.getQuiz(id).getName() %></a></td>
-<td>Date Here?</td>
+<td><%=UserInfo.getDateForQuiz(id)%></td>
 </tr>
 <% } } %>
 </table>

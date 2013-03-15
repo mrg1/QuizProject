@@ -36,7 +36,7 @@
 <% for(Score score : UserInfo.getHistory(username)) { %>
 <tr>
 <td><%= UserInfo.getQuiz(score.getQuizId()).getName() %></td>
-<td><%= score.getScore()%></td>
+<td><%= score.getScore()%>%</td>
 <% } %></tr>
 </table>
 

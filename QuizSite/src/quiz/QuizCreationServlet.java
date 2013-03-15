@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import db.AchievementInfo;
 import db.UserInfo;
 
 /**
@@ -60,6 +61,7 @@ public class QuizCreationServlet extends HttpServlet {
 		}
 		Quiz q = new Quiz(name, username, description, random, onepage, immediate, practice);
 		UserInfo.addQuiz(q);
+		AchievementInfo.checkQuizCreationAchievments(username);
 	}
 
 }

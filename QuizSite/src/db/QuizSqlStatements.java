@@ -15,7 +15,7 @@ public class QuizSqlStatements {
 	private final static String FRIENDS_TABLE = "friends";
 	public final static String SQL_GET_FRIENDS = "SELECT friend FROM " + FRIENDS_TABLE + " WHERE " + "user=?;";
 	public final static String SQL_ADD_FRIEND = "INSERT INTO " + FRIENDS_TABLE + " VALUES (?, ?);";
-
+	public final static String SQL_DELETE_FRIEND = "DELETE FROM " + FRIENDS_TABLE + " WHERE (user=? AND friend=?) OR (user=? AND friend=?);";
 
 	//Acheivments
 	private final static String ACHIEVMENTS_TABLE = "achievments";
@@ -55,16 +55,17 @@ public class QuizSqlStatements {
 
 	//Scores
 	private final static String SCORES_TABLE = "scores";
-	public final static String SQL_GET_SCORES = "SELECT quizId, score, elapsed FROM " + SCORES_TABLE + " WHERE username=? ORDER BY scoreTimeStamp DESC;";
-	public final static String SQL_GET_TOP_TEN = "SELECT username, score, elapsed FROM " + SCORES_TABLE + " WHERE quizId=? ORDER BY score LIMIT 10 DESC;";
+	public final static String SQL_GET_SCORES = "SELECT quizId, score, elapsed, scoreId FROM " + SCORES_TABLE + " WHERE username=? ORDER BY scoreTimeStamp DESC;";
+	public final static String SQL_GET_TOP_TEN = "SELECT username, score, elapsed, scoreId FROM " + SCORES_TABLE + " WHERE quizId=? ORDER BY score DESC LIMIT 10;";
 	public final static String SQL_ADD_SCORE = "INSERT INTO " + SCORES_TABLE + " (username, quizId, score, elapsed) VALUES (?, ?, ?, ?);";
 	public final static String SQL_REMOVE_USER_HISTORY = "DELETE FROM " + SCORES_TABLE + " where username=?;";
 	public static final String SQL_REMOVE_QUIZ_HISTORY = "DELETE FROM " + SCORES_TABLE + " where quizId=?;";
 	public final static String SQL_REMOVE_USER_HISTORY_ON_QUIZ = "DELETE FROM " + SCORES_TABLE + " where username=? AND quizId=?;";
 	public final static String SQL_MOST_PLAYED_QUIZ = "SELECT quizId FROM (SELECT quizId, count(*) as c FROM " +  SCORES_TABLE + " GROUP BY quizId ORDER BY c DESC) as temp_table;";
-	public final static String SQL_GET_USER_QUIZ_HISTORY = "SELECT score, elapsed FROM " + SCORES_TABLE + " where username=? AND quizId=?;";
-	public final static String SQL_GET_RECENT_QUIZ_ARREMPTS = "SELECT score, username, elapsed FROM " + SCORES_TABLE + " WHERE quizId=? ORDER BY scoreTimeStamp;";
-	public final static String SQL_GET_DAYS_SCORES_ON_QUIZ = "SELECT score, username, elapsed FROM " + SCORES_TABLE + " WHERE quizId=? AND scoreTimeStamp > DATE_SUB(NOW(), INTERVAL 1 DAY) ORDER BY score DESC;";
+	public final static String SQL_GET_USER_QUIZ_HISTORY = "SELECT score, elapsed, scoreId FROM " + SCORES_TABLE + " where username=? AND quizId=? ORDER BY scoreTimeStamp DESC;";
+	public final static String SQL_GET_RECENT_QUIZ_ARREMPTS = "SELECT score, username, elapsed, scoreId FROM " + SCORES_TABLE + " WHERE quizId=? ORDER BY scoreTimeStamp DESC;";
+	public final static String SQL_GET_DAYS_SCORES_ON_QUIZ = "SELECT score, username, elapsed, scoreId FROM " + SCORES_TABLE + " WHERE quizId=? AND scoreTimeStamp > DATE_SUB(NOW(), INTERVAL 1 DAY) ORDER BY score DESC;";
+	public static final String SQL_GET_SCORE_DATE = "SELECT scoreTimeStamp FROM " + SCORES_TABLE + " WHERE scoreId=?;";
 	
 	//Anouncements
 	private final static String ANN_TABLE = "announcements";
@@ -76,7 +77,10 @@ public class QuizSqlStatements {
 	public final static String SQL_DELETE_QUIZ = "DELETE FROM " + ANSWER_TABLE + " WHERE questionId IN (SELECT questionId FROM " + QUESTION_TABLE + " WHERE quizId=?);";
 	public final static String SQL_DELETE_QUIZ_2 = "DELETE FROM " + QUESTION_TABLE + " WHERE quizId=?;";
 	public final static String SQL_DELETE_QUIZ_3 = "DELETE FROM " + QUIZ_TABLE + " WHERE quizId=?;";
-	public final static String SQL_GET_FRIEND_HISTORY = "SELECT quizId, f, score, elapsed FROM " + SCORES_TABLE + " , (SELECT friend as f FROM friends WHERE user=?) as f_table WHERE scores.username = f_table.f ORDER BY scoreTimeStamp DESC;";
+	public final static String SQL_GET_FRIEND_HISTORY = "SELECT quizId, f, score, elapsed, scoreId FROM " + SCORES_TABLE + " , (SELECT friend as f FROM friends WHERE user=?) as f_table WHERE scores.username = f_table.f ORDER BY scoreTimeStamp DESC;";
+
+
+
 
 
 	

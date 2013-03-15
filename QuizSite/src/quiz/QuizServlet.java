@@ -8,10 +8,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import question.*;
-import quiz.*;
-
+import db.AchievementInfo;
 import db.UserInfo;
 
 /**
@@ -40,7 +38,7 @@ public class QuizServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		int elapsed = (int) ((System.currentTimeMillis() - ((Long) request.getAttribute("startTime")))/1000);
+		int elapsed = (int) ((System.currentTimeMillis() - ((Long) request.getAttribute("startTime")))/1000);
 		String username = (String) request.getSession().getAttribute("username");
 		int quizId = Integer.parseInt(request.getParameter("quizId"));
 		request.setAttribute("quizId", quizId);
@@ -54,12 +52,17 @@ public class QuizServlet extends HttpServlet {
 			request.setAttribute("answer" + questionId, ans);
 			maxScore += question.getMaxScore();
 		}
-
-		int percent = (score*100)/maxScore;		
-//		quiz.recordScore(username, percent, elapsed);
+		int percent = (score*100)/maxScore;
+		quiz.recordScore(username, percent, elapsed);
+		AchievementInfo.checkQuizTakingAchievements(username, percent, quizId, elapsed);
 		request.setAttribute("percent", Integer.toString(percent));
-//		request.setAttribute("elapsed", Integer.toString(elapsed));
-		request.setAttribute("elapsed", Integer.toString(0));
+		request.setAttribute("elapsed", Integer.toString(elapsed));
+		String from = request.getParameter("from");
+		String scoreToBeat = request.getParameter("scoreToBeat");
+		if(from != null) {
+			request.setAttribute("from",from);
+			request.setAttribute("scoreToBeat",scoreToBeat);
+		}
 		RequestDispatcher dispatch = request.getRequestDispatcher("quiz-summary.jsp");
 		dispatch.forward(request, response);
 	}

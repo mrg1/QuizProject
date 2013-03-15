@@ -24,19 +24,25 @@
 <% } %>
 
 <h3 class="inline">Announcements</h3>
-<% for(Announcement a : UserInfo.getAnnouncments()) { %>
-<p class="announce"><%=a.getUsername() %> posted: <%=a.getContent() %></p>
-<%} %>
+<% List<Announcement> announcements = UserInfo.getAnnouncments(); %>
+<% if(announcements.isEmpty()) %><p class="announce">No announcements!</p><%; %>
+<% Iterator<Announcement> announceIter = announcements.iterator(); %>
+<% for(int i = 0; i < 3; i++) {%>
+	<% if(!announceIter.hasNext()) break; %>
+	<% Announcement cur = announceIter.next(); %>
+	<p class="announce"><%=cur.getUsername() %> posted: <%=cur.getContent() %></p>
+<% } %>
 
 <div class="panel1">
 
 <p class="welcome">Welcome <a href="user.jsp?user=<%=username%>"><%= username %></a></p>
 
+<h3>Achievements:</h3>
 <div class="achievements">
 <% List<Integer> achievements = UserInfo.getAchievements(username); %>
 <% for(Integer i : achievements) {%>
 	<p> <%=AchievementInfo.getAchievement(i) %></p>
-	<%} %>
+<%} %>
 </div>
 
 <h3 class="inline">Message Activity</h3>
@@ -75,7 +81,7 @@
 <%	Score score = history.get(i); %>
 <tr>
 <td><a href="quiz.jsp?id=<%=score.getQuizId()%>"><%= UserInfo.getQuiz(score.getQuizId()).getName() %></a></td>
-<td><%= score.getScore()%></td>
+<td><%= score.getScore()%>%</td>
 </tr>
 <% } } } %>
 </table>
@@ -149,7 +155,7 @@
 <tr>
 <td><a href="user.jsp?user=<%=s.getUsername()%>"><%= s.getUsername() %></a></td>
 <td><a href="quiz.jsp?id=<%=s.getQuizId()%>"><%= UserInfo.getQuiz(s.getQuizId()).getName() %></a></td>
-<td><%= s.getScore()%></td>
+<td><%= s.getScore()%>%</td>
 <% } } %>
 </tr>
 </table>

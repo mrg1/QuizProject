@@ -4,6 +4,7 @@
 
 <%@ page import="db.*" %>
 <%@ page import="quiz.*" %>
+<%@ page import="message.*" %>
 <%@ page import="question.*" %>
 <%@ page import="java.util.*" %>
 
@@ -24,7 +25,34 @@ String username = (String)session.getAttribute("username");
 
 <h1><%=quiz.getName() %> Summary</h1>
 
+<% Object from = request.getAttribute("from"); %>
+<% if(from != null) { %>
+	<h1>Challenge Results:</h1>
+	<% int scoreToBeat = Integer.parseInt((String)request.getAttribute("scoreToBeat")); %>
+	<% int percent = Integer.parseInt((String)request.getAttribute("percent")); %>
+	<% if(scoreToBeat > percent) {%>
+		<p>Sorry, you couldn't beat <%=(String)from %>'s score.</p>
+		<% UserInfo.addMessage(new Note((String)from,username,"Shit I could not beat your score in "+quiz.getName()+".")); %>
+	<% } else if(scoreToBeat < percent) { %>
+		<p>You beat <%=(String)from %>'s score!</p>
+		<% UserInfo.addMessage(new Note((String)from,username,"Beat yo ass on "+quiz.getName()+".")); %>
+	<% } else { %>
+		<p>You tied <%=(String)from %>'s score.</p>
+		<% UserInfo.addMessage(new Note((String)from,username,"We tied on "+quiz.getName()+".")); %>
+	<% } %>
+	<% request.setAttribute("from",null); %>
+	<% request.setAttribute("scoreToBeat",null); %>
+<% } %>
+
 <h1>You got <%= request.getAttribute("percent") %>%!!!</h1>
+<h2>Challenge a friend?</h2>
+<form action="ChallengeServlet" method="post">
+	<p>To: <input type="text" name="to"/></p>
+	<p>Trash talk: <textarea rows="4" cols="50" name="content"></textarea>
+	<input type="hidden" name="score" value=<%=request.getAttribute("percent") %> />
+	<input type="hidden" name="quizID" value=<%=request.getAttribute("quizId") %> /></p>
+	<p><input type="submit" value="Challenge"/></p>
+</form>
 <h2><%= request.getAttribute("elapsed") %> seconds elapsed.</h2>
 
 <%

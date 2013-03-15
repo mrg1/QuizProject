@@ -89,8 +89,14 @@ public class ResponseQuestion implements Question {
 	}
 	
 	public static String getBuilderHTML() {
-		// TODO Auto-generated method stub
-		return null;
+		String out = "";
+		out += "<p>Question: <input type=\"text\" name=\"question\" /></p>\n";
+		out += "<p>Answers (separate each by new line): <textarea rows=\"4\" cols=\"50\" name=\"answers\"></textarea></p>\n";
+		out += "<p>Case Sensitive: <input type=\"checkbox\" name=\"caseSensitive\" value=\"true\" /></p>\n";
+		out += "<p>Weight: <input type=\"text\" name=\"weight\" />\n";
+		out += "<input type=\"hidden\" name=\"questionId\" value=\""+QuestionInfo.RESPONSE_QUESTION_ID+"\" /></p>\n"; 
+		out += "<input type=\"submit\" value=\"Add Question\" /></p>";
+		return out;
 	}
 	
 	public static ResponseQuestion parseXML(String XML) {

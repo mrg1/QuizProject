@@ -10,16 +10,16 @@ import javax.servlet.http.HttpServletResponse;
 import db.UserInfo;
 
 /**
- * Servlet implementation class AcceptServlet
+ * Servlet implementation class DeleteFriendServlet
  */
-@WebServlet("/AcceptServlet")
-public class AcceptServlet extends HttpServlet {
+@WebServlet("/DeleteFriendServlet")
+public class DeleteFriendServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AcceptServlet() {
+    public DeleteFriendServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,12 +35,10 @@ public class AcceptServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String to = (String)request.getSession().getAttribute("username");
-		String from = request.getParameter("from");
-		int id = Integer.parseInt(request.getParameter("id"));
-		UserInfo.addFriend(to, from);
-		UserInfo.deleteMessages(id);
-		request.setAttribute("alert", "You and " + from + " are now friends!");
+		String friend = request.getParameter("friend");
+		String username = (String)request.getSession().getAttribute("username");
+		UserInfo.deleteFriend(username,friend);
+		request.setAttribute("alert", "You and " + friend + " are no longer friends.");
 		request.getRequestDispatcher("friends.jsp").forward(request, response);
 	}
 
