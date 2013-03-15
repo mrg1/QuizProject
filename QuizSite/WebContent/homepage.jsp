@@ -72,7 +72,7 @@
 <th>Tests Taken</th>
 <th>Tests Created</th>
 </tr>
-<tr>
+<tr valign="top">
 
 <td>
 <table class="table2" width="250">
@@ -87,7 +87,7 @@
 <% if(history.size() > i) { %>
 <%	Score score = history.get(i); %>
 <tr>
-<td><a href="quiz.jsp?id=<%=score.getQuizId()%>"><%= UserInfo.getQuiz(score.getQuizId()).getName() %></a></td>
+<td><a href="quiz.jsp?id=<%=score.getQuizId()%>"><%= UserInfo.getQuizName(score.getQuizId()) %></a></td>
 <td><%= score.getScore()%>%</td>
 </tr>
 <% } } } %>
@@ -96,7 +96,7 @@
 
 <td>
 <table class="table2" width="250">
-<tr>
+<tr valign="top">
 <th>Title</th>
 <th>Date</th>
 </tr>
@@ -105,7 +105,7 @@
 <tr>
 <% if(historyCreated.size() > i) { %>
 <%	int id = historyCreated.get(i); %>
-<td><a href="quiz.jsp?id=<%=id%>"><%= UserInfo.getQuiz(id).getName() %></a></td>
+<td><a href="quiz.jsp?id=<%=id%>"><%= UserInfo.getQuizName(id) %></a></td>
 <td><%=UserInfo.getDateForQuiz(id)%></td>
 </tr>
 <% } } %>
@@ -128,7 +128,7 @@
 <% for (int i = 0; i < 10; i++) {%>
 <% if(popular.size() > i) { %>
 <% int id = popular.get(i); %>
-<li><%=i + 1 %>. <a href="quiz.jsp?id=<%=id%>"><%=UserInfo.getQuiz(id).getName() %></a></li>
+<li><%=i + 1 %>. <a href="quiz.jsp?id=<%=id%>"><%=UserInfo.getQuizName(id) %></a></li>
 <% } } } %>
 
 </ul>
@@ -142,7 +142,7 @@
 <% for (int i = 0; i < 5; i++) {%>
 <% if(recent.size() > i) { %>
 <% int id = recent.get(i); %>
-<li><a href="quiz.jsp?id=<%=id%>"><%=UserInfo.getQuiz(id).getName() %></a></li>
+<li><a href="quiz.jsp?id=<%=id%>"><%=UserInfo.getQuizName(id) %></a></li>
 <% } } } %>
 
 </ul>
@@ -162,7 +162,7 @@
 <%	Score s = friendHistory.get(i); %>
 <tr>
 <td><a href="user.jsp?user=<%=s.getUsername()%>"><%= s.getUsername() %></a></td>
-<td><a href="quiz.jsp?id=<%=s.getQuizId()%>"><%= UserInfo.getQuiz(s.getQuizId()).getName() %></a></td>
+<td><a href="quiz.jsp?id=<%=s.getQuizId()%>"><%= UserInfo.getQuizName(s.getQuizId()) %></a></td>
 <td><%= s.getScore()%>%</td>
 <% } } %>
 </tr>

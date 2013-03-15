@@ -40,6 +40,10 @@ table.table5 th {
 	width:80px;
 	border-bottom:1px dotted black;
 }
+.friendTable th, td {
+	width:450px;
+}
+
 
 .panel3 {
 	width:40%;
@@ -138,9 +142,6 @@ cursor: pointer;
 	word-break:break-all;
 }
 
-.achievementPanel {
-
-}
 .achievements, .message {
 	margin-left:50px;
 }
@@ -151,4 +152,64 @@ cursor: pointer;
 }
 .achievementMessagePanel {
 	max-width:100%;
+}
+.inputText {
+	width:200px;
+}
+.friendPanel {
+	padding:20px;
+	background-color:lavender;
+	border-style:solid;
+	border-color:blueviolet;
+	border-width:2px;
+	-moz-border-radius: 15px;
+	border-radius: 15px;
+}
+.friendInput {
+	margin-left:10px;
+}
+.inboxList {
+	list-style-type:none;
+}
+.messagePanel {
+	padding:20px;
+	background-color:lavender;
+	border-style:solid;
+	border-color:blueviolet;
+	border-width:2px;
+	-moz-border-radius: 15px;
+	border-radius: 15px;
+}
+.removeButton {
+	margin-top:-60px;
+	margin-right:40px;
+}
+.composeIcon {
+	width:40px;
+	height:40px;
+}
+.compose {
+	margin-right:20px;
+}
+.historyTable {
+	max-height:200px;
+	overflow:scroll;
+}
+.leftQuiz {
+	width:70%;
+	float:left;
+}
+.rightQuiz {
+	width:20%;
+	float:left;
+}
+.takeButton {
+	padding:5px;
+	background-color:whitesmoke;
+	border-color:lavender;
+	border-style:groove;
+	border-width:5px;
+  	width:250px;
+  	height:100px;
+  	font-size:50;
 }

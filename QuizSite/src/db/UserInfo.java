@@ -803,8 +803,6 @@ public class UserInfo {
 			PreparedStatement addStatement = con.prepareStatement(QuizSqlStatements.SQL_SET_TAG);
 			addStatement.setInt(1, quizId);
 			addStatement.setString(2, tag);
-			addStatement.setInt(3, quizId);
-			addStatement.setString(4, tag);
 			addStatement.execute();
 		} catch (SQLException e) {
 			e.printStackTrace();

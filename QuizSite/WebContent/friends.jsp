@@ -21,24 +21,30 @@
 	<% request.setAttribute("alert",null); %>
 <% } %>
 
+<div class="friendPanel">
 <form action="SendRequestServlet" method="post">
-	<p>Add Friend: <input type="text" name="to" /></p>
-	<p>Message: <textarea rows="4" cols="50" name="content"></textarea></p>
-	<p><input type="submit" value="Add" /></p>
+	<p class="inline friendInput">Friend Name: <input type="text" name="to" class="inputText" /></p>
+	<p class="inline friendInput">Message(optional): <input type="text" name="content" class="inputText" /></p>
+	<p class="inline friendInput"><input type="submit" value="Add" /></p>
 </form>
+</div>
 
-<table class="table4">
+<hr>
+
+
+<table class="friendTable">
 <tr>
 <th>Friend</th>
 <th></th>
 </tr>
 
+
 <% ArrayList<String> friends = UserInfo.getFriends((String) session.getAttribute("username")); %>
 <% if(friends.isEmpty()) %><tr><td>You have no friends.</td></tr>
 <% for(String friend : friends) { %>
 <tr>
-<td><a href="user.jsp?user=<%=friend%>"><%= friend %></a></td>
-<td>
+<td align="center"><a href="user.jsp?user=<%=friend%>"><%= friend %></a></td>
+<td align="center">
 	<form action="DeleteFriendServlet" method="post">
     	<p><input type="hidden" name="friend" value=<%=friend %> />
         <input type="submit" value="Remove" /></p>
