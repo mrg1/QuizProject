@@ -39,14 +39,17 @@ public class SendRequestServlet extends HttpServlet {
 		String from = (String)request.getSession().getAttribute("username");
 		String to = request.getParameter("to");
 		String content = request.getParameter("content");
-		if(UserInfo.userExists(to)) {
+		if(from.equals(to)){
+			request.setAttribute("alert", "Request couldn't be sent, you cannot friend yourself.");
+			request.getRequestDispatcher("friends.jsp").forward(request, response);
+		} else if(UserInfo.userExists(to)) {
 			UserInfo.addMessage(new Request(to,from,content));
 			request.setAttribute("alert", "Request successfully sent!");
 			request.getRequestDispatcher("friends.jsp").forward(request, response);
 		} else if(UserInfo.getFriends(from).contains(to)) {
 			request.setAttribute("alert", "Request couldn't be sent, you and " + to + " are already friends.");
 			request.getRequestDispatcher("friends.jsp").forward(request, response);
-		} else {
+		}  else {
 			request.setAttribute("alert", "Request couldn't be sent, user " + to + " doesn't exist.");
 			request.getRequestDispatcher("friends.jsp").forward(request, response);
 		}

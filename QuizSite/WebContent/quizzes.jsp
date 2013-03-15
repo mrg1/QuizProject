@@ -31,7 +31,7 @@
 <%	Quiz quiz = UserInfo.getQuiz(id); %>
 <tr>
 <td><a href="quiz.jsp?id=<%= id %>"><%= quiz.getName() %></a></td>
-<td><%= quiz.getAuthor()%></td>
+<td><a href="user.jsp?user=<%=quiz.getAuthor()%>"><%= quiz.getAuthor() %></a></td>
 <td><%= UserInfo.getDateForQuiz(id) %></td>
 </tr>
 <% } } %>
