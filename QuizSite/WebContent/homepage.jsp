@@ -38,21 +38,21 @@
 
 <div class="homepageLeft">
 
+<% if(loggedIn) { %>
 <div class="welcomePanel">
 <img class="inline profile" src="http://www.almostsavvy.com/wp-content/uploads/2011/04/profile-photo.jpg" align="middle"></img>
 <p class="welcome inline">Welcome <a href="user.jsp?user=<%=username%>"><%= username %></a></p>
 </div>
 
-<h2>Achievements:</h3>
-<div class="achievements">
+<div class="achievementMessagePanel">
+<h3>Achievements:</h3>
 <% List<Integer> achievements = UserInfo.getAchievements(username); %>
 <% for(Integer i : achievements) {%>
-	<p> <%=AchievementInfo.getAchievement(i) %></p>
+	<p class="achievements"> <%=AchievementInfo.getAchievement(i) %></p>
 <%} %>
-</div>
 
-<h3 class="inline">Message Activity</h3>
-<ul class="list">
+<h3>Message Activity</h3>
+<ul class="messageList">
 	<% List<Message> messages = UserInfo.getMessages(username); %>
 	<% if(messages.isEmpty()) %><li>No messages!</li><%; %>
 	<% Iterator<Message> messageIter = messages.iterator(); %>
@@ -62,8 +62,9 @@
 		<li><%=cur.getFrom() %> sent you a <%=cur.getTypeName() %>!</li>
 	<% } %>
 </ul>
+</div>
 
-<h3 class="inline">Your Recent Activity</h3>
+<h3 class="inline">Your Recent History</h3>
 <p class="inline"><a href="history.jsp">(See Full History)</a></p>
 
 <table class="table1">
@@ -71,7 +72,7 @@
 <th>Tests Taken</th>
 <th>Tests Created</th>
 </tr>
-<tr>
+<tr valign="top">
 
 <td>
 <table class="table2" width="250">
@@ -86,7 +87,7 @@
 <% if(history.size() > i) { %>
 <%	Score score = history.get(i); %>
 <tr>
-<td><a href="quiz.jsp?id=<%=score.getQuizId()%>"><%= UserInfo.getQuiz(score.getQuizId()).getName() %></a></td>
+<td><a href="quiz.jsp?id=<%=score.getQuizId()%>"><%= UserInfo.getQuizName(score.getQuizId()) %></a></td>
 <td><%= score.getScore()%>%</td>
 </tr>
 <% } } } %>
@@ -95,7 +96,7 @@
 
 <td>
 <table class="table2" width="250">
-<tr>
+<tr valign="top">
 <th>Title</th>
 <th>Date</th>
 </tr>
@@ -104,7 +105,7 @@
 <tr>
 <% if(historyCreated.size() > i) { %>
 <%	int id = historyCreated.get(i); %>
-<td><a href="quiz.jsp?id=<%=id%>"><%= UserInfo.getQuiz(id).getName() %></a></td>
+<td><a href="quiz.jsp?id=<%=id%>"><%= UserInfo.getQuizName(id) %></a></td>
 <td><%=UserInfo.getDateForQuiz(id)%></td>
 </tr>
 <% } } %>
@@ -115,6 +116,7 @@
 </table>
 </div>
 
+<% } %>
 <div class="homepageRight">
 
 <h3>Popular Quizzes</h3>
@@ -126,7 +128,7 @@
 <% for (int i = 0; i < 10; i++) {%>
 <% if(popular.size() > i) { %>
 <% int id = popular.get(i); %>
-<li><%=i + 1 %>. <a href="quiz.jsp?id=<%=id%>"><%=UserInfo.getQuiz(id).getName() %></a></li>
+<li><%=i + 1 %>. <a href="quiz.jsp?id=<%=id%>"><%=UserInfo.getQuizName(id) %></a></li>
 <% } } } %>
 
 </ul>
@@ -140,11 +142,12 @@
 <% for (int i = 0; i < 5; i++) {%>
 <% if(recent.size() > i) { %>
 <% int id = recent.get(i); %>
-<li><a href="quiz.jsp?id=<%=id%>"><%=UserInfo.getQuiz(id).getName() %></a></li>
+<li><a href="quiz.jsp?id=<%=id%>"><%=UserInfo.getQuizName(id) %></a></li>
 <% } } } %>
 
 </ul>
 
+<% if(loggedIn) { %>
 <h3 class="inline">Friend Activity</h3>
 <table class="table3">
 <tr>
@@ -159,13 +162,13 @@
 <%	Score s = friendHistory.get(i); %>
 <tr>
 <td><a href="user.jsp?user=<%=s.getUsername()%>"><%= s.getUsername() %></a></td>
-<td><a href="quiz.jsp?id=<%=s.getQuizId()%>"><%= UserInfo.getQuiz(s.getQuizId()).getName() %></a></td>
+<td><a href="quiz.jsp?id=<%=s.getQuizId()%>"><%= UserInfo.getQuizName(s.getQuizId()) %></a></td>
 <td><%= s.getScore()%>%</td>
 <% } } %>
 </tr>
 </table>
 
 </div>
-
+<% } %>
 </body>
 </html>

@@ -22,16 +22,16 @@
 	<% request.setAttribute("alert",null); %>
 <% } %>
 
-<h1>Inbox</h1>
-<a href="sendMessage.jsp" class="inline">(Create Message)</a>
-<ul class="list">
+<h1 class="inline">Inbox</h1>
+<a class="inline right compose" href="sendMessage.jsp" class="inline"><img align="middle" class="composeIcon" src="http://gcseit.info/wp-content/uploads/2010/04/mozilla-compose-icon.png"/>Compose Message</a>
+<ul class="inboxList">
 	<% List<Message> messages = UserInfo.getMessages(username); %>
 	<% if(messages.isEmpty()) %><li>Nothing yet!</li><%; %>
 	<% for(Message cur : messages) {%>
-		<li class="message"><%= cur.getHtml() %>
-		<form action="DeleteMessageServlet" method="post">
+		<li class="messagePanel"><%= cur.getHtml() %>
+		<form action="DeleteMessageServlet" method="post" class="right inline">
            <input type="hidden" name="id" value="<%=cur.getMessageId() %>" />
-           <input type="submit" value="Remove" />
+           <input type="submit" value="Delete Message" class="removeButton"/>
      	</form>    
 		</li>
 	<% } %>
