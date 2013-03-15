@@ -109,7 +109,7 @@ public class FillBlankQuestion implements Question {
 	
 	public static String getBuilderHTML() {
 		String out = "";
-		out += "<p>Question: <input type=\"text\" name=\"pre\" />________<input type=\"text\" name=\"post\" /><\n";
+		out += "<p>Question: <input type=\"text\" name=\"pre\" />________<input type=\"text\" name=\"post\" /></p>\n";
 		out += "<p>Answers (separate each by new line): <textarea rows=\"4\" cols=\"50\" name=\"answers\"></textarea></p>\n";
 		out += "<p>Case Sensitive: <input type=\"checkbox\" name=\"caseSensitive\" value=\"true\" /></p>\n";
 		out += "<p>Weight: <input type=\"text\" name=\"weight\" />\n";
