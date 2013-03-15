@@ -64,7 +64,7 @@ public class AchievementInfo {
 			UserInfo.addAchievment(username, JAQUIZZ_ICAL_ID);
 		}
 		if (top.size() > 0) {
-			if ((top.get(0).getScore() < percent || (top.get(0).getScore() == percent && top.get(0).getElapsed() > elapsed)) && !achs.contains(THE_GREATEST_ID)) {
+			if ((top.get(0).getScore() < percent || (top.get(0).getScore() == percent && top.get(0).getElapsed() >= elapsed)) && !achs.contains(THE_GREATEST_ID)) {
 				UserInfo.addAchievment(username, THE_GREATEST_ID);
 			}
 		} else {

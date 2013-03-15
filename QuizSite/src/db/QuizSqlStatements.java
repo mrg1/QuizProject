@@ -85,7 +85,7 @@ public class QuizSqlStatements {
 	private final static String TAG_TABLE = "tags";
 	public final static String SQL_GET_TAGS_BY_CATEGORY = "SELECT quizId FROM " + TAG_TABLE + " WHERE tagType=?";
 	public final static String SQL_GET_TAGS_BY_QUIZ = "SELECT tagType FROM " + TAG_TABLE + " WHERE quizId=?;";
-	public final static String SQL_SET_TAG = "INSERT INTO " + TAG_TABLE + " (quizId, tagType) VALUES (?, ?) WHERE NOT EXISTS (SELECT * FROM " + TAG_TABLE + " WHERE quizId=? AND tagType=?);";
+	public final static String SQL_SET_TAG = "INSERT INTO " + TAG_TABLE + " (quizId, tagType) VALUES (?, ?);";
 	public final static String SQL_GET_ALL_TAGS = "SELECT DISTINCT tagType FROM " + TAG_TABLE + ";";
 
 
