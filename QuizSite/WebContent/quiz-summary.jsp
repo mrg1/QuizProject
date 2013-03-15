@@ -22,6 +22,14 @@
 <h1><%=quiz.getName() %> Summary</h1>
 
 <h1>You got <%= request.getAttribute("percent") %>%!!!</h1>
+<h2>Challenge a friend?</h2>
+<form action="ChallengeServlet" method="post">
+	<p>To: <input type="text" name="to"/></p>
+	<p>Trash talk: <textarea rows="4" cols="50" name="content"></textarea>
+	<input type="hidden" name="score" value=<%=request.getAttribute("percent") %> />
+	<input type="hidden" name="quizID" value=<%=request.getAttribute("quizId") %> /></p>
+	<p><input type="submit" value="Challenge"/></p>
+</form>
 <h2><%= request.getAttribute("elapsed") %> seconds elapsed.</h2>
 
 <%
