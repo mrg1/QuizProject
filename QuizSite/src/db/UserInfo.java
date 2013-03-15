@@ -628,7 +628,7 @@ public class UserInfo {
 			ResultSet rs = selectStatement.executeQuery();
 			if(rs.next()){
 				Timestamp t = rs.getTimestamp(1);
-				result = new SimpleDateFormat("yyyy-MM-dd").format(t);
+				result = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(t);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -645,7 +645,7 @@ public class UserInfo {
 			ResultSet rs = selectStatement.executeQuery();
 			if(rs.next()){
 				Timestamp t = rs.getTimestamp(1);
-				result = new SimpleDateFormat("yyyy-MM-dd").format(t);
+				result = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(t);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
