@@ -155,10 +155,13 @@ public class Quiz {
 					if(allChecked(used)) break;
 				}
 				result[index] = j;
+				used[index] = true;
 			}
 			
 		} else {
-			for(int i = 0; i < result.length; i++) result[i] = i;
+			for(int i = 0; i < result.length; i++) {
+				result[i] = i;
+			}
 		}
 		return result;
 	}

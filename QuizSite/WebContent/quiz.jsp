@@ -76,7 +76,7 @@
 <div class="panel4">
 
 <h3>Recent Attempts</h3>
-<table class="table2 sortable">
+<table class="table2">
 <tr>
 <th>User</th>
 <th>Score</th>

@@ -9,6 +9,7 @@
 <head>
 <title>Quizzes</title>
 <link href="stylesheet.css" rel="stylesheet" type="text/css"></link>
+<script src="sorttable.js"></script>
 </head>
 
 <body>
@@ -18,7 +19,7 @@
 
 <h1>All Quizzes</h1>
 
-<table class="table4">
+<table class="table4 sortable">
 <tr>
 <th>Quiz Title</th>
 <th>Created By</th>
