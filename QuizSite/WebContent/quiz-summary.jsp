@@ -57,16 +57,10 @@ String username = (String)session.getAttribute("username");
 
 <%
 Question[] questions = quiz.getQuestions();
-for(int i = 0; i < questions.length; i++) {
-	int index = (Integer) request.getAttribute("question" + i);
-	Question q = questions[index];
-	String ans = (String) request.getAttribute("answer" + q.getID());
-	out.println("<p></p><hr>");
-	out.println(q.getCorrectedHTML(ans));
-}
+
 
 for(Question q : questions) {
-	String ans = (String) request.getAttribute("answer" + q.getID());
+	String ans = (String) request.getParameter("answer" + q.getID());
 	out.println("<p></p><hr>");
 	out.println(q.getCorrectedHTML(ans));
 }
