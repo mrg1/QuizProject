@@ -98,3 +98,11 @@ table.table5 th {
 .navbarPanel {
 	background-color:ghostwhite;
 }
+
+.submitLink {
+background-color: transparent;
+text-decoration: underline;
+border: none;
+color: blue;
+cursor: pointer;
+}

@@ -25,7 +25,8 @@
 <p>Please enter the information for your new quiz:</p>
 <form action="QuizCreationServlet" method="post">
 <p>Quiz Name: <input type="text" name="quizname" /></p>
-<p>Description: <input type="text" name="description"/><p>
+<p>Description: <textarea rows="4" cols="50" name="description"></textarea><p>
+<p>Tags (Enter tags to describe your quiz content, like "Sports" or "General Knowledge"): <textarea rows="4" cols="50" name="tags"></textarea></p>
 <p>Would you like your quiz to have randomly ordered questions? <input type="checkbox" name="random" value="random"/> </p>
 <p>Would you like your quiz to have a separate page for each question? <input type="checkbox" name="multipage" value="multipage"/> </p>
 <p>Would you like your quiz to give immediate correction? <input type="checkbox" name="immediate" value="immediate"/> </p>

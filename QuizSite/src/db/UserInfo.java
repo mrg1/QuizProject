@@ -797,4 +797,80 @@ public class UserInfo {
 		return result;
 	}
 	
+	public static void addTag(int quizId, String tag){
+		con = QuizDB.getConnection();
+		try {
+			PreparedStatement addStatement = con.prepareStatement(QuizSqlStatements.SQL_SET_TAG);
+			addStatement.setInt(1, quizId);
+			addStatement.setString(2, tag);
+			addStatement.setInt(3, quizId);
+			addStatement.setString(4, tag);
+			addStatement.execute();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static List<String> getTagsForQuiz(int quizId){
+		List<String> result = new ArrayList<String>();
+		con = QuizDB.getConnection();
+		try {
+			PreparedStatement selectStatement = con.prepareStatement(QuizSqlStatements.SQL_GET_TAGS_BY_QUIZ);
+			selectStatement.setInt(1, quizId);
+			ResultSet rs = selectStatement.executeQuery();
+			while(rs.next()){
+				result.add(rs.getString(1));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	public static List<Integer> getQuizzesForTag(String tag){
+		List<Integer> result = new ArrayList<Integer>();
+		con = QuizDB.getConnection();
+		try {
+			PreparedStatement selectStatement = con.prepareStatement(QuizSqlStatements.SQL_GET_TAGS_BY_CATEGORY);
+			selectStatement.setString(1, tag);
+			ResultSet rs = selectStatement.executeQuery();
+			while(rs.next()){
+				result.add(rs.getInt(1));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	public static List<String> getAllTags(){
+		List<String> result = new ArrayList<String>();
+		con = QuizDB.getConnection();
+		try {
+			PreparedStatement selectStatement = con.prepareStatement(QuizSqlStatements.SQL_GET_ALL_TAGS);
+			ResultSet rs = selectStatement.executeQuery();
+			while(rs.next()){
+				result.add(rs.getString(1));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	public static String getQuizName(int quizId){
+		String result = "";
+		con = QuizDB.getConnection();
+		try {
+			PreparedStatement selectStatement = con.prepareStatement(QuizSqlStatements.SQL_GET_QUIZ_NAME);
+			selectStatement.setInt(1, quizId);
+			ResultSet rs = selectStatement.executeQuery();
+			if(rs.next()){
+				result = rs.getString(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 }

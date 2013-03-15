@@ -2,6 +2,7 @@ package quiz;
 
 import java.io.IOException;
 
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -55,6 +56,8 @@ public class QuizCreationServlet extends HttpServlet {
 		String practiceValue = request.getParameter("practice");
 		String name = request.getParameter("quizname");
 		String description = request.getParameter("description");
+		String tagString = request.getParameter("tags");
+		String[] tags = QuestionInfo.getAnswersFromString(tagString);
 		int questionType = Integer.parseInt(request.getParameter("questionType"));
 		if(randomValue!= null){
 			random = true;
@@ -71,6 +74,9 @@ public class QuizCreationServlet extends HttpServlet {
 		Quiz q = new Quiz(name, username, description, random, onepage, immediate, practice);
 		UserInfo.addQuiz(q);
 		AchievementInfo.checkQuizCreationAchievments(username);
+		for(String tag : tags){
+			UserInfo.addTag(q.getQuizId(), tag);
+		}
 		String htmlBuilder = "";
 		switch(questionType){
 			case QuestionInfo.MULTIPLE_CHOICE_ID:
@@ -86,6 +92,7 @@ public class QuizCreationServlet extends HttpServlet {
 				htmlBuilder = ResponseQuestion.getBuilderHTML();
 				break;
 		}
+		
 		request.setAttribute("quizId", q.getQuizId());
 		request.setAttribute("html", htmlBuilder);
 		request.setAttribute("type", questionType);

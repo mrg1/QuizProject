@@ -9,6 +9,8 @@
 <li class="inline navbarItem"><a href="friends.jsp">Friends</a></li>
 <li class="inline navbarItem"><a href="inbox.jsp">Inbox</a></li>
 <li class="inline navbarItem"><a href="create-quiz.jsp">Create Quiz</a></li>
+<li class="inline navbarItem"><a href="tag-page.jsp">Categories</a></li>
+
 <% if(UserInfo.isAdmin((String)session.getAttribute("username"))) { %>
 	<li class="inline navbarItem"><a href="admin.jsp">Admin</a></li>
 <% } %>
