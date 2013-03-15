@@ -34,8 +34,8 @@
 </tr>
 
 <% ArrayList<String> friends = UserInfo.getFriends((String) session.getAttribute("username")); %>
-<% for(String friend : friends) { %>
 <% if(friends.isEmpty()) %><tr><td>You have no friends.</td></tr>
+<% for(String friend : friends) { %>
 <tr>
 <td><a href="user.jsp?user=<%=friend%>"><%= friend %></a></td>
 <td>

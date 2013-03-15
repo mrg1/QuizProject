@@ -42,11 +42,11 @@ if(questionIndex < (quiz.getQuestions().length-1)) { //not last question
 	out.println("<form action=\"QuizServlet\" method=\"post\">");
 }
 if(questionIndex==0) {
+	quiz.shuffleQuestions();
  	out.println("<input type=\"hidden\" name=\"startTime\" value=\""+System.currentTimeMillis()+"\"></input>");
 } else {
  	out.println("<input type=\"hidden\" name=\"startTime\" value=\""+request.getParameter("startTime")+"\"></input>");
 }
-
 
 
 for(Question ques : questions) {

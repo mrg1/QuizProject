@@ -32,7 +32,7 @@
 <% for(int i = 0; i < 3; i++) {%>
 	<% if(!announceIter.hasNext()) break; %>
 	<% Announcement cur = announceIter.next(); %>
-	<p class="announce"><%=cur.getUsername() %> posted: <%=cur.getContent() %></p>
+	<p class="announce"><a href="user.jsp?user=<%=cur.getUsername() %>"><%=cur.getUsername() %></a> posted: <%=cur.getContent() %></p>
 <% } %>
 
 
@@ -147,7 +147,6 @@
 </ul>
 
 <h3 class="inline">Friend Activity</h3>
-<p class="inline"><a href="friends.jsp">(See Friends)</a></p>
 <table class="table3">
 <tr>
 <th>Friend</th>

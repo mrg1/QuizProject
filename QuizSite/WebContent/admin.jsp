@@ -77,7 +77,7 @@ for(User u : users) {
 		<input type="submit" value="Delete" />
 	</form>
 	</td>
-	<td><%=cur.getUsername() %></td>
+	<td><a href="user.jsp?user=<%=cur.getUsername() %>"><%=cur.getUsername() %></a></td>
 	</tr>
 <% } %>
 </table>
@@ -100,7 +100,7 @@ for(User u : users) {
 		<input type="submit" value="Delete" />
 	</form>
 	</td>
-	<td><%=UserInfo.getQuiz(id).getName() %>, id: <%=id %></td>
+	<td><a href="quiz.jsp?id=<%= id %>"><%=UserInfo.getQuiz(id).getName() %></a>, id: <%=id %></td>
 <% } %>
 </table>
 

@@ -23,7 +23,8 @@
 
 <form action="QuizServlet" method="post">
 <input type="hidden" name="startTime" value="<%= System.currentTimeMillis() %>"></input>
-<% 
+<%
+quiz.shuffleQuestions();
 Question[] questions = quiz.getQuestions();
 
 for (Question q : questions) {

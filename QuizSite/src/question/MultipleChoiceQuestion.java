@@ -41,6 +41,7 @@ public class MultipleChoiceQuestion implements Question {
 	
 	@Override
 	public int checkAnswer(String userAnswer) {
+		if(userAnswer==null) return 0;
 		if(userAnswer.equals(answer)) return weight;
 		return 0;
 	}

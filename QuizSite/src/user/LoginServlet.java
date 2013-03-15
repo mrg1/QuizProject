@@ -40,7 +40,10 @@ public class LoginServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
-		if(!UserInfo.userExists(username)) request.getRequestDispatcher("information-incorrect.html").forward(request, response);
+		if(!UserInfo.userExists(username)) {
+			request.getRequestDispatcher("information-incorrect.html").forward(request, response);
+			return;
+		}
 		//password += UserInfo.getSalt(username));
 		try {
 			MessageDigest md = MessageDigest.getInstance("SHA");

@@ -42,12 +42,14 @@ public class CreateServlet extends HttpServlet {
 		if (UserInfo.userExists(username))
 			request.getRequestDispatcher("name-in-use.jsp").forward(request, response);
 		else {
+			int salt = new Random().nextInt(100);
 			try {
 				MessageDigest md = MessageDigest.getInstance("SHA");
+				password += salt;
 				password = hexToString(md.digest(password.getBytes()));
 			} catch (NoSuchAlgorithmException ignored) {}
 			
-			int salt = new Random().nextInt(100);
+			
 			UserInfo.addUser(username, password, salt, false);
 			request.getSession().setAttribute("username", username);
 			request.getRequestDispatcher("homepage.jsp").forward(request, response);

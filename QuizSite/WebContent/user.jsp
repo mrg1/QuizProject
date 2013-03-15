@@ -9,6 +9,7 @@
 
 <head>
 <% String user = request.getParameter("user"); %>
+<% String username = (String)session.getAttribute("username"); %>
 <title><%= user %></title>
 <link href="stylesheet.css" rel="stylesheet" type="text/css"></link>
 </head>
@@ -23,7 +24,7 @@
 <div>
 <input type="hidden" name="to" value=<%=user %> />
 <input type="hidden" name="content" value="I would like to be your friend!" />
-<input type="submit" value="Add Friend" />
+<% if(!UserInfo.getFriends(username).contains(user)&&!user.equals(username)) %><input type="submit" value="Add Friend" />
 </div>
 </form>
 

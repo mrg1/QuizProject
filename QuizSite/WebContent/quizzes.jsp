@@ -9,6 +9,7 @@
 <head>
 <title>Quizzes</title>
 <link href="stylesheet.css" rel="stylesheet" type="text/css"></link>
+<script src="sorttable.js"></script>
 </head>
 
 <body>
@@ -18,7 +19,7 @@
 
 <h1>All Quizzes</h1>
 
-<table class="table4">
+<table class="table4 sortable">
 <tr>
 <th>Quiz Title</th>
 <th>Created By</th>
@@ -31,11 +32,10 @@
 <%	Quiz quiz = UserInfo.getQuiz(id); %>
 <tr>
 <td><a href="quiz.jsp?id=<%= id %>"><%= quiz.getName() %></a></td>
-<td><%= quiz.getAuthor()%></td>
+<td><a href="user.jsp?user=<%=quiz.getAuthor()%>"><%= quiz.getAuthor() %></a></td>
 <td><%= UserInfo.getDateForQuiz(id) %></td>
 </tr>
 <% } } %>
-<tr>
 
 </table>
 
