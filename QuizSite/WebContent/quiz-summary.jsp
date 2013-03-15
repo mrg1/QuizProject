@@ -19,7 +19,7 @@ String username = (String)session.getAttribute("username");
 
 <body>
 
-<%@include file="navbar.html" %>
+<%@include file="navbar.jsp" %>
 
 
 <h1><%=quiz.getName() %> Summary</h1>

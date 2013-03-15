@@ -13,7 +13,7 @@
 
 <body>
 
-<%@include file="navbar.html" %>
+<%@include file="navbar.jsp" %>
 
 
 <h1>All Quizzes</h1>
