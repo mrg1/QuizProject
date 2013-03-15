@@ -130,8 +130,15 @@ public class MultipleChoiceQuestion implements Question {
 	}
 	
 	public static String getBuilderHTML() {
-		// TODO Auto-generated method stub
-		return null;
+		String out = "";
+		out += "<p>Question: <input type=\"text\" name=\"question\" /></p>\n";
+		out += "<p>Choices (separate each by new line): <textarea rows=\"4\" cols=\"50\" name=\"choices\"></textarea></p>\n";
+		out += "<p>Answer: <input type=\"text\" name=\"answer\" /></p>\n";
+		out += "<p>Randomized order: <input type=\"checkbox\" name=\"randomized\" value=\"true\" /></p>\n";
+		out += "<p>Weight: <input type=\"text\" name=\"weight\" />\n";
+		out += "<input type=\"hidden\" name=\"questionId\" value=\""+QuestionInfo.MULTIPLE_CHOICE_ID+"\" /></p>\n"; 
+		out += "<input type=\"submit\" value=\"Add Question\" /></p>";
+		return out;
 	}
 	
 	public static MultipleChoiceQuestion parseXML(String XML) {
