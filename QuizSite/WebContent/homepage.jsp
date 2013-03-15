@@ -24,9 +24,14 @@
 <% } %>
 
 <h3 class="inline">Announcements</h3>
-<% for(Announcement a : UserInfo.getAnnouncments()) { %>
-<p class="announce"><%=a.getUsername() %> posted: <%=a.getContent() %></p>
-<%} %>
+<% List<Announcement> announcements = UserInfo.getAnnouncments(); %>
+<% if(announcements.isEmpty()) %><p class="announce">No announcements!</p><%; %>
+<% Iterator<Announcement> announceIter = announcements.iterator(); %>
+<% for(int i = 0; i < 3; i++) {%>
+	<% if(!announceIter.hasNext()) break; %>
+	<% Announcement cur = announceIter.next(); %>
+	<p class="announce"><%=cur.getUsername() %> posted: <%=cur.getContent() %></p>
+<% } %>
 
 <div class="panel1">
 

@@ -39,8 +39,15 @@ for (Question q : questions) {
 	out.println(q.getHTML());
 }
 %>
-<input type="hidden" name="quizId" value="<%= request.getParameter("id") %>"></input> 
+<p>
+<input type="hidden" name="quizId" value="<%= request.getParameter("id") %>"></input>
+<% Object from = request.getAttribute("from"); %>
+<% if(from != null) { %>
+	<input type="hidden" name="scoreToBeat" value="<%= (String)request.getParameter("scoreToBeat") %>"></input>
+	<input type="hidden" name="from" value="<%= (String)request.getParameter("from") %>"></input>
+<% } %>
 <input type="submit" value="Submit!"></input>
+</p>
 </form>
 
 

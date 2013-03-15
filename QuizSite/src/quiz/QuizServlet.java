@@ -8,9 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import question.*;
-
 import db.AchievementInfo;
 import db.UserInfo;
 
@@ -65,6 +63,12 @@ public class QuizServlet extends HttpServlet {
 		AchievementInfo.checkQuizTakingAchievements(username, percent, quizId, elapsed);
 		request.setAttribute("percent", Integer.toString(percent));
 		request.setAttribute("elapsed", Integer.toString(elapsed));
+		String from = request.getParameter("from");
+		String scoreToBeat = request.getParameter("scoreToBeat");
+		if(from != null) {
+			request.setAttribute("from",from);
+			request.setAttribute("scoreToBeat",scoreToBeat);
+		}
 		RequestDispatcher dispatch = request.getRequestDispatcher("quiz-summary.jsp");
 		dispatch.forward(request, response);
 	}
