@@ -89,7 +89,7 @@ public class QuizCreationServlet extends HttpServlet {
 		request.setAttribute("quizId", q.getQuizId());
 		request.setAttribute("html", htmlBuilder);
 		request.setAttribute("type", questionType);
-		RequestDispatcher dispatch = request.getRequestDispatcher("add-question.jsp");
+		RequestDispatcher dispatch = request.getRequestDispatcher("create-question.jsp");
 		dispatch.forward(request, response);
 	}
 

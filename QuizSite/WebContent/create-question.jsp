@@ -28,8 +28,8 @@
 <%=(String)request.getAttribute("html")%>
 
 <p><input type="submit" value="Add New Question"/> 
-<input type="hidden" name="quizId" value=<%=((Integer)request.getAttribute("quizId")).toString()%>/>
-<input type="hidden" name="currQuestionType" value=<%=((Integer)request.getAttribute("type")).toString()%>/>
+<input type="hidden" name="quizId" value="<%=request.getAttribute("quizId")%>"/>
+<input type="hidden" name="currQuestionType" value="<%=request.getAttribute("type")%>"/>
 <select name="nextQuestionType">
 <option value="-1">Done Creating Quiz</option>
 <option value="0">Multiple Choice</option>

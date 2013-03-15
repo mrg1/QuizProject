@@ -15,6 +15,7 @@ public class QuestionInfo {
 		for(String s : tokens){
 			result.add(s);
 		}
-		return (String[]) result.toArray();
+		String[] arrayResult = result.toArray(new String[result.size()]);
+		return arrayResult;
 	}
 }

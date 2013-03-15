@@ -1,6 +1,8 @@
 package quiz;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -43,7 +45,8 @@ public class AddQuestionServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int quizId = Integer.parseInt(request.getParameter("quizId"));
 		int currQuestionType = Integer.parseInt(request.getParameter("currQuestionType"));
-		int nextQuestionType = Integer.parseInt(request.getParameter("currQuestionType"));
+		int nextQuestionType = Integer.parseInt(request.getParameter("nextQuestionType"));
+		System.out.print(nextQuestionType);
 		String nextPage = "create-question.jsp";
 		String question;
 		int weight;
@@ -112,6 +115,12 @@ public class AddQuestionServlet extends HttpServlet {
 				htmlBuilder = ResponseQuestion.getBuilderHTML();
 				break;
 		}	
+		
+		request.setAttribute("quizId", quizId);
+		request.setAttribute("html", htmlBuilder);
+		request.setAttribute("type", nextQuestionType);
+		RequestDispatcher dispatch = request.getRequestDispatcher(nextPage);
+		dispatch.forward(request, response);
 	}
 
 }
