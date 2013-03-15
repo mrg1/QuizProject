@@ -18,16 +18,22 @@
 
 <%@include file="navbar.jsp" %>
 
-
 <h1><%= user %></h1>
+<% if(loggedIn && !UserInfo.getFriends(username).contains(user)&&!user.equals(username)) {%>
 <form action="SendRequestServlet" method="post">
 <div>
 <input type="hidden" name="to" value=<%=user %> />
 <input type="hidden" name="content" value="I would like to be your friend!" />
-<% if(loggedIn && !UserInfo.getFriends(username).contains(user)&&!user.equals(username)) %><input type="submit" value="Add Friend" />
+<input type="submit" value="Add Friend" />
 </div>
 </form>
-
+<% } %>
+<%if(loggedIn && user.equals(username)) {%>
+	<form action="ProfilePictureServlet" method="post">
+	<p>Image: <input type="text" name="image" />
+	<input type="submit" value="Change Profile Picture" /></p>
+	</form>
+<%} %>
 <h3>Achievements:</h3>
 <div class="achievements">
 <% List<Integer> achievements = UserInfo.getAchievements(user); %>
