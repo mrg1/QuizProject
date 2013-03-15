@@ -60,8 +60,8 @@ public class QuizServlet extends HttpServlet {
 //			int index = Integer.parseInt(param);
 //			request.setAttribute("question" + i, index);
 //		}
-		quiz.recordScore(username, score, elapsed);
 		int percent = (score*100)/maxScore;		
+		quiz.recordScore(username, percent, elapsed);
 		request.setAttribute("percent", Integer.toString(percent));
 		request.setAttribute("elapsed", Integer.toString(elapsed));
 		RequestDispatcher dispatch = request.getRequestDispatcher("quiz-summary.jsp");
