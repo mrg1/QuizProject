@@ -40,7 +40,11 @@
 
 <% if(loggedIn) { %>
 <div class="welcomePanel">
-<img class="inline profile" src="http://www.almostsavvy.com/wp-content/uploads/2011/04/profile-photo.jpg" align="middle"></img>
+<%if(UserInfo.getProfilePicture(username).isEmpty()) {%>
+	<img class="inline profile" src="http://www.almostsavvy.com/wp-content/uploads/2011/04/profile-photo.jpg"></img>
+<%} else { %>
+	<img class="inline profile" src=<%=UserInfo.getProfilePicture(username)%> />
+<%} %>	
 <p class="welcome inline">Welcome <a href="user.jsp?user=<%=username%>"><%= username %></a></p>
 </div>
 

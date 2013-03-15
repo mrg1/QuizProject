@@ -18,7 +18,14 @@
 
 <%@include file="navbar.jsp" %>
 
-<h1><%= user %></h1>
+<div>
+<%if(UserInfo.getProfilePicture(user).isEmpty()) {%>
+	<img class="inline profile" src="http://www.almostsavvy.com/wp-content/uploads/2011/04/profile-photo.jpg"></img>
+<%} else { %>
+	<img class="inline profile" src=<%=UserInfo.getProfilePicture(user) %> />
+<%} %>	
+<h1 class="inline"><%= user %></h1>
+</div>
 <% if(loggedIn && !UserInfo.getFriends(username).contains(user)&&!user.equals(username)) {%>
 <form action="SendRequestServlet" method="post">
 <div>
