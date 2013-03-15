@@ -34,14 +34,16 @@
 <% List<Score> allScores = UserInfo.getRecentQuizAttempts(quiz.getQuizId()); %>
 <% int sumScore = 0; %>
 <% int sumTime = 0; %>
-<% int n = 1; %>
+<% int n = 0; %>
 <% for (Score s : allScores) {%>
 <% 		sumScore += s.getScore(); %>
 <% 		sumTime += s.getElapsed(); %>
 <%		n++; %>
 <% } %>
+<% if (n != 0) {%>
 <% int avgScore = sumScore/n; %>
 <% int avgTime = sumTime/n; %>
+<% } %>
 
 <h3>Average score: <%=avgScore %>%</h3>
 <h3>Average time: <%=avgTime %> seconds</h3>
