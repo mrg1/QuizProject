@@ -20,8 +20,9 @@
 <input class="loginButton" type="submit" value="Create Account"/>
 </form>
 
-<p class="centered"><a href="index.html">Return To Login</a></p>
-
+<form class="centered" action="index.jsp" method="post">
+<input class="loginButton" type="submit" value="Return To Login"/>
+</form>
 </div>
 </body>
 

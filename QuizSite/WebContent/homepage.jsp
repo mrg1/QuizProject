@@ -23,33 +23,32 @@
 	<% request.setAttribute("alert",null); %>
 <% } %>
 
-<div class="panel1">
-
-<h3 class="inline">Announcements</h3>
 <% List<Announcement> announcements = UserInfo.getAnnouncments(); %>
-<% if(announcements.isEmpty()) %><p class="announce">No announcements!</p><%; %>
+<% if(!announcements.isEmpty()) {%>
+<div class="announcementPanel">
+<h3 class="inline announceTitle">Site Announcements:</h3>
 <% Iterator<Announcement> announceIter = announcements.iterator(); %>
 <% for(int i = 0; i < 3; i++) {%>
 	<% if(!announceIter.hasNext()) break; %>
 	<% Announcement cur = announceIter.next(); %>
-	<p class="announce"><a href="user.jsp?user=<%=cur.getUsername() %>"><%=cur.getUsername() %></a> posted: <%=cur.getContent() %></p>
+	<p class="announce"><a href="user.jsp?user=<%=cur.getUsername() %>"><%=cur.getUsername() %></a> posted "<%=cur.getContent() %>"</p>
+<% } %>
+</div>
 <% } %>
 
+<div class="homepageLeft">
 
-<p class="welcome">Welcome <a href="user.jsp?user=<%=username%>"><%= username %></a></p>
+<div class="welcomePanel">
+<img class="inline profile" src="http://www.almostsavvy.com/wp-content/uploads/2011/04/profile-photo.jpg" align="middle"></img>
+<p class="welcome inline">Welcome <a href="user.jsp?user=<%=username%>"><%= username %></a></p>
+</div>
 
-
-<% List<Integer> achievements = UserInfo.getAchievements(username);
-	if(!achievements.isEmpty()) { %>
-	<h3>Achievements:</h3>
-	<div>
-	<ul class="list">
-<%		for(Integer i : achievements) {
-			out.println("<li>" + AchievementInfo.getAchievement(i) + "</li>");
-		} 
-	}
-%>
-</ul>
+<h2>Achievements:</h3>
+<div class="achievements">
+<% List<Integer> achievements = UserInfo.getAchievements(username); %>
+<% for(Integer i : achievements) {%>
+	<p> <%=AchievementInfo.getAchievement(i) %></p>
+<%} %>
 </div>
 
 <h3 class="inline">Message Activity</h3>
@@ -116,7 +115,7 @@
 </table>
 </div>
 
-<div class="panel2">
+<div class="homepageRight">
 
 <h3>Popular Quizzes</h3>
 
