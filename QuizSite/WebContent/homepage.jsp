@@ -38,6 +38,7 @@
 
 <div class="homepageLeft">
 
+<% if(loggedIn) { %>
 <div class="welcomePanel">
 <img class="inline profile" src="http://www.almostsavvy.com/wp-content/uploads/2011/04/profile-photo.jpg" align="middle"></img>
 <p class="welcome inline">Welcome <a href="user.jsp?user=<%=username%>"><%= username %></a></p>
@@ -115,6 +116,7 @@
 </table>
 </div>
 
+<% } %>
 <div class="homepageRight">
 
 <h3>Popular Quizzes</h3>
@@ -145,6 +147,7 @@
 
 </ul>
 
+<% if(loggedIn) { %>
 <h3 class="inline">Friend Activity</h3>
 <table class="table3">
 <tr>
@@ -166,6 +169,6 @@
 </table>
 
 </div>
-
+<% } %>
 </body>
 </html>

@@ -24,7 +24,7 @@
 <div>
 <input type="hidden" name="to" value=<%=user %> />
 <input type="hidden" name="content" value="I would like to be your friend!" />
-<% if(!UserInfo.getFriends(username).contains(user)&&!user.equals(username)) %><input type="submit" value="Add Friend" />
+<% if(loggedIn && !UserInfo.getFriends(username).contains(user)&&!user.equals(username)) %><input type="submit" value="Add Friend" />
 </div>
 </form>
 

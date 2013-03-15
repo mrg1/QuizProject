@@ -152,7 +152,7 @@
 
 </div>
 
-
+<%if(loggedIn) { %>
 <button onclick="window.location = 'quiz-summary.jsp'">Practice</button>
 <% if(quiz.isOnePage()) { %>
 <% out.println("<button onclick=\"window.location = 'quiz-content.jsp?id="+quiz.getQuizId()+"'\">Take Quiz</button>"); %>	
@@ -160,7 +160,7 @@
 <% out.println("<button onclick=\"window.location = 'quiz-content-multipage.jsp?id="+quiz.getQuizId()+"&q=0'\">Take Quiz</button>"); %>
 <% } %>
 <button onclick="window.location = 'quiz-summary.jsp'">Edit</button>
-
+<% } %>
 
 
 </body>
