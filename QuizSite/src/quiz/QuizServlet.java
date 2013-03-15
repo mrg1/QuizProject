@@ -38,7 +38,8 @@ public class QuizServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int elapsed = (int) ((System.currentTimeMillis() - ((Long) request.getAttribute("startTime")))/1000);
+		int elapsed = 0;
+//		int elapsed = (int) ((System.currentTimeMillis() - ((Long) request.getAttribute("startTime")))/1000);
 		String username = (String) request.getSession().getAttribute("username");
 		int quizId = Integer.parseInt(request.getParameter("quizId"));
 		request.setAttribute("quizId", quizId);
