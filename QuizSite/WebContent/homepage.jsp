@@ -71,7 +71,7 @@
 <th>Tests Taken</th>
 <th>Tests Created</th>
 </tr>
-<tr>
+<tr valign="top">
 
 <td>
 <table class="table2" width="250">
@@ -95,7 +95,7 @@
 
 <td>
 <table class="table2" width="250">
-<tr>
+<tr valign="top">
 <th>Title</th>
 <th>Date</th>
 </tr>
