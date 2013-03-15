@@ -41,12 +41,12 @@
 <%		n++; %>
 <% } %>
 <% if (n != 0) {%>
-<% int avgScore = sumScore/n; %>
-<% int avgTime = sumTime/n; %>
+<% sumScore /= n; %>
+<% sumTime /= n; %>
 <% } %>
 
-<h3>Average score: <%=avgScore %>%</h3>
-<h3>Average time: <%=avgTime %> seconds</h3>
+<h3>Average score: <%=sumScore %>%</h3>
+<h3>Average time: <%=sumTime %> seconds</h3>
 <h3>Number of attempts: <%=n %> attempts</h3>
 
 <table class="table5 sortable">
