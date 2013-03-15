@@ -11,11 +11,13 @@ public class AchievementInfo {
 	public static final int PROD_AUTH_ID = 3;
 	public static final int QUIZ_MACHINE_ID = 4;
 	public static final int THE_GREATEST_ID = 5;
+	public static final int JAQUIZZ_ICAL_ID = 6;
 	
 	public static final int AM_AUTH_VALUE = 1;
 	public static final int PROF_AUTH_VALUE = 5;
 	public static final int PROD_AUTH_VALUE = 10;
 	public static final int QUIZ_MACHINE_VALUE = 10;
+	public static final int JAQUIZZ_ICAL_VALUE = 32;
 	
 	public static String getAchievement(int id) {
 		switch(id) {
@@ -31,6 +33,8 @@ public class AchievementInfo {
 				return "Quiz Machine!";
 			case THE_GREATEST_ID:
 				return "I am the Greatest!";
+			case JAQUIZZ_ICAL_ID:
+				return "Jacquizz would be proud!";
 		}
 		return "";
 	}
@@ -53,8 +57,11 @@ public class AchievementInfo {
 		List<Score> quizzes = UserInfo.getHistory(username);
 		List<Integer> achs = UserInfo.getAchievements(username);
 		List<Score> top = UserInfo.getTopTen(quizId);
-		if (quizzes.size() == QUIZ_MACHINE_VALUE && !achs.contains(QUIZ_MACHINE_ID)) {
+		if (quizzes.size() >= QUIZ_MACHINE_VALUE && !achs.contains(QUIZ_MACHINE_ID)) {
 			UserInfo.addAchievment(username, QUIZ_MACHINE_ID);
+		}
+		if(quizzes.size() >= JAQUIZZ_ICAL_VALUE && !achs.contains(JAQUIZZ_ICAL_ID)){
+			UserInfo.addAchievment(username, JAQUIZZ_ICAL_ID);
 		}
 		if (top.size() > 0) {
 			if ((top.get(0).getScore() < percent || (top.get(0).getScore() == percent && top.get(0).getElapsed() > elapsed)) && !achs.contains(THE_GREATEST_ID)) {
