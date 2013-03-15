@@ -25,11 +25,28 @@
 	<% request.setAttribute("alert",null); %>
 <% } %>
 
+<div class="leftQuiz">
 <h1><%= quiz.getName() %></h1>
-
 <p class="achievements">Created by <a href="user.jsp?user=<%=quiz.getAuthor()%>"><%= quiz.getAuthor() %></a>. <%=quiz.getDescription() %></p>
+<p class="achievements inline">Tags: </p>
+<% List<String> tags = UserInfo.getTagsForQuiz(quiz.getQuizId()); %>
+<% for (String s : tags) { %>
+<form class="inline" action="display-quizzes-for-tag.jsp">
+	<input type="hidden" name="tagType" value="<%=s %>"/>
+	<input class="sumbitLink" type="submit" value="<%=s %>"/>
+</form>
+<% } %>
+</div>
 
-<div class="panel3">
+
+<div class="rightQuiz">
+<% if(quiz.isOnePage()) { %>
+<% out.println("<button class=\"takeButton\" onclick=\"window.location = 'quiz-content.jsp?id="+quiz.getQuizId()+"'\"><h1>Take Quiz</h1></button>"); %>	
+<% } else { %>
+<% out.println("<button class=\"takeButton\" onclick=\"window.location = 'quiz-content-multipage.jsp?id="+quiz.getQuizId()+"&q=0'\"><h1>Take Quiz</h1></button>"); %>
+<% } %>
+</div>
+
 
 <% List<Score> allScores = UserInfo.getRecentQuizAttempts(quiz.getQuizId()); %>
 <% int sumScore = 0; %>
@@ -45,10 +62,25 @@
 <% sumTime /= n; %>
 <% } %>
 
-<h3>Average score: <%=sumScore %>%</h3>
-<h3>Average time: <%=sumTime %> seconds</h3>
-<h3>Number of attempts: <%=n %> attempts</h3>
+<table class="statsTable">
 
+<tr>
+<th>Average Score</th>
+<th>Average Time</th>
+<th>Number of Attempts</th>
+</tr>
+
+<tr>
+<td align="center"><h1><%=sumScore %>%</h1></td>
+<td align="center"><h1><%=sumTime %> seconds</h1></td>
+<td align="center"><h1><%=n %> attempts</h1></td>
+</tr>
+
+</table>
+
+<div class="panel3 historyTable">
+
+<h3>Your Past Attempts</h3>
 <table class="table5 sortable">
 <tr>
 <th>Date</th>
@@ -75,7 +107,7 @@
 
 <div class="panel4">
 
-<h3>Recent Attempts</h3>
+<h3>Recent Attempts by All Users</h3>
 <table class="table2">
 <tr>
 <th>User</th>
@@ -151,16 +183,6 @@
 </table>
 
 </div>
-
-
-<button onclick="window.location = 'quiz-summary.jsp'">Practice</button>
-<% if(quiz.isOnePage()) { %>
-<% out.println("<button onclick=\"window.location = 'quiz-content.jsp?id="+quiz.getQuizId()+"'\">Take Quiz</button>"); %>	
-<% } else { %>
-<% out.println("<button onclick=\"window.location = 'quiz-content-multipage.jsp?id="+quiz.getQuizId()+"&q=0'\">Take Quiz</button>"); %>
-<% } %>
-<button onclick="window.location = 'quiz-summary.jsp'">Edit</button>
-
 
 
 </body>

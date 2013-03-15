@@ -26,7 +26,7 @@
 
 <ul class="list">
 	<% List<String> tags = UserInfo.getAllTags(); %>
-	<% if(messages.isEmpty()) %><li>No Tags Available</li><%; %>
+	<% if(tags.isEmpty()) %><li>No Tags Available</li><%; %>
 	<% for(String tag : tags) {%>
 		<li>
 		<form action="display-quizzes-for-tag.jsp" method="post">

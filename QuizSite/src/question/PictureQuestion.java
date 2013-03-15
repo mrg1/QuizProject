@@ -74,13 +74,13 @@ public class PictureQuestion implements Question {
 
 	@Override
 	public String getHTML() {
-		String html = "<img src=\"" + url + "\" alt=\"Picture-Response Question\">\n";
+		String html = "<img class=\"testPicture\" src=\"" + url + "\" alt=\"Picture-Response Question\">\n";
 		html += "<p>Answer: <input type=\"text\" name=\"answer" + this.getID() + "\" /></p>";
 		return html;
 	}
 	
 	public String getCorrectedHTML(String userAnswer) {
-		String html = "<img src=\"" + url + "\" alt=\"Picture-Response Question\">\n" + 
+		String html = "<img class=\"testPicture\" src=\"" + url + "\" alt=\"Picture-Response Question\">\n" + 
 				"<p>Answer: <input type=\"text\" name=\"answer" + this.getID() + "\" value=\"" + userAnswer + "\" disabled /></p>";
 		if(this.checkAnswer(userAnswer) == this.getMaxScore()) {
 			html += "<p style=\"color: green; font-weight: bold\">Answer Correct!</p>";

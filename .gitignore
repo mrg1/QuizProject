@@ -1,39 +1,11 @@
-# Files for git to ignore
-*.class
-.classpath
-.DS_Store
 *.class
 
-*.class
+# Package Files #
+*.jar
+*.war
+*.ear
 
-*.class
-
-QuizSite/bin/question/MultipleChoiceQuestion.class
-
-QuizSite/bin/question/PictureQuestion.class
-
-QuizSite/bin/question/Question.class
-
-QuizSite/bin/question/ResponseQuestion.class
-
-QuizSite/bin/question/ResponseQuestion.class
-
-QuizSite/bin/question/Question.class
-
-QuizSite/bin/question/PictureQuestion.class
-
-QuizSite/bin/question/MultipleChoiceQuestion.class
-
-QuizSite/bin/question/ResponseQuestion.class
-
-QuizSite/bin/question/Question.class
-
-QuizSite/bin/question/PictureQuestion.class
-
-QuizSite/bin/question/MultipleChoiceQuestion.class
-
-org.eclipse.jdt.core.prefs
-
-org.eclipse.wst.common.component
-
-org.eclipse.wst.common.common.project.facet.xml.core.xml
+QuizSite/.classpath
+QuizSite/.settings/org.eclipse.jdt.core.prefs
+QuizSite/.settings/org.eclipse.wst.common.component
+QuizSite/.settings/org.eclipse.wst.common.common.project.facet.xml.core.xml

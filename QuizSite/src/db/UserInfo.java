@@ -278,6 +278,48 @@ public class UserInfo {
 		return result.toArray(new Question[result.size()]);
 	}
 
+	public static Question getQuestion(int questionId){
+		Question result = null;
+		con = QuizDB.getConnection();
+		try {
+			PreparedStatement selectStatement = con.prepareStatement(QuizSqlStatements.SQL_GET_ONE_QUESTION);
+			selectStatement.setInt(1, questionId);
+			ResultSet rs = selectStatement.executeQuery();
+			if(rs.next()){
+				Question question;
+				String questionContent = rs.getString(3);
+				String questionContent2 = rs.getString(4);
+				int weight = rs.getInt(5);
+				int questionType = rs.getInt(6);
+				boolean caseOrRandomize = rs.getBoolean(7);
+				List<String> answers = getAnswers(questionId);
+				String correctAnswer = getCorrectAnswer(questionId);
+				String[] answerArray = answers.toArray(new String[answers.size()]);
+				switch(questionType){
+					case QuestionInfo.FILL_BLANK_ID: question = new FillBlankQuestion(questionContent, questionContent2, answerArray, caseOrRandomize, weight);
+						question.setID(questionId);
+						result= question;
+						break;
+					case QuestionInfo.MULTIPLE_CHOICE_ID: question = new MultipleChoiceQuestion(questionContent, answerArray, correctAnswer, caseOrRandomize, weight);
+						question.setID(questionId);
+						result= question;
+						break;
+					case QuestionInfo.PICTURE_QUESTION_ID: question = new PictureQuestion(questionContent, answerArray, caseOrRandomize, weight);
+						question.setID(questionId);
+						result= question;
+						break;
+					case QuestionInfo.RESPONSE_QUESTION_ID: question = new ResponseQuestion(questionContent, answerArray, caseOrRandomize, weight);
+						question.setID(questionId);
+						result= question;
+						break;
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
 	private static String getCorrectAnswer(int questionId) {
 		String result = "";
 		con = QuizDB.getConnection();
@@ -803,8 +845,6 @@ public class UserInfo {
 			PreparedStatement addStatement = con.prepareStatement(QuizSqlStatements.SQL_SET_TAG);
 			addStatement.setInt(1, quizId);
 			addStatement.setString(2, tag);
-			addStatement.setInt(3, quizId);
-			addStatement.setString(4, tag);
 			addStatement.execute();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -872,5 +912,70 @@ public class UserInfo {
 			e.printStackTrace();
 		}
 		return result;
+	}
+	
+	public static String getProfilePicture(String username){
+		String result = "";
+		con = QuizDB.getConnection();
+		try {
+			PreparedStatement selectStatement = con.prepareStatement(QuizSqlStatements.SQL_GET_PROFILE_PICTURE);
+			selectStatement.setString(1, username);
+			ResultSet rs = selectStatement.executeQuery();
+			if(rs.next()){
+				result = rs.getString(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	public static void setProfilePicture(String picture, String username){
+		con = QuizDB.getConnection();
+		try {
+			PreparedStatement addStatement = con.prepareStatement(QuizSqlStatements.SQL_SET_PROFILE_PICTURE);
+			addStatement.setString(1, picture);
+			addStatement.setString(2, username);
+			addStatement.execute();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void addReport(int quizId){
+		con = QuizDB.getConnection();
+		try {
+			PreparedStatement addStatement = con.prepareStatement(QuizSqlStatements.SQL_ADD_REPORT);
+			addStatement.setInt(1, quizId);
+			addStatement.execute();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static Map<Integer, Integer> getReports(){
+		Map<Integer, Integer> result = new HashMap<Integer, Integer>();
+		con = QuizDB.getConnection();
+		try {
+			PreparedStatement selectStatement = con.prepareStatement(QuizSqlStatements.SQL_GET_REPORTS);
+			ResultSet rs = selectStatement.executeQuery();
+			while(rs.next()){
+				result.put(rs.getInt(1), rs.getInt(2));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	public static void deleteReport(int quizId){
+		con = QuizDB.getConnection();
+		try {
+			PreparedStatement deleteStatement = con.prepareStatement(QuizSqlStatements.SQL_DELETE_REPORTS);
+			deleteStatement.setInt(1, quizId);
+			deleteStatement.execute();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 }
