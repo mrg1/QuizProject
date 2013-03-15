@@ -871,4 +871,32 @@ public class UserInfo {
 		}
 		return result;
 	}
+	
+	public static String getProfilePicture(String username){
+		String result = "";
+		con = QuizDB.getConnection();
+		try {
+			PreparedStatement selectStatement = con.prepareStatement(QuizSqlStatements.SQL_GET_PROFILE_PICTURE);
+			selectStatement.setString(1, username);
+			ResultSet rs = selectStatement.executeQuery();
+			if(rs.next()){
+				result = rs.getString(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	public static void setProfilePicture(String picture, String username){
+		con = QuizDB.getConnection();
+		try {
+			PreparedStatement addStatement = con.prepareStatement(QuizSqlStatements.SQL_SET_PROFILE_PICTURE);
+			addStatement.setString(1, picture);
+			addStatement.setString(2, username);
+			addStatement.execute();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 }
