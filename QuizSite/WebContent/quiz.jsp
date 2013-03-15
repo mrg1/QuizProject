@@ -91,7 +91,7 @@
 <tr>
 <td><a href="user.jsp?user=<%=score.getUsername()%>"><%= score.getUsername() %></a></td>
 <td></td>
-<td><%= score.getScore()%></td>
+<td><%= score.getScore()%>%</td>
 </tr>
 <% } } } %>
 </table>
@@ -113,7 +113,7 @@
 <tr>
 <td><a href="user.jsp?user=<%=score.getUsername()%>"><%= score.getUsername() %></a></td>
 <td></td>
-<td><%= score.getScore()%></td>
+<td><%= score.getScore()%>%</td>
 </tr>
 <% } } } %>
 

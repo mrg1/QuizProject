@@ -20,6 +20,7 @@
 
 <h1><%= user %></h1>
 
+<h3>Achievements:</h3>
 <div class="achievements">
 <% List<Integer> achievements = UserInfo.getAchievements(user); %>
 <% for(Integer i : achievements) {%>
