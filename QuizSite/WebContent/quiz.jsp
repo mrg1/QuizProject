@@ -32,9 +32,9 @@
 <div class="panel3">
 <table class="table5 sortable">
 <tr>
-<th>Past Scores</th>
-<th>Elapsed</th>
 <th>Date</th>
+<th>Elapsed</th>
+<th>Past Scores</th>
 </tr>
 
 
