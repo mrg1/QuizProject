@@ -2,7 +2,7 @@
 
 <head>
 <% for(Cookie cookie : request.getCookies()) { %>
-	<% if(cookie.getName().equals("username")) { %>
+	<% if(cookie.getName().equals("username") && cookie.getValue()!=null) { %>
 		<% session.setAttribute("username",cookie.getValue()); %>
 		<% response.sendRedirect("homepage.jsp"); %>
 	<% } %>
