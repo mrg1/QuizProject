@@ -30,6 +30,25 @@
 <p class="achievements">Created by <a href="user.jsp?user=<%=quiz.getAuthor()%>"><%= quiz.getAuthor() %></a>. <%=quiz.getDescription() %></p>
 
 <div class="panel3">
+
+<% List<Score> allScores = UserInfo.getRecentQuizAttempts(quiz.getQuizId()); %>
+<% int sumScore = 0; %>
+<% int sumTime = 0; %>
+<% int n = 0; %>
+<% for (Score s : allScores) {%>
+<% 		sumScore += s.getScore(); %>
+<% 		sumTime += s.getElapsed(); %>
+<%		n++; %>
+<% } %>
+<% if (n != 0) {%>
+<% sumScore /= n; %>
+<% sumTime /= n; %>
+<% } %>
+
+<h3>Average score: <%=sumScore %>%</h3>
+<h3>Average time: <%=sumTime %> seconds</h3>
+<h3>Number of attempts: <%=n %> attempts</h3>
+
 <table class="table5 sortable">
 <tr>
 <th>Date</th>

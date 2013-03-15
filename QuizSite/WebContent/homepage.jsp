@@ -23,6 +23,8 @@
 	<% request.setAttribute("alert",null); %>
 <% } %>
 
+<div class="panel1">
+
 <h3 class="inline">Announcements</h3>
 <% List<Announcement> announcements = UserInfo.getAnnouncments(); %>
 <% if(announcements.isEmpty()) %><p class="announce">No announcements!</p><%; %>
@@ -33,7 +35,6 @@
 	<p class="announce"><%=cur.getUsername() %> posted: <%=cur.getContent() %></p>
 <% } %>
 
-<div class="panel1">
 
 <p class="welcome">Welcome <a href="user.jsp?user=<%=username%>"><%= username %></a></p>
 
