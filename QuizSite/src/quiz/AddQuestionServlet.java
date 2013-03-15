@@ -50,7 +50,7 @@ public class AddQuestionServlet extends HttpServlet {
 		String nextPage = "create-question.jsp";
 		String question;
 		Integer weight = 1;
-		Integer testWeight;
+		String testWeight;
 		String boolString;
 		boolean caseOrRand = false;
 		String[] answers;
@@ -58,8 +58,8 @@ public class AddQuestionServlet extends HttpServlet {
 			case QuestionInfo.MULTIPLE_CHOICE_ID:
 				boolString = request.getParameter("randomized");
 				question = request.getParameter("question");
-				testWeight = Integer.parseInt(request.getParameter("weight"));
-				if(testWeight != null) weight = testWeight;
+				testWeight = request.getParameter("weight");
+				if(!testWeight.equals("") && !testWeight.equals(null)) weight = Integer.parseInt(testWeight);
 				if(boolString != null){
 					caseOrRand = true;
 				}
@@ -70,8 +70,8 @@ public class AddQuestionServlet extends HttpServlet {
 			case QuestionInfo.PICTURE_QUESTION_ID:
 				boolString = request.getParameter("caseSensitive");
 				question = request.getParameter("question");
-				testWeight = Integer.parseInt(request.getParameter("weight"));
-				if(testWeight != null) weight = testWeight;
+				testWeight = request.getParameter("weight");
+				if(!testWeight.equals("") && !testWeight.equals(null)) weight = Integer.parseInt(testWeight);
 				if(boolString != null){
 					caseOrRand = true;
 				}
@@ -85,16 +85,16 @@ public class AddQuestionServlet extends HttpServlet {
 				if(boolString != null){
 					caseOrRand = true;
 				}
-				testWeight = Integer.parseInt(request.getParameter("weight"));
-				if(testWeight != null) weight = testWeight;
+				testWeight = request.getParameter("weight");
+				if(!testWeight.equals("") && !testWeight.equals(null)) weight = Integer.parseInt(testWeight);
 				answers = QuestionInfo.getAnswersFromString(request.getParameter("answers"));
 				UserInfo.addQuestion(quizId, new FillBlankQuestion(pre, post, answers, caseOrRand, weight));
 				break;
 			case QuestionInfo.RESPONSE_QUESTION_ID:
 				boolString = request.getParameter("caseSensitive");
 				question = request.getParameter("question");
-				testWeight = Integer.parseInt(request.getParameter("weight"));
-				if(testWeight != null) weight = testWeight;
+				testWeight = request.getParameter("weight");
+				if(!testWeight.equals("") && !testWeight.equals(null)) weight = Integer.parseInt(testWeight);
 				if(boolString != null){
 					caseOrRand = true;
 				}
