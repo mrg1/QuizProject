@@ -95,6 +95,7 @@
 <%	Score score = dayHistory.get(i); %>
 <tr>
 <td><a href="user.jsp?user=<%=score.getUsername()%>"><%= score.getUsername() %></a></td>
+<td></td>
 <td><%= score.getScore()%></td>
 </tr>
 <% } } } %>
@@ -116,6 +117,7 @@
 <%	Score score = totalHistory.get(i); %>
 <tr>
 <td><a href="user.jsp?user=<%=score.getUsername()%>"><%= score.getUsername() %></a></td>
+<td></td>
 <td><%= score.getScore()%></td>
 </tr>
 <% } } } %>

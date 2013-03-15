@@ -448,7 +448,7 @@ public class UserInfo {
 			selectStatement.setInt(1, quizId);
 			ResultSet rs = selectStatement.executeQuery();
 			while(rs.next()){
-				result.add(new Score(rs.getInt(2), quizId, rs.getString(1), rs.getInt(3)));
+				result.add(new Score(rs.getInt(2), quizId, rs.getString(1), rs.getInt(3), rs.getInt(4)));
 			}
 		}
 	    catch (SQLException e) {
@@ -465,7 +465,7 @@ public class UserInfo {
 			selectStatement.setString(1, username);
 			ResultSet rs = selectStatement.executeQuery();
 			while(rs.next()){
-				result.add(new Score(rs.getInt(2), rs.getInt(1), username, rs.getInt(3)));
+				result.add(new Score(rs.getInt(2), rs.getInt(1), username, rs.getInt(3), rs.getInt(4)));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -566,7 +566,7 @@ public class UserInfo {
 			selectStatement.setString(1, username);
 			ResultSet rs = selectStatement.executeQuery();
 			while(rs.next()){
-				history.add(new Score(rs.getInt(3), rs.getInt(1),rs.getString(2), rs.getInt(4)));
+				history.add(new Score(rs.getInt(3), rs.getInt(1),rs.getString(2), rs.getInt(4), rs.getInt(5)));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -583,7 +583,7 @@ public class UserInfo {
 			selectStatement.setInt(2, quizId);
 			ResultSet rs = selectStatement.executeQuery();
 			while(rs.next()){
-				history.add(new Score(rs.getInt(1), quizId, username, rs.getInt(2)));
+				history.add(new Score(rs.getInt(1), quizId, username, rs.getInt(2), rs.getInt(3)));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -627,8 +627,25 @@ public class UserInfo {
 			selectStatement.setInt(1, quizId);
 			ResultSet rs = selectStatement.executeQuery();
 			if(rs.next()){
-				Date d = rs.getDate(1);
-				result = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(d);
+				Timestamp t = rs.getTimestamp(1);
+				result = new SimpleDateFormat("yyyy-MM-dd").format(t);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	public static String getDateForScore(int scoreId){
+		String result = "";
+		con = QuizDB.getConnection();
+		try {
+			PreparedStatement selectStatement = con.prepareStatement(QuizSqlStatements.SQL_GET_SCORE_DATE);
+			selectStatement.setInt(1, scoreId);
+			ResultSet rs = selectStatement.executeQuery();
+			if(rs.next()){
+				Timestamp t = rs.getTimestamp(1);
+				result = new SimpleDateFormat("yyyy-MM-dd").format(t);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -644,7 +661,7 @@ public class UserInfo {
 			selectStatement.setInt(1, quizId);
 			ResultSet rs = selectStatement.executeQuery();
 			while(rs.next()){
-				history.add(new Score(rs.getInt(1), quizId,rs.getString(2), rs.getInt(3)));
+				history.add(new Score(rs.getInt(1), quizId,rs.getString(2), rs.getInt(3), rs.getInt(4)));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -660,7 +677,7 @@ public class UserInfo {
 			selectStatement.setInt(1, quizId);
 			ResultSet rs = selectStatement.executeQuery();
 			while(rs.next()){
-				history.add(new Score(rs.getInt(1), quizId,rs.getString(2), rs.getInt(3)));
+				history.add(new Score(rs.getInt(1), quizId,rs.getString(2), rs.getInt(3), rs.getInt(4)));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
