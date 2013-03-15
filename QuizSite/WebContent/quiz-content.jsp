@@ -16,7 +16,7 @@
 
 <body>
 
-<%@include file="navbar.html" %>
+<%@include file="navbar.jsp" %>
 
 
 <h1><%= quiz.getName() %></h1>
