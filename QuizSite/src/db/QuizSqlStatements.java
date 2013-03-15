@@ -53,9 +53,10 @@ public class QuizSqlStatements {
 	private final static String QUESTION_TABLE = "questions";
 	public final static String SQL_ADD_QUESTION = "INSERT INTO " + QUESTION_TABLE + " (quizID, questionContent, questioncontent2, weight, questionType, caseOrRandomize) VALUES(?, ?, ?, ?, ?, ?);";
 	public final static String SQL_GET_QUESTION_ID = "SELECT LAST_INSERT_ID();";
-	public final static String SQL_GET_QUESTION = "Select * FROM " + QUESTION_TABLE + " WHERE quizId=? ORDER BY questionId;";
+	public final static String SQL_GET_QUESTION = "SELECT * FROM " + QUESTION_TABLE + " WHERE quizId=? ORDER BY questionId;";
 	public final static String SQL_DELETE_QUESTIONS = "DELETE FROM " + QUESTION_TABLE + " WHERE quizId =?;";
-
+	public final static String SQL_GET_ONE_QUESTION = "SELECT * FROM " + QUESTION_TABLE + " WHERE questionId=?;";
+	
 	//Scores
 	private final static String SCORES_TABLE = "scores";
 	public final static String SQL_GET_SCORES = "SELECT quizId, score, elapsed, scoreId FROM " + SCORES_TABLE + " WHERE username=? ORDER BY scoreTimeStamp DESC;";
