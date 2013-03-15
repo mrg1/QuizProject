@@ -137,7 +137,6 @@ public class MultipleChoiceQuestion implements Question {
 		out += "<p>Randomized order: <input type=\"checkbox\" name=\"randomized\" value=\"true\" /></p>\n";
 		out += "<p>Weight: <input type=\"text\" name=\"weight\" />\n";
 		out += "<input type=\"hidden\" name=\"questionId\" value=\""+QuestionInfo.MULTIPLE_CHOICE_ID+"\" /></p>\n"; 
-		out += "<input type=\"submit\" value=\"Add Question\" /></p>";
 		return out;
 	}
 	
