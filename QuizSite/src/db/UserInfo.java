@@ -566,7 +566,7 @@ public class UserInfo {
 			selectStatement.setString(1, username);
 			ResultSet rs = selectStatement.executeQuery();
 			while(rs.next()){
-				history.add(new Score(rs.getInt(3), rs.getInt(1),rs.getString(2), rs.getInt(4), rs.getInt(4)));
+				history.add(new Score(rs.getInt(3), rs.getInt(1),rs.getString(2), rs.getInt(4), rs.getInt(5)));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -583,7 +583,7 @@ public class UserInfo {
 			selectStatement.setInt(2, quizId);
 			ResultSet rs = selectStatement.executeQuery();
 			while(rs.next()){
-				history.add(new Score(rs.getInt(1), quizId, username, rs.getInt(2), rs.getInt(4)));
+				history.add(new Score(rs.getInt(1), quizId, username, rs.getInt(2), rs.getInt(3)));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
