@@ -10,7 +10,8 @@ public class QuizSqlStatements {
 	public final static String SQL_ADD_USER = "INSERT INTO " + USER_TABLE + " (username, password, salt, admin) VALUES (?, ?, ?, ?);";
 	public static final String SQL_GET_ADMIN = "SELECT username, password FROM " + USER_TABLE + " WHERE username=? AND admin=1;";
 	public static final String SQL_CHANGE_USER_ADMIN = "UPDATE " + USER_TABLE + " SET admin=? WHERE username=?;";
-
+	public static final String SQL_USER_GET_SALT = "SELECT salt FROM " + USER_TABLE + " WHERE username=?;";
+	
 	//Friend shit
 	private final static String FRIENDS_TABLE = "friends";
 	public final static String SQL_GET_FRIENDS = "SELECT friend FROM " + FRIENDS_TABLE + " WHERE " + "user=?;";
