@@ -781,6 +781,20 @@ public class UserInfo {
 		}
 	}
 
-	
+	public static int getSalt(String username){
+		int result = 0;
+		con = QuizDB.getConnection();
+		try {
+			PreparedStatement selectStatement = con.prepareStatement(QuizSqlStatements.SQL_USER_GET_SALT);
+			selectStatement.setString(1, username);
+			ResultSet rs = selectStatement.executeQuery();
+			if(rs.next()){
+				result = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 	
 }
