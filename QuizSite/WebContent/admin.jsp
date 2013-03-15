@@ -4,11 +4,14 @@
 <html>
 <%@ page import="db.*" %>
 <%@ page import="user.*" %>
-<%@ page import="java.util.List" %>
+<%@ page import="java.util.*" %>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Administration</title>
 <link href="stylesheet.css" rel="stylesheet" type="text/css"></link>
+<% String username = (String)session.getAttribute("username"); %>
+<% User user = UserInfo.getUser(username); %>
+<%// if(!UserInfo.isAdmin(username)) out.println("<meta http-equiv=\"REFRESH\" content=\"0;url=homepage.jsp\">"); %>
 </head>
 <body>
 
@@ -27,29 +30,54 @@
 <h1>Actions</h1>
 <h2>Announcements</h2>
 <form action="AnnounceServlet" method="post">
-	<p>Create Announcement: <textarea rows="4" cols="50" name="content"></textarea></p>
+	<p>Create Announcement:<br /><textarea rows="4" cols="50" name="content"></textarea></p>
 	<p><input type="submit" value="Announce" /></p>
 </form>
 
+
+<h2>Administrators</h2>
+
+<% List<User> users = UserInfo.getUsers();
+List<User> admins = new ArrayList<User>();
+for(User u : users) {
+	if(UserInfo.isAdmin(u.getUsername())) {
+		admins.add(u);
+		System.out.println(u.getUsername() + " recorded as admin");
+	}
+} %>
+<table>
+<%for(User cur : admins) { %>
+	<tr>
+	
+	<td>
+	<form action="RemoveAdminServlet" method="post">
+		<input type="hidden" name="user" value=<%=cur.getUsername() %> />
+		<input type="submit" value="Remove Admin" />
+	</form>
+	</td>
+	<td><%=cur.getUsername() %></td>
+	</tr>
+<% } %>
+</table>
+
 <h2>Users</h2>
 <table>
-<% List<User> users = UserInfo.getUsers(); %>
 <% if(users.isEmpty()) %><tr><td>No users yet!</td></tr>
 <% for(User cur : users) { %>
 	<tr>
-	<td><%=cur.getUsername() %></td>
 	<td>
 	<form action="PromoteServlet" method="post">
-		<p><input type="hidden" name="user" value=<%=cur.getUsername() %> /></p>
-		<p class="inline"><input type="submit" value="Promote" /></p>
+		<input type="hidden" name="user" value=<%=cur.getUsername() %> />
+		<input type="submit" value="Promote" />
 	</form>
 	</td>
 	<td>
 	<form action="DeleteUserServlet" method="post">
-		<p><input type="hidden" name="user" value=<%=cur.getUsername() %> /></p>
-		<p class="inline"><input type="submit" value="Delete" /></p>
+		<input type="hidden" name="user" value=<%=cur.getUsername() %> />
+		<input type="submit" value="Delete" />
 	</form>
 	</td>
+	<td><%=cur.getUsername() %></td>
 	</tr>
 <% } %>
 </table>
@@ -60,19 +88,19 @@
 <% if(quizIDs.isEmpty()) %><tr><td>No quizzes yet!</td></tr>
 <% for(Integer id : quizIDs) { %>
 	<tr>
-	<td><%=UserInfo.getQuiz(id).getName() %>, id: <%=id %></td>
 	<td>
 	<form action="ClearQuizHistoryServlet" method="post">
-		<p><input type="hidden" name="quizID" value=<%=id %> /></p>
-		<p><input type="submit" value="Clear History" /></p>
+		<input type="hidden" name="quizID" value=<%=id %> />
+		<input type="submit" value="Clear History" />
 	</form>
 	</td>
 	<td>
 	<form action="DeleteQuizServlet" method="post">
-		<p><input type="hidden" name="quizID" value=<%=id %> /></p>
-		<p><input type="submit" value="Delete" /></p>
+		<input type="hidden" name="quizID" value=<%=id %> />
+		<input type="submit" value="Delete" />
 	</form>
 	</td>
+	<td><%=UserInfo.getQuiz(id).getName() %>, id: <%=id %></td>
 <% } %>
 </table>
 

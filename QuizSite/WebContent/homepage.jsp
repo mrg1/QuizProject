@@ -38,12 +38,18 @@
 
 <p class="welcome">Welcome <a href="user.jsp?user=<%=username%>"><%= username %></a></p>
 
-<h3>Achievements:</h3>
-<div class="achievements">
-<% List<Integer> achievements = UserInfo.getAchievements(username); %>
-<% for(Integer i : achievements) {%>
-	<p> <%=AchievementInfo.getAchievement(i) %></p>
-<%} %>
+
+<% List<Integer> achievements = UserInfo.getAchievements(username);
+	if(!achievements.isEmpty()) { %>
+	<h3>Achievements:</h3>
+	<div>
+	<ul class="list">
+<%		for(Integer i : achievements) {
+			out.println("<li>" + AchievementInfo.getAchievement(i) + "</li>");
+		} 
+	}
+%>
+</ul>
 </div>
 
 <h3 class="inline">Message Activity</h3>
@@ -69,7 +75,7 @@
 <tr>
 
 <td>
-<table class="table2">
+<table class="table2" width="250">
 <tr>
 <th>Title</th>
 <th>Score</th>
@@ -89,7 +95,7 @@
 </td>
 
 <td>
-<table class="table2">
+<table class="table2" width="250">
 <tr>
 <th>Title</th>
 <th>Date</th>
