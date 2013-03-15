@@ -42,7 +42,10 @@ public class AcceptChallengeServlet extends HttpServlet {
 		request.setAttribute("from",from);
 		request.setAttribute("scoreToBeat",scoreToBeat);
 		UserInfo.deleteMessages(id);
-		request.getRequestDispatcher("quiz-content.jsp?id="+quizID).forward(request, response);
+		if(UserInfo.getQuiz(id).isOnePage()) 
+			request.getRequestDispatcher("quiz-content.jsp?id="+quizID).forward(request, response);
+		else
+			request.getRequestDispatcher("quiz-content-multipage.jsp?id="+quizID).forward(request, response);
 	}
 
 }
