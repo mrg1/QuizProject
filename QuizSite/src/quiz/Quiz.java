@@ -119,6 +119,18 @@ public class Quiz {
 		return questions;
 	}
 	
+	public void shuffleQuestions() {
+		if (!random) {
+			return;
+		}
+		int[] newOrder = calcOrder();
+		Question[] newQuestions = new Question[questions.length];
+		for(int i = 0; i < questions.length; i++) {
+			newQuestions[i] = questions[newOrder[i]];
+		}
+		questions = newQuestions;
+	}
+	
 	/**
 	 * 
 	 * @return an array listing the questions[] index in the order they should be presented
