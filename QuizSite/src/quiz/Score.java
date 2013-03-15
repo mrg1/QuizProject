@@ -6,13 +6,14 @@ public class Score {
 	private String username;
 	private int seconds;
 	private int scoreId;
-	/*
+	
+
 	public Score(int score, int quizId, String username, int elapsed){
 		this.score = score;
 		this.quizId = quizId;
 		this.username = username;
 		this.seconds = elapsed;
-	}*/
+	}
 	
 	public Score(int score, int quizId, String username, int elapsed, int scoreId){
 		this.score = score;
@@ -22,13 +23,6 @@ public class Score {
 		this.scoreId = scoreId;
 	}
 	
-	public String getDate() {
-		return date;
-	}
-
-	public void setDate(String date) {
-		this.date = date;
-	}
 
 	public int getScore() {
 		return score;
@@ -60,6 +54,14 @@ public class Score {
 	
 	public void setElapsed(int sec) {
 		seconds = sec;
+	}
+	
+	public int getScoreId() {
+		return scoreId;
+	}
+
+	public void setScoreId(int scoreId) {
+		this.scoreId = scoreId;
 	}
 
 	@Override
