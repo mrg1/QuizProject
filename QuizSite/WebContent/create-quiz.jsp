@@ -26,9 +26,10 @@
 <form action="QuizCreationServlet" method="post">
 <table>
 <tr><td>Quiz Name:</td><td><input type="text" name="quizname" /></td></tr>
-<tr><td>Description:</td><td><input type="text" name="description" /></td></tr>
+<tr><td>Description:</td><td><textarea rows="4" cols="50" name="description"/></td></tr>
+<tr><td>Tags (Enter tags to describe your quiz content, like "Sports" or "General Knowledge"):</td><td><textarea rows="4" cols="50" name="tags"/></td></tr>
 </table>
-<br />
+<br/>
 <table>
 <tr>
 <td><input type="checkbox" name="random" value="random"/></td><td>Would you like your quiz to have randomly ordered questions?</td>

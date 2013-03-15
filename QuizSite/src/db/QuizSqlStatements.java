@@ -32,6 +32,7 @@ public class QuizSqlStatements {
 	public final static String SQL_GET_AUTHOR_HISTORY = "SELECT quizId FROM " + QUIZ_TABLE + " WHERE author=? ORDER BY quiz_timestamp DESC;";
 	public final static String SQL_GET_QUIZZES_BY_TITLE = "SELECT quizId FROM " + QUIZ_TABLE + " ORDER BY name;";
 	public static final String SQL_GET_QUIZ_DATE = "SELECT quiz_timestamp FROM " + QUIZ_TABLE + " WHERE quizId=?;" ;
+	public static final String SQL_GET_QUIZ_NAME = "SELECT name FROM " + QUIZ_TABLE + " WHERE quizId=?;";;
 	
 	//Messages
 	private final static String MESSAGE_TABLE = "messages";
@@ -79,6 +80,14 @@ public class QuizSqlStatements {
 	public final static String SQL_DELETE_QUIZ_2 = "DELETE FROM " + QUESTION_TABLE + " WHERE quizId=?;";
 	public final static String SQL_DELETE_QUIZ_3 = "DELETE FROM " + QUIZ_TABLE + " WHERE quizId=?;";
 	public final static String SQL_GET_FRIEND_HISTORY = "SELECT quizId, f, score, elapsed, scoreId FROM " + SCORES_TABLE + " , (SELECT friend as f FROM friends WHERE user=?) as f_table WHERE scores.username = f_table.f ORDER BY scoreTimeStamp DESC;";
+
+	//Tags and Categories
+	private final static String TAG_TABLE = "tags";
+	public final static String SQL_GET_TAGS_BY_CATEGORY = "SELECT quizId FROM " + TAG_TABLE + " WHERE tagType=?";
+	public final static String SQL_GET_TAGS_BY_QUIZ = "SELECT tagType FROM " + TAG_TABLE + " WHERE quizId=?;";
+	public final static String SQL_SET_TAG = "INSERT INTO " + TAG_TABLE + " (quizId, tagType) VALUES (?, ?) WHERE NOT EXISTS (SELECT * FROM " + TAG_TABLE + " WHERE quizId=? AND tagType=?);";
+	public final static String SQL_GET_ALL_TAGS = "SELECT DISTINCT tagType FROM " + TAG_TABLE + ";";
+
 
 
 

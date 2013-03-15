@@ -91,6 +91,13 @@ table.table5 th {
 	background-color:ghostwhite;
 }
 
+.submitLink {
+background-color: transparent;
+text-decoration: underline;
+border: none;
+color: blue;
+cursor: pointer;
+}
 .announce {
 	font-weight:bold;
 	margin-left:25px;
