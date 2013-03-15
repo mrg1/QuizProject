@@ -47,6 +47,7 @@
 <% } %>
 </div>
 
+
 <% List<Score> allScores = UserInfo.getRecentQuizAttempts(quiz.getQuizId()); %>
 <% int sumScore = 0; %>
 <% int sumTime = 0; %>
@@ -61,7 +62,7 @@
 <% sumTime /= n; %>
 <% } %>
 
-<table class="staticsticsTable">
+<table class="statsTable">
 
 <tr>
 <th>Average Score</th>
@@ -76,7 +77,6 @@
 </tr>
 
 </table>
-
 
 <div class="panel3 historyTable">
 

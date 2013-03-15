@@ -899,4 +899,41 @@ public class UserInfo {
 			e.printStackTrace();
 		}
 	}
+	
+	public static void addReport(int quizId){
+		con = QuizDB.getConnection();
+		try {
+			PreparedStatement addStatement = con.prepareStatement(QuizSqlStatements.SQL_ADD_REPORT);
+			addStatement.setInt(1, quizId);
+			addStatement.execute();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static Map<Integer, Integer> getReports(){
+		Map<Integer, Integer> result = new HashMap<Integer, Integer>();
+		con = QuizDB.getConnection();
+		try {
+			PreparedStatement selectStatement = con.prepareStatement(QuizSqlStatements.SQL_GET_REPORTS);
+			ResultSet rs = selectStatement.executeQuery();
+			while(rs.next()){
+				result.put(rs.getInt(1), rs.getInt(2));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	public static void deleteReport(int quizId){
+		con = QuizDB.getConnection();
+		try {
+			PreparedStatement deleteStatement = con.prepareStatement(QuizSqlStatements.SQL_DELETE_REPORTS);
+			deleteStatement.setInt(1, quizId);
+			deleteStatement.execute();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 }
