@@ -32,42 +32,49 @@
 </form>
 
 <h2>Users</h2>
-<ul class="list">
+<table>
 <% List<User> users = UserInfo.getUsers(); %>
-<% if(users.isEmpty()) %><li>No users yet!</li>
+<% if(users.isEmpty()) %><tr><td>No users yet!</td></tr>
 <% for(User cur : users) { %>
-	<li>
-	<p><%=cur.getUsername() %>
+	<tr>
+	<td><%=cur.getUsername() %></td>
+	<td>
 	<form action="PromoteServlet" method="post">
 		<p><input type="hidden" name="user" value=<%=cur.getUsername() %> /></p>
 		<p class="inline"><input type="submit" value="Promote" /></p>
 	</form>
+	</td>
+	<td>
 	<form action="DeleteUserServlet" method="post">
 		<p><input type="hidden" name="user" value=<%=cur.getUsername() %> /></p>
 		<p class="inline"><input type="submit" value="Delete" /></p>
 	</form>
-	</li>
+	</td>
+	</tr>
 <% } %>
-</ul>
+</table>
 
 <h2>Quizzes</h2>
-<ul class="list">
+<table>
 <% List<Integer> quizIDs = UserInfo.getQuizzesByTitle(); %>
-<% if(quizIDs.isEmpty()) %><li>No quizzes yet!</li>
+<% if(quizIDs.isEmpty()) %><tr><td>No quizzes yet!</td></tr>
 <% for(Integer id : quizIDs) { %>
-	<li>
-	<%=UserInfo.getQuiz(id).getName() %>, id: <%=id %>
+	<tr>
+	<td><%=UserInfo.getQuiz(id).getName() %>, id: <%=id %></td>
+	<td>
 	<form action="ClearQuizHistoryServlet" method="post">
 		<p><input type="hidden" name="quizID" value=<%=id %> /></p>
-		<p><input type="submit" value="Clear" /></p>
+		<p><input type="submit" value="Clear History" /></p>
 	</form>
+	</td>
+	<td>
 	<form action="DeleteQuizServlet" method="post">
 		<p><input type="hidden" name="quizID" value=<%=id %> /></p>
 		<p><input type="submit" value="Delete" /></p>
 	</form>
-	</li>
+	</td>
 <% } %>
-</ul>
+</table>
 
 </body>
 </html>

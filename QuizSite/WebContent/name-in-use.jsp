@@ -12,7 +12,7 @@
 <img class="centeredImage" src="http://imageshack.us/a/img7/1496/quizzsitelogo.png">
 
 <div class="centered">
-<h1>The Name <%= request.getParameter("username") %> is Already In Use</h1>
+<h1>The Name <%=request.getParameter("username") %> is Already In Use</h1>
 <p>Please enter another name and password.</p>
 <form action="CreateServlet" method="post">
 <p>User Name: <input type="text" name="username" /></p>
