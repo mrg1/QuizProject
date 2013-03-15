@@ -628,7 +628,7 @@ public class UserInfo {
 			ResultSet rs = selectStatement.executeQuery();
 			if(rs.next()){
 				Timestamp t = rs.getTimestamp(1);
-				result = new SimpleDateFormat("yyyy-MM-dd").format(t);
+				result = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(t);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -645,7 +645,7 @@ public class UserInfo {
 			ResultSet rs = selectStatement.executeQuery();
 			if(rs.next()){
 				Timestamp t = rs.getTimestamp(1);
-				result = new SimpleDateFormat("yyyy-MM-dd").format(t);
+				result = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(t);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -767,4 +767,18 @@ public class UserInfo {
 		}
 	}
 
+	public static void deleteFriend(String username, String friend){
+		con = QuizDB.getConnection();
+		try {
+			PreparedStatement deleteStatement = con.prepareStatement(QuizSqlStatements.SQL_DELETE_FRIEND);
+			deleteStatement.setString(1, friend);
+			deleteStatement.setString(2, username);
+			deleteStatement.setString(3, username);
+			deleteStatement.setString(4, friend);
+			deleteStatement.execute();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
 }

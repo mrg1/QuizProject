@@ -32,11 +32,12 @@
 
 <p class="welcome">Welcome <a href="user.jsp?user=<%=username%>"><%= username %></a></p>
 
+<h3>Achievements:</h3>
 <div class="achievements">
 <% List<Integer> achievements = UserInfo.getAchievements(username); %>
 <% for(Integer i : achievements) {%>
 	<p> <%=AchievementInfo.getAchievement(i) %></p>
-	<%} %>
+<%} %>
 </div>
 
 <h3 class="inline">Message Activity</h3>
@@ -75,7 +76,7 @@
 <%	Score score = history.get(i); %>
 <tr>
 <td><a href="quiz.jsp?id=<%=score.getQuizId()%>"><%= UserInfo.getQuiz(score.getQuizId()).getName() %></a></td>
-<td><%= score.getScore()%></td>
+<td><%= score.getScore()%>%</td>
 </tr>
 <% } } } %>
 </table>
@@ -149,7 +150,7 @@
 <tr>
 <td><a href="user.jsp?user=<%=s.getUsername()%>"><%= s.getUsername() %></a></td>
 <td><a href="quiz.jsp?id=<%=s.getQuizId()%>"><%= UserInfo.getQuiz(s.getQuizId()).getName() %></a></td>
-<td><%= s.getScore()%></td>
+<td><%= s.getScore()%>%</td>
 <% } } %>
 </tr>
 </table>

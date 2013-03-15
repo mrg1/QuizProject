@@ -43,7 +43,7 @@
 <%	Score score = quizHistory.get(i); %>
 <tr>
 <td><%= score.getScore()%></td>
-<td>Date here?</td>
+<td><%= UserInfo.getDateForScore(score.getScoreId()) %></td>
 </tr>
 <% } } } %>
 
@@ -62,7 +62,7 @@
 
 <% List<Score> recent = UserInfo.getRecentQuizAttempts(quiz.getQuizId()); %>
 <% if (recent != null) { %>
-<% for(int i = 0; i < 10; i++) { %>
+<% for(int i = 0; i < 5; i++) { %>
 <% if(recent.size() > i) { %>
 <%	Score score = recent.get(i); %>
 <tr>
@@ -96,7 +96,7 @@
 <tr>
 <td><a href="user.jsp?user=<%=score.getUsername()%>"><%= score.getUsername() %></a></td>
 <td></td>
-<td><%= score.getScore()%></td>
+<td><%= score.getScore()%>%</td>
 </tr>
 <% } } } %>
 </table>
@@ -118,7 +118,7 @@
 <tr>
 <td><a href="user.jsp?user=<%=score.getUsername()%>"><%= score.getUsername() %></a></td>
 <td></td>
-<td><%= score.getScore()%></td>
+<td><%= score.getScore()%>%</td>
 </tr>
 <% } } } %>
 

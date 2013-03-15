@@ -37,14 +37,14 @@
 <% if(users.isEmpty()) %><li>No users yet!</li>
 <% for(User cur : users) { %>
 	<li>
-	<%=cur.getUsername() %>
+	<p><%=cur.getUsername() %>
 	<form action="PromoteServlet" method="post">
 		<p><input type="hidden" name="user" value=<%=cur.getUsername() %> /></p>
-		<p><input type="submit" value="Promote" /></p>
+		<p class="inline"><input type="submit" value="Promote" /></p>
 	</form>
 	<form action="DeleteUserServlet" method="post">
 		<p><input type="hidden" name="user" value=<%=cur.getUsername() %> /></p>
-		<p><input type="submit" value="Delete" /></p>
+		<p class="inline"><input type="submit" value="Delete" /></p>
 	</form>
 	</li>
 <% } %>
