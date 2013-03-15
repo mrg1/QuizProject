@@ -8,19 +8,23 @@
 .inline {
 	display:inline;
 }
-.achievements {
-	margin-left:50px;
-	margin-top:-20px;
-}
 
+/*Table Styles */
+table th {
+    background-color:darkslategray;
+    color:white;
+    font-weight: bold;
+}
 table.table1 td{ 
 	border-left:1px dotted black;
 	border-right:1px dotted black;
+	border-bottom:1px dotted black;
 	padding:5px;
 }
 table.table2 td, table.table3 td, table.table4 td, table.table5 td  { 
 	border-left:0px dotted black;
 	border-right:0px dotted black;
+	border-bottom:0px;
 	padding:5px;
 	text-align:center;
 }
@@ -117,6 +121,7 @@ table.table5 th {
 	width:40%;
 	float:left;
 }
+
 .welcomePanel {
 	max-width:100%;
 }
@@ -124,4 +129,19 @@ table.table5 th {
 	font-weight:bold;
 	font-size:xx-large;
 	word-break:break-all;
+}
+
+.achievementPanel {
+
+}
+.achievements, .message {
+	margin-left:50px;
+}
+
+.messageList {
+	list-style-type:none;
+	margin-left:10px;
+}
+.achievementMessagePanel {
+	max-width:100%;
 }
