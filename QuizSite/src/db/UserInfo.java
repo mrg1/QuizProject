@@ -627,8 +627,8 @@ public class UserInfo {
 			selectStatement.setInt(1, quizId);
 			ResultSet rs = selectStatement.executeQuery();
 			if(rs.next()){
-				Date d = rs.getDate(1);
-				result = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(d);
+				Timestamp t = rs.getTimestamp(1);
+				result = new SimpleDateFormat("yyyy-MM-dd").format(t);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -644,8 +644,8 @@ public class UserInfo {
 			selectStatement.setInt(1, scoreId);
 			ResultSet rs = selectStatement.executeQuery();
 			if(rs.next()){
-				Date d = rs.getDate(1);
-				result = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(d);
+				Timestamp t = rs.getTimestamp(1);
+				result = new SimpleDateFormat("yyyy-MM-dd").format(t);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
