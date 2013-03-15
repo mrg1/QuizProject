@@ -41,7 +41,7 @@ public class AcceptServlet extends HttpServlet {
 		UserInfo.addFriend(to, from);
 		UserInfo.deleteMessages(id);
 		request.setAttribute("alert", "You and " + from + " are now friends!");
-		request.getRequestDispatcher("homepage.jsp").forward(request, response);
+		request.getRequestDispatcher("friends.jsp").forward(request, response);
 	}
 
 }

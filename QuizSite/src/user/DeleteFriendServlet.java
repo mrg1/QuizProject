@@ -37,7 +37,7 @@ public class DeleteFriendServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String friend = request.getParameter("friend");
 		String username = (String)request.getSession().getAttribute("username");
-		UserInfo.deleteFriendship(username,friend);
+		UserInfo.deleteFriend(username,friend);
 		request.setAttribute("alert", "You and " + friend + " are no longer friends.");
 		request.getRequestDispatcher("friends.jsp").forward(request, response);
 	}

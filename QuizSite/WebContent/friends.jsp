@@ -40,8 +40,8 @@
 <td><a href="user.jsp?user=<%=friend%>"><%= friend %></a></td>
 <td>
 	<form action="DeleteFriendServlet" method="post">
-    	<input type="hidden" name="friend" value=<%=friend %> />
-        <input type="submit" value="Remove" />
+    	<p><input type="hidden" name="friend" value=<%=friend %> />
+        <input type="submit" value="Remove" /></p>
     </form></td>
 </tr>
 
