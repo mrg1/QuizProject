@@ -132,8 +132,8 @@ public class MultipleChoiceQuestion implements Question {
 	public static String getBuilderHTML() {
 		String out = "";
 		out += "<p>Question: <input type=\"text\" name=\"question\" /></p>\n";
-		out += "<p>Choices (separate each by new line): <textarea rows=\"4\" cols=\"50\" name=\"choices\"></textarea></p>\n";
-		out += "<p>Answer: <input type=\"text\" name=\"answer\" /></p>\n";
+		out += "<p>Incorrect Answers (separate each by new line): <textarea rows=\"4\" cols=\"50\" name=\"choices\"></textarea></p>\n";
+		out += "<p>Correct Answer: <input type=\"text\" name=\"answer\" /></p>\n";
 		out += "<p>Randomized order: <input type=\"checkbox\" name=\"randomized\" value=\"true\" /></p>\n";
 		out += "<p>Weight: <input type=\"text\" name=\"weight\" />\n";
 		out += "<input type=\"hidden\" name=\"questionId\" value=\""+QuestionInfo.MULTIPLE_CHOICE_ID+"\" /></p>\n"; 
