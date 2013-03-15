@@ -278,6 +278,48 @@ public class UserInfo {
 		return result.toArray(new Question[result.size()]);
 	}
 
+	public static Question getQuestion(int questionId){
+		Question result = null;
+		con = QuizDB.getConnection();
+		try {
+			PreparedStatement selectStatement = con.prepareStatement(QuizSqlStatements.SQL_GET_ONE_QUESTION);
+			selectStatement.setInt(1, questionId);
+			ResultSet rs = selectStatement.executeQuery();
+			if(rs.next()){
+				Question question;
+				String questionContent = rs.getString(3);
+				String questionContent2 = rs.getString(4);
+				int weight = rs.getInt(5);
+				int questionType = rs.getInt(6);
+				boolean caseOrRandomize = rs.getBoolean(7);
+				List<String> answers = getAnswers(questionId);
+				String correctAnswer = getCorrectAnswer(questionId);
+				String[] answerArray = answers.toArray(new String[answers.size()]);
+				switch(questionType){
+					case QuestionInfo.FILL_BLANK_ID: question = new FillBlankQuestion(questionContent, questionContent2, answerArray, caseOrRandomize, weight);
+						question.setID(questionId);
+						result= question;
+						break;
+					case QuestionInfo.MULTIPLE_CHOICE_ID: question = new MultipleChoiceQuestion(questionContent, answerArray, correctAnswer, caseOrRandomize, weight);
+						question.setID(questionId);
+						result= question;
+						break;
+					case QuestionInfo.PICTURE_QUESTION_ID: question = new PictureQuestion(questionContent, answerArray, caseOrRandomize, weight);
+						question.setID(questionId);
+						result= question;
+						break;
+					case QuestionInfo.RESPONSE_QUESTION_ID: question = new ResponseQuestion(questionContent, answerArray, caseOrRandomize, weight);
+						question.setID(questionId);
+						result= question;
+						break;
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
 	private static String getCorrectAnswer(int questionId) {
 		String result = "";
 		con = QuizDB.getConnection();
