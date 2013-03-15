@@ -114,7 +114,6 @@ public class FillBlankQuestion implements Question {
 		out += "<p>Case Sensitive: <input type=\"checkbox\" name=\"caseSensitive\" value=\"true\" /></p>\n";
 		out += "<p>Weight: <input type=\"text\" name=\"weight\" />\n";
 		out += "<input type=\"hidden\" name=\"questionId\" value=\""+QuestionInfo.FILL_BLANK_ID+"\" /></p>\n"; 
-		out += "<input type=\"submit\" value=\"Add Question\" /></p>";
 		return out;
 	}
 	

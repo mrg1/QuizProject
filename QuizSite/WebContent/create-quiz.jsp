@@ -23,7 +23,7 @@
 <div class="centered">
 <h1>Create New Quiz</h1>
 <p>Please enter the information for your new quiz:</p>
-<form action="CreateServlet" method="post">
+<form action="QuizCreationServlet" method="post">
 <p>Quiz Name: <input type="text" name="quizname" /></p>
 <p>Description: <input type="text" name="description"/><p>
 <p>Would you like your quiz to have randomly ordered questions? <input type="checkbox" name="random" value="random"/> </p>

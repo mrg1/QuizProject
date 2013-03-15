@@ -45,13 +45,13 @@ public class UserInfo {
 		return result;
 	}
 
-	public static void addUser(String username, String password, String salt, boolean admin){
+	public static void addUser(String username, String password, int salt, boolean admin){
 		con = QuizDB.getConnection();
 		try {
 			PreparedStatement addStatement = con.prepareStatement(QuizSqlStatements.SQL_ADD_USER);
 			addStatement.setString(1, username);
 			addStatement.setString(2, password);
-			addStatement.setString(3, salt);
+			addStatement.setInt(3, salt);
 			addStatement.setBoolean(4, admin);
 			addStatement.execute();
 		} catch (SQLException e) {

@@ -3,22 +3,22 @@ package user;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import db.UserInfo;
 
 /**
- * Servlet implementation class LogoutServlet
+ * Servlet implementation class AcceptChallengeServlet
  */
-@WebServlet("/LogoutServlet")
-public class LogoutServlet extends HttpServlet {
+@WebServlet("/AcceptChallengeServlet")
+public class AcceptChallengeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LogoutServlet() {
+    public AcceptChallengeServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,16 +34,15 @@ public class LogoutServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getSession().setAttribute("username",null);
-		for(Cookie cookie : request.getCookies()) {
-			if(cookie.getName().equals("username")) {
-				cookie.setValue(null);
-				cookie.setMaxAge(0);
-				response.addCookie(cookie);
-				break;
-			}
-		}
-		request.getRequestDispatcher("index.jsp").forward(request, response);
+		String from = request.getParameter("from");
+		String scoreToBeat = request.getParameter("scoreToBeat");	
+		String quizID = request.getParameter("quizID");
+		int id = Integer.parseInt(request.getParameter("id"));
+		
+		request.setAttribute("from",from);
+		request.setAttribute("scoreToBeat",scoreToBeat);
+		UserInfo.deleteMessages(id);
+		request.getRequestDispatcher("quiz-content.jsp?id="+quizID).forward(request, response);
 	}
 
 }

@@ -1,11 +1,19 @@
 package quiz;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import question.FillBlankQuestion;
+import question.MultipleChoiceQuestion;
+import question.PictureQuestion;
+import question.QuestionInfo;
+import question.ResponseQuestion;
 
 import db.AchievementInfo;
 import db.UserInfo;
@@ -47,6 +55,7 @@ public class QuizCreationServlet extends HttpServlet {
 		String practiceValue = request.getParameter("practice");
 		String name = request.getParameter("quizname");
 		String description = request.getParameter("description");
+		int questionType = Integer.parseInt(request.getParameter("questionType"));
 		if(randomValue!= null){
 			random = true;
 		}
@@ -62,6 +71,26 @@ public class QuizCreationServlet extends HttpServlet {
 		Quiz q = new Quiz(name, username, description, random, onepage, immediate, practice);
 		UserInfo.addQuiz(q);
 		AchievementInfo.checkQuizCreationAchievments(username);
+		String htmlBuilder = "";
+		switch(questionType){
+			case QuestionInfo.MULTIPLE_CHOICE_ID:
+				htmlBuilder = MultipleChoiceQuestion.getBuilderHTML();
+				break;
+			case QuestionInfo.FILL_BLANK_ID:
+				htmlBuilder = FillBlankQuestion.getBuilderHTML();
+				break;
+			case QuestionInfo.PICTURE_QUESTION_ID:
+				htmlBuilder = PictureQuestion.getBuilderHTML();
+				break;
+			case QuestionInfo.RESPONSE_QUESTION_ID:
+				htmlBuilder = ResponseQuestion.getBuilderHTML();
+				break;
+		}
+		request.setAttribute("quizId", q.getQuizId());
+		request.setAttribute("html", htmlBuilder);
+		request.setAttribute("type", questionType);
+		RequestDispatcher dispatch = request.getRequestDispatcher("create-question.jsp");
+		dispatch.forward(request, response);
 	}
 
 }
