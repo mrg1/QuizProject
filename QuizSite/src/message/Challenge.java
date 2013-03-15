@@ -4,19 +4,25 @@ import db.MessageInfo;
 import db.UserInfo;
 
 public class Challenge extends Message {
-	private int score;
-	private int quizID;
 	public Challenge(String to, String from, String content) {
-		super(to, from, content);
+		super(to,from,content);
 	}
 
 	private static final int type = MessageInfo.CHALLENGE_ID;
 	
 	public String getHtml(){
+		String realContent = content;
+		int firstSpace = realContent.indexOf(" ");
+		int quizID = Integer.parseInt(realContent.substring(0,firstSpace));
+		realContent = realContent.substring(firstSpace+1);
+		int secondSpace = realContent.indexOf(" ");
+		String score = realContent.substring(0,secondSpace);
+		realContent = realContent.substring(secondSpace+1);
+
 		String out = "";
-		out += "<p>" + from + " received a score of "+score+" on the quiz "+UserInfo.getQuiz(quizID).getName()+". You gonna take that?";
-		out += "He/she says: "+content+"</p>\n";
-		out += "</form>";
+		out += "<p>" + from + " received a score of "+score+" on "+UserInfo.getQuiz(quizID).getName() + ". What do you got?</p>\n";
+		out += "<p>He/she says: "+realContent+"</p>\n";
+		out += "<a href=\"quiz-content.jsp?id="+quizID+"\">Accept Challenge</a>";
 		return out;
 	}
 	

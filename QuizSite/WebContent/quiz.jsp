@@ -18,6 +18,11 @@
 
 <%@include file="navbar.jsp" %>
 
+<% Object message = request.getAttribute("alert"); %>
+<% if(message != null) { %>
+	<p><%=(String)message %></p>
+	<% request.setAttribute("alert",null); %>
+<% } %>
 
 <h1><%= quiz.getName() %></h1>
 
