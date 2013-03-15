@@ -43,6 +43,9 @@ table.table5 th {
 .friendTable th, td {
 	width:450px;
 }
+table.statsTable {
+	padding-top:10px;
+}
 
 
 .panel3 {
@@ -191,10 +194,6 @@ cursor: pointer;
 .compose {
 	margin-right:20px;
 }
-.historyTable {
-	max-height:200px;
-	overflow:scroll;
-}
 .leftQuiz {
 	width:70%;
 	float:left;
@@ -212,4 +211,8 @@ cursor: pointer;
   	width:250px;
   	height:100px;
   	font-size:50;
+}
+.testPicture {
+	max-height:200px;
+	max-width:100%;
 }
