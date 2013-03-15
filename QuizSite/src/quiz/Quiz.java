@@ -26,6 +26,7 @@ public class Quiz {
 
 	private String name, author, desc, timestamp;
 	private Question[] questions;
+	private int[] order;
 	private boolean random, onePage, immediateCorrection, practice;
 	private int quizId;
 	/**
@@ -61,6 +62,7 @@ public class Quiz {
 		this.immediateCorrection = immediateCorrection; 
 		this.practice = practice;
 		this.quizId = quizId;
+		calcOrder();
 	}
 	
 	public Quiz(String name, String author, String description, boolean random, boolean onePage, boolean immediateCorrection, boolean practice){
@@ -72,6 +74,7 @@ public class Quiz {
 		this.immediateCorrection = immediateCorrection; 
 		this.practice = practice;
 		this.questions = new Question[0];
+		calcOrder();
 	}
 	
 	public void remove() {
@@ -122,6 +125,10 @@ public class Quiz {
 	 * (i.e. [3, 1, 2] means questions[3] then questions[1] then questions[2])
 	 */
 	public int[] getQuestionOrder() {
+		return order;
+	}
+	
+	public int[] calcOrder() {
 		int[] result = new int[questions.length];
 		if(random) {
 			Random rand = new Random();

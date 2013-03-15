@@ -38,7 +38,7 @@ public class QuizServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int elapsed = (int) ((System.currentTimeMillis() - Long.parseLong(request.getParameter("startTime")))/1000);
+		int elapsed = (int) ((System.currentTimeMillis() - ((Long) request.getAttribute("startTime")))/1000);
 		String username = (String) request.getSession().getAttribute("username");
 		int quizId = Integer.parseInt(request.getParameter("quizId"));
 		request.setAttribute("quizId", quizId);
@@ -52,12 +52,6 @@ public class QuizServlet extends HttpServlet {
 			request.setAttribute("answer" + questionId, ans);
 			maxScore += question.getMaxScore();
 		}
-//		for(int i = 0; i < quiz.getQuestions().length; i++) {
-//			String param = request.getParameter("question" + i);
-//			System.out.println("Trying to parse "+param);
-//			int index = Integer.parseInt(param);
-//			request.setAttribute("question" + i, index);
-//		}
 		int percent = (score*100)/maxScore;
 		quiz.recordScore(username, percent, elapsed);
 		AchievementInfo.checkQuizTakingAchievements(username, percent, quizId, elapsed);

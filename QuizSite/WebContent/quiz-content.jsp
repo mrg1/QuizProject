@@ -25,14 +25,6 @@
 <input type="hidden" name="startTime" value="<%= System.currentTimeMillis() %>"></input>
 <% 
 Question[] questions = quiz.getQuestions();
-/* int[] order = quiz.getQuestionOrder();
-for(int i = 0; i < order.length; i++) {
-	Question q = questions[order[i]];
-	out.println("<hr>");
-	out.println(q.getHTML());
-	String paramInput = "<input type=\"hidden\" name=\"question" + i + "\" value=\"" + order[i] + "\" ></input>";
-	System.out.println("Parameter question" + i + " = " + order[i]);
-} */
 
 for (Question q : questions) {
 	out.println("<hr>");
