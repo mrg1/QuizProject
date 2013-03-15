@@ -11,7 +11,8 @@ public class QuizSqlStatements {
 	public static final String SQL_GET_ADMIN = "SELECT username, password FROM " + USER_TABLE + " WHERE username=? AND admin=1;";
 	public static final String SQL_CHANGE_USER_ADMIN = "UPDATE " + USER_TABLE + " SET admin=? WHERE username=?;";
 	public static final String SQL_USER_GET_SALT = "SELECT salt FROM " + USER_TABLE + " WHERE username=?;";
-	
+	public static final String SQL_GET_PROFILE_PICTURE = "SELECT profile_picture FROM " + USER_TABLE + " WHERE username=?;";
+	public static final String SQL_SET_PROFILE_PICTURE = "UPDATE " + USER_TABLE + " SET profile_picture=? WHERE username=?;";
 	//Friend shit
 	private final static String FRIENDS_TABLE = "friends";
 	public final static String SQL_GET_FRIENDS = "SELECT friend FROM " + FRIENDS_TABLE + " WHERE " + "user=?;";
@@ -88,7 +89,7 @@ public class QuizSqlStatements {
 	public final static String SQL_SET_TAG = "INSERT INTO " + TAG_TABLE + " (quizId, tagType) VALUES (?, ?) WHERE NOT EXISTS (SELECT * FROM " + TAG_TABLE + " WHERE quizId=? AND tagType=?);";
 	public final static String SQL_GET_ALL_TAGS = "SELECT DISTINCT tagType FROM " + TAG_TABLE + ";";
 
-
+	
 
 
 
