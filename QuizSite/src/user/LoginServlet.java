@@ -5,6 +5,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -39,12 +40,17 @@ public class LoginServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
+		if(!UserInfo.userExists(username)) request.getRequestDispatcher("information-incorrect.html").forward(request, response);
+		//password += UserInfo.getSalt(username));
 		try {
 			MessageDigest md = MessageDigest.getInstance("SHA");
 			password = hexToString(md.digest(password.getBytes()));
 		} catch (NoSuchAlgorithmException ignored) {}
 		if (UserInfo.checkPassword(username, password)) {
 			request.getSession().setAttribute("username", username);
+			Cookie cookie1 = new Cookie("username",username);
+			cookie1.setMaxAge(24*60*60);
+            response.addCookie(cookie1);
 			request.getRequestDispatcher("homepage.jsp").forward(request, response);
 		}
 		else
