@@ -15,7 +15,7 @@
 
 <body>
 
-<%@include file="navbar.html" %>
+<%@include file="navbar.jsp" %>
 
 <% Object message = request.getAttribute("alert"); %>
 <% if(message != null) { %>
@@ -23,9 +23,10 @@
 	<% request.setAttribute("alert",null); %>
 <% } %>
 
-<%-- <% for(String a : UserInfo.getAnnouncements()) { %>
-<p class="announce"><%=a %></p>
-<%} %> --%>
+<h3 class="inline">Announcements</h3>
+<% for(Announcement a : UserInfo.getAnnouncments()) { %>
+<p class="announce"><%=a.getUsername() %> posted: <%=a.getContent() %></p>
+<%} %>
 
 <div class="panel1">
 
@@ -41,7 +42,7 @@
 <h3 class="inline">Message Activity</h3>
 <ul class="list">
 	<% List<Message> messages = UserInfo.getMessages(username); %>
-	<% if(messages.isEmpty()) %><li>No new messages!</li><%; %>
+	<% if(messages.isEmpty()) %><li>No messages!</li><%; %>
 	<% Iterator<Message> messageIter = messages.iterator(); %>
 	<% for(int i = 0; i < 5; i++) {%>
 		<% if(!messageIter.hasNext()) break; %>

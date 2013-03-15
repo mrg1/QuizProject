@@ -3,6 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <%@ page import="db.UserInfo" %>
+<%@ page import="java.util.ArrayList" %>
 
 <head>
 <title>Friends</title>
@@ -11,7 +12,7 @@
 
 <body>
 
-<%@include file="navbar.html" %>
+<%@include file="navbar.jsp" %>
 
 
 <% Object message = request.getAttribute("alert"); %>
@@ -26,24 +27,22 @@
 	<p><input type="submit" value="Add" /></p>
 </form>
 
-<h1>Friends for <%= session.getAttribute("username") %>:</h1>
-<ul>
-	<%for(String cur : UserInfo.getFriends(request.getParameter("username"))) { %>
-		<li><%=cur %></li>
-	<%} %>
-</ul>
-
 <table class="table4">
 <tr>
 <th>Friend</th>
 <th></th>
 </tr>
 
-<% for(String friend : UserInfo.getFriends((String) session.getAttribute("username"))) { %>
-
+<% ArrayList<String> friends = UserInfo.getFriends((String) session.getAttribute("username")); %>
+<% for(String friend : friends) { %>
+<% if(friends.isEmpty()) %><tr><td>You have no friends.</td></tr>
 <tr>
 <td><a href="user.jsp?user=<%=friend%>"><%= friend %></a></td>
-<td><a href="friends.jsp">Remove</a></td>
+<td>
+	<form action="DeleteFriendServlet" method="post">
+    	<input type="hidden" name="friend" value=<%=friend %> />
+        <input type="submit" value="Remove" />
+    </form></td>
 </tr>
 
 <%} %>
