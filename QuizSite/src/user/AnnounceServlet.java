@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import db.*;
 
 /**
  * Servlet implementation class AnnounceServlet
@@ -33,7 +34,16 @@ public class AnnounceServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String username = (String)request.getSession().getAttribute("username");
 		String content = request.getParameter("content");
+		if(UserInfo.isAdmin(username)) {
+			UserInfo.addAnnouncement(username,content);
+			request.setAttribute("alert", "Announcement added!");
+			request.getRequestDispatcher("admin.jsp").forward(request, response);
+		} else {
+			request.setAttribute("alert", "Announcement couldn't be added, you are not an admin.");
+			request.getRequestDispatcher("admin.jsp").forward(request, response);
+		}
 	}
 
 }

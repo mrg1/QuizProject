@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import db.UserInfo;
+
 /**
  * Servlet implementation class PromoteServlet
  */
@@ -34,6 +36,15 @@ public class PromoteServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String user = request.getParameter("user");
+		String username = (String)request.getSession().getAttribute("username");
+		if(UserInfo.isAdmin(username)) {
+			UserInfo.changeAdmin(user,true);
+			request.setAttribute("alert", user + " has been promoted.");
+			request.getRequestDispatcher("admin.jsp").forward(request, response);
+		} else {
+			request.setAttribute("alert", "Action not processed, you are not an admin.");
+			request.getRequestDispatcher("admin.jsp").forward(request, response);
+		}
 	}
 
 }

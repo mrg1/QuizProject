@@ -23,9 +23,10 @@
 	<% request.setAttribute("alert",null); %>
 <% } %>
 
-<%-- <% for(String a : UserInfo.getAnnouncements()) { %>
-<p class="announce"><%=a %></p>
-<%} %> --%>
+<h3 class="inline">Announcements</h3>
+<% for(Announcement a : UserInfo.getAnnouncments()) { %>
+<p class="announce"><%=a.getUsername() %> posted: <%=a.getContent() %></p>
+<%} %>
 
 <div class="panel1">
 

@@ -35,7 +35,15 @@ public class DeleteUserServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String user = request.getParameter("user");
-		UserInfo.deleteUser(user);
+		String username = (String)request.getSession().getAttribute("username");
+		if(UserInfo.isAdmin(username)) {
+			request.setAttribute("alert", user + " has been deleted.");
+			UserInfo.deleteUser(user);
+			request.getRequestDispatcher("admin.jsp").forward(request, response);
+		} else {
+			request.setAttribute("alert", "Action not processed, you are not an admin.");
+			request.getRequestDispatcher("admin.jsp").forward(request, response);
+		}
 	}
 
 }

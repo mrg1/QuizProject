@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import db.UserInfo;
+
 /**
  * Servlet implementation class ClearQuizHistoryServlet
  */
@@ -33,7 +35,16 @@ public class ClearQuizHistoryServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String quiz = request.getParameter("quiz");
+		int quizID = Integer.parseInt(request.getParameter("quizID"));
+		String username = (String)request.getSession().getAttribute("username");
+		if(UserInfo.isAdmin(username)) {
+			UserInfo.deleteHistoryForQuiz(quizID);
+			request.setAttribute("alert", "History for " + UserInfo.getQuiz(quizID).getName() + " has been deleted.");
+			request.getRequestDispatcher("admin.jsp").forward(request, response);
+		} else {
+			request.setAttribute("alert", "Action not processed, you are not an admin.");
+			request.getRequestDispatcher("admin.jsp").forward(request, response);
+		}
 	}
 
 }

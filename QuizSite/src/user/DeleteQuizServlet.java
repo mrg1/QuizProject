@@ -36,8 +36,15 @@ public class DeleteQuizServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int quizID = Integer.parseInt(request.getParameter("quizID"));
-		UserInfo.deleteQuiz(quizID);
-		UserInfo.
+		String username = (String)request.getSession().getAttribute("username");
+		if(UserInfo.isAdmin(username)) {
+			request.setAttribute("alert", UserInfo.getQuiz(quizID).getName() + " has been deleted.");
+			UserInfo.deleteQuiz(quizID);
+			request.getRequestDispatcher("admin.jsp").forward(request, response);
+		} else {
+			request.setAttribute("alert", "Action not processed, you are not an admin.");
+			request.getRequestDispatcher("admin.jsp").forward(request, response);
+		}
 	}
 
 }
