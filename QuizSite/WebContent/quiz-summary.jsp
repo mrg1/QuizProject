@@ -8,8 +8,11 @@
 <%@ page import="java.util.*" %>
 
 <head>
-<% Quiz quiz = UserInfo.getQuiz((Integer) request.getAttribute("quizId")); %>
-<% String username = (String)session.getAttribute("username"); %>
+<% 
+Quiz quiz = UserInfo.getQuiz((Integer) request.getAttribute("quizId"));
+quiz.calcOrder();
+String username = (String)session.getAttribute("username"); 
+%>
 <title><%= quiz.getName() %> Summary</title>
 <link href="stylesheet.css" rel="stylesheet" type="text/css"></link>
 </head>
@@ -26,13 +29,13 @@
 
 <%
 Question[] questions = quiz.getQuestions();
-/* for(int i = 0; i < questions.length; i++) {
+for(int i = 0; i < questions.length; i++) {
 	int index = (Integer) request.getAttribute("question" + i);
 	Question q = questions[index];
 	String ans = (String) request.getAttribute("answer" + q.getID());
 	out.println("<p></p><hr>");
 	out.println(q.getCorrectedHTML(ans));
-} */
+}
 
 for(Question q : questions) {
 	String ans = (String) request.getAttribute("answer" + q.getID());
