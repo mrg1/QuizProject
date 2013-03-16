@@ -26,6 +26,15 @@ if(questionIndex==0) {
 } else {
 	qOrder = request.getParameter("qOrder");
 }
+String[] idStrings = qOrder.split(",");
+int[] idOrder = new int[idStrings.length];
+for(int i = 0; i < idStrings.length; i++) {
+	idOrder[i] = Integer.parseInt(idStrings[i]);
+}
+
+for(int i = 0; i < idStrings.length; i++) {
+	questions[i] = UserInfo.getQuestion(idOrder[i]);
+}
 %>
 
 <title><%= quiz.getName() %></title>
@@ -60,15 +69,7 @@ if(questionIndex==0) {
  	out.println("<input type=\"hidden\" name=\"startTime\" value=\""+request.getParameter("startTime")+"\"></input>");
 }
 out.println("<input type=\"hidden\" name=\"qOrder\" value=\""+qOrder+"\"></input>");
-String[] idStrings = qOrder.split(",");
-int[] idOrder = new int[idStrings.length];
-for(int i = 0; i < idStrings.length; i++) {
-	idOrder[i] = Integer.parseInt(idStrings[i]);
-}
 
-for(int i = 0; i < idStrings.length; i++) {
-	questions[i] = UserInfo.getQuestion(idOrder[i]);
-}
 
 for(Question ques : questions) {
 	if(request.getParameter("answer"+ques.getID()) != null) {

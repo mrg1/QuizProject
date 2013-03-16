@@ -90,7 +90,7 @@ public class MultipleChoiceQuestion implements Question {
 	
 	public String getCorrectedHTML(String userAnswer) {
 		String html = "<p>" + this.getText() + "</p>\n"; 
-				for(int i = (choices.size()-1); i >=0; i--) {
+				for(int i = 0; i < choices.size(); i++) {
 					html += "<p><input type=\"radio\" name=\"answer" + this.getID() + "\" value=\"" + choices.get(i) +"\" ";
 					if(choices.get(i).equals(userAnswer)) html += "checked";
 					html +=	" disabled />" + " " + choices.get(i) + "<br />";
