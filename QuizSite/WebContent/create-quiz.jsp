@@ -32,20 +32,15 @@
 </table>
 <br />
 
-<table>
-<tr>
-<td><input type="checkbox" name="random" value="random"/></td><td>Would you like your quiz to have randomly ordered questions?</td>
-</tr>
-<tr>
-<td><input type="checkbox" name="multipage" value="multipage"/></td><td>Would you like your quiz to have a separate page for each question?</td>
-</tr>
-<tr>
-<td><input type="checkbox" name="immediate" value="immediate"/></td><td>Would you like your quiz to give immediate correction?</td>
-</tr>
-<tr>
-<td><input type="checkbox" name="practice" value="practice"/></td><td>Would you like your quiz to allow practice mode?</td>
-</tr>
-</table>
+
+<p><input type="checkbox" name="random" value="random"/>Would you like your quiz to have randomly ordered questions?</p>
+
+<p><input type="checkbox" name="multipage" value="multipage"/>Would you like your quiz to have a separate page for each question?</p>
+
+<p><input type="checkbox" name="immediate" value="immediate"/>Would you like your quiz to give immediate correction?</p>
+
+<p><input type="checkbox" name="practice" value="practice"/>Would you like your quiz to allow practice mode?</p>
+
 
 <p><input type="submit" value="Add New Question"/> 
 <select name="questionType">
