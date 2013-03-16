@@ -69,7 +69,7 @@
 </tr>
 <tr>
 
-<td>
+<td valign="top">
 <table class="table2">
 <tr>
 <th>Title</th>
@@ -89,7 +89,7 @@
 </table>
 </td>
 
-<td>
+<td valign="top">
 <table class="table2">
 <tr>
 <th>Title</th>

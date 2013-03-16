@@ -71,7 +71,7 @@
 	<% for(int i = 0; i < 5; i++) {%>
 		<% if(!messageIter.hasNext()) break; %>
 		<% Message cur = messageIter.next(); %>
-		<li><%=cur.getFrom() %> sent you a <%=cur.getTypeName() %>!</li>
+		<li><a href="user.jsp?user=<%=cur.getFrom()%>"><%=cur.getFrom() %></a> sent you a <%=cur.getTypeName() %>!</li>
 	<% } %>
 </ul>
 </div>
