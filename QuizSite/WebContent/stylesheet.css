@@ -28,9 +28,11 @@ table.table2 td, table.table3 td, table.table4 td, table.table5 td  {
 	padding:5px;
 	text-align:center;
 }
-table.table1 th, table.table2 th, table.table3 th {
-	border-bottom:1px dotted black;
-	min-width:80px;
+table.table1 {
+	width:500px;
+}
+table.table2 th {
+	width:100px;
 }
 table.table4 th {
 	border-bottom:1px dotted black;

@@ -58,8 +58,6 @@ public class QuizCreationServlet extends HttpServlet {
 		String name = request.getParameter("quizname");
 		if(name.equals("")) name = "{no name}";
 		String description = request.getParameter("description");
-		String tagString = request.getParameter("tags");
-		String[] tags = QuestionInfo.getAnswersFromString(tagString);
 		int questionType = Integer.parseInt(request.getParameter("questionType"));
 		if(randomValue!= null){
 			random = true;
@@ -76,9 +74,13 @@ public class QuizCreationServlet extends HttpServlet {
 		Quiz q = new Quiz(name, username, description, random, onepage, immediate, practice);
 		UserInfo.addQuiz(q);
 		AchievementInfo.checkQuizCreationAchievments(username);
-		Set<String> tagSet = new HashSet<String>(Arrays.asList(tags));
-		for(String tag : tagSet){
-			UserInfo.addTag(q.getQuizId(), tag);
+		String tagString = request.getParameter("tags");
+		if(!tagString.equals(null) && !tagString.equals("")){
+			String[] tags = QuestionInfo.getAnswersFromString(tagString);
+			Set<String> tagSet = new HashSet<String>(Arrays.asList(tags));
+			for(String tag : tagSet){
+				UserInfo.addTag(q.getQuizId(), tag);
+			}
 		}
 		String htmlBuilder = "";
 		switch(questionType){
