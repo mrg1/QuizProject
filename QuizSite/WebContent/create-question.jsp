@@ -27,7 +27,7 @@
 
 <%=(String)request.getAttribute("html")%>
 
-<p><input type="submit" value="Add New Question"/> 
+<p><input type="submit" value="Add New Question or Submit"/> 
 <input type="hidden" name="quizId" value="<%=request.getAttribute("quizId")%>"/>
 <input type="hidden" name="currQuestionType" value="<%=request.getAttribute("type")%>"/>
 <select name="nextQuestionType">

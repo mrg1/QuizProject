@@ -1,19 +1,19 @@
 package quiz;
 
 public class AverageRating {
-	private double rating;
-	private int quizId;
+	private Double rating;
+	private Integer quizId;
 	
-	public AverageRating(int quizId, double rating){
+	public AverageRating(Integer quizId, Double rating){
 		this.rating = rating;
 		this.quizId = quizId;
 	}
 
-	public double getRating() {
+	public Double getRating() {
 		return rating;
 	}
 
-	public void setRating(double rating) {
+	public void setRating(Double rating) {
 		this.rating = rating;
 	}
 
@@ -21,7 +21,7 @@ public class AverageRating {
 		return quizId;
 	}
 
-	public void setQuizId(int quizId) {
+	public void setQuizId(Integer quizId) {
 		this.quizId = quizId;
 	}
 }
