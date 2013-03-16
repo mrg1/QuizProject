@@ -43,7 +43,7 @@ public class DeleteUserServlet extends HttpServlet {
 			for(int id : UserInfo.getQuizzesByTitle()) {
 				if(UserInfo.getQuiz(id).getAuthor().equals(user)) {
 					UserInfo.deleteHistoryForQuiz(id);
-					UserInfo.deleteRatingsByQuiz(quizID);
+					UserInfo.deleteRatingsByQuiz(id);
 					UserInfo.deleteQuiz(id);
 				}
 			}

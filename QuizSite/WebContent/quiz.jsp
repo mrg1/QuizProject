@@ -48,7 +48,9 @@
 
 <div class="rightQuiz">
 <% if(quiz.isOnePage()) { %>
+<% if(loggedIn) { %>
 <% out.println("<button class=\"takeButton\" onclick=\"window.location = 'quiz-content.jsp?id="+quiz.getQuizId()+"'\"><h1>Take Quiz</h1></button>"); %>	
+<% } %>
 <% } else { %>
 <% out.println("<button class=\"takeButton\" onclick=\"window.location = 'quiz-content-multipage.jsp?id="+quiz.getQuizId()+"&q=0'\"><h1>Take Quiz</h1></button>"); %>
 <% } %>
