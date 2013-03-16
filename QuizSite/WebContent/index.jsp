@@ -22,7 +22,8 @@
 <tr><td>Password:</td><td><input type="password" name="password" /></td></tr>
 </table>
 <input class="loginButton" type="submit" value="Login"/>
-</form><br />
+</form>
+
 <form class="centered" action="create-account.html" method="post">
 <input class="loginButton" type="submit" value="Create New Account"/>
 </form>

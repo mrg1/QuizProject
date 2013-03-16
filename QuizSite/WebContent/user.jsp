@@ -12,6 +12,8 @@
 <% String username = (String)session.getAttribute("username"); %>
 <title><%= user %></title>
 <link href="stylesheet.css" rel="stylesheet" type="text/css"></link>
+<script type="text/javascript" src="jquery-1.2.2.pack.js"></script>
+<script type="text/javascript" src="htmltooltip.js"></script>
 </head>
 
 <body>

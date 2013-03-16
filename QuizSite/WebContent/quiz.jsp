@@ -88,7 +88,7 @@
 <%} else { %>
 	<td align="center"><h1><%=format.format(UserInfo.getAverageRating(Integer.parseInt(request.getParameter("id")))) %></h1></td>
 <% } %>
-<td align="center"><h1><%=sumScore %></h1></td>
+<td align="center"><h1><%=sumScore %>%</h1></td>
 <td align="center"><h1><%=sumTime %> seconds</h1></td>
 <td align="center"><h1><%=n %> attempts</h1></td>
 </tr>
@@ -190,7 +190,7 @@
 <%	Score score = dayHistory.get(i); %>
 <tr>
 <td><a href="user.jsp?user=<%=score.getUsername()%>"><%= score.getUsername() %></a></td>
-<td></td>
+<td><%= UserInfo.getDateForScore(score.getScoreId()) %></td>
 <td><%= score.getScore()%>%</td>
 </tr>
 <% } } } %>
@@ -212,7 +212,7 @@
 <%	Score score = totalHistory.get(i); %>
 <tr>
 <td><a href="user.jsp?user=<%=score.getUsername()%>"><%= score.getUsername() %></a></td>
-<td></td>
+<td><%= UserInfo.getDateForScore(score.getScoreId()) %></td>
 <td><%= score.getScore()%>%</td>
 </tr>
 <% } } } %>
