@@ -1003,7 +1003,7 @@ public class UserInfo {
 			selectStatement.setInt(1, quizId);
 			ResultSet rs = selectStatement.executeQuery();
 			while(rs.next()){
-				ratingTotal.add(rs.getInt(1));
+				ratingTotal.add(rs.getInt(3));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
