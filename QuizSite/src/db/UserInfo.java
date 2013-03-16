@@ -1067,4 +1067,25 @@ public class UserInfo {
 		return ratings;
 	}
 	
+	public static void deleteRatingsByUser(String username){
+		con = QuizDB.getConnection();
+		try {
+			PreparedStatement deleteStatement = con.prepareStatement(QuizSqlStatements.SQL_DELETE_RATING_USER);
+			deleteStatement.setString(1, username);
+			deleteStatement.execute();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void deleteRatingsByQuiz(int quizId){
+		con = QuizDB.getConnection();
+		try {
+			PreparedStatement deleteStatement = con.prepareStatement(QuizSqlStatements.SQL_DELETE_RATING_QUIZ);
+			deleteStatement.setInt(1, quizId);
+			deleteStatement.execute();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 }
