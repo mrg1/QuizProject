@@ -37,7 +37,7 @@ public class RateServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String username = (String) request.getSession().getAttribute("username");
 		int rating = Integer.parseInt(request.getParameter("questionType"));
-		String content = request.getParameter("review");
+		String content = request.getParameter("content");
 		int quizId = Integer.parseInt(request.getParameter("quizID"));
 		UserInfo.addRating(new Rating(username,quizId,rating,content));
 		request.setAttribute("alert","Review added!");

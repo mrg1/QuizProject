@@ -81,7 +81,7 @@
 <tr>
 <%NumberFormat format = NumberFormat.getInstance(); %>
 <%format.setMaximumFractionDigits(1); %>
-<td align="center"><h1><%=format.format(5.11231) %></h1></td>
+<td align="center"><h1><%=format.format(UserInfo.getAverageRating(Integer.parseInt(request.getParameter("id")))) %></h1></td>
 <td align="center"><h1><%=sumScore %></h1></td>
 <td align="center"><h1><%=sumTime %> seconds</h1></td>
 <td align="center"><h1><%=n %> attempts</h1></td>
