@@ -42,7 +42,6 @@ if(questionIndex==0) {
 if(quiz.immediateCorrection() && (questionIndex != 0)) {
 	Question lastQuestion = questions[questionIndex-1];
 	String lastAnswer = request.getParameter("answer"+lastQuestion.getID());
-	System.out.println(lastAnswer);
 	out.println(lastQuestion.getCorrectedHTML(lastAnswer));
 	out.println("<hr>");
 }

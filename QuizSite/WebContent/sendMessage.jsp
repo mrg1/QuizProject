@@ -22,7 +22,7 @@
 <h1>Send Message</h1>
 <form action="SendNoteServlet" method="post">
 	<p>To: <input type="text" name="to"/></p>
-	<p>Content: <textarea rows="4" cols="50" name="content"></textarea></p>
+	<p>Content:<br /><textarea rows="4" cols="50" name="content"></textarea></p>
 	<p><input type="submit" value="Send"/></p>
 </form>
 </body>
