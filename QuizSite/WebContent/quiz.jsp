@@ -71,12 +71,14 @@
 <table class="statsTable">
 
 <tr>
+<th>Average Rating</th>
 <th>Average Score</th>
 <th>Average Time</th>
 <th>Number of Attempts</th>
 </tr>
 
 <tr>
+<td align="center"><h1>3 Stars</h1></td>
 <td align="center"><h1><%=sumScore %>%</h1></td>
 <td align="center"><h1><%=sumTime %> seconds</h1></td>
 <td align="center"><h1><%=n %> attempts</h1></td>

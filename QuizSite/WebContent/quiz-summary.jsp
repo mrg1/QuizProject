@@ -55,6 +55,9 @@ for(int i = 0; i < idStrings.length; i++) {
 <% } %>
 
 <h1>You got <%= request.getAttribute("percent") %>%!!!</h1>
+<table>
+<tr>
+<td>
 <h2>Challenge a friend?</h2>
 <form action="ChallengeServlet" method="post">
 	<p>To: <input type="text" name="to"/></p>
@@ -63,6 +66,24 @@ for(int i = 0; i < idStrings.length; i++) {
 	<input type="hidden" name="quizID" value=<%=request.getAttribute("quizId") %> /></p>
 	<p><input type="submit" value="Challenge"/></p>
 </form>
+</td>
+<td>
+<h2>Rate the quiz?</h2>
+<form action="RateServlet" method="post">
+	<p><select name="questionType">
+	<option value="1">1 Star</option>
+	<option value="2">2 Stars</option>
+	<option value="3">3 Stars</option>
+	<option value="4">4 Stars</option>
+	<option value="5">5 Stars</option>
+	</select></p>
+	<p>Review: <textarea rows="4" cols="50" name="content"></textarea>
+	<input type="hidden" name="quizID" value=<%=request.getAttribute("quizId") %> /></p>
+	<p><input type="submit" value="Rate"/></p>
+</form>
+</td>
+</tr>
+</table>
 <h2><%= request.getAttribute("elapsed") %> seconds elapsed.</h2>
 
 <%
