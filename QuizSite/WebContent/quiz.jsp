@@ -86,7 +86,7 @@
 
 </table>
 
-<div class="panel3 historyTable">
+<div class="panel3">
 
 <h3>Your Past Attempts</h3>
 <table class="table5 sortable">
@@ -98,6 +98,30 @@
 
 
 <% List<Score> quizHistory = UserInfo.getUserHistoryOnQuiz(username, quiz.getQuizId()); %>
+<% if (quizHistory != null) { %>
+<% for(int i = 0; i < 5; i++) { %>
+<% if(quizHistory.size() > i) { %>
+<%	Score score = quizHistory.get(i); %>
+<tr>
+<td><%= UserInfo.getDateForScore(score.getScoreId()) %></td>
+<td><%= score.getElapsed() %></td>
+<td><%= score.getScore()%>%</td>
+</tr>
+<% } } } %>
+
+
+</table>
+
+<h3>Recent Reviews</h3>
+<table class="table5 sortable">
+<tr>
+<th>User</th>
+<th>Rating</th>
+<th>Comments</th>
+</tr>
+
+
+<% List<Ratings> reviews = UserInfo.getRatingsForQuiz(quiz.getQuizId()); %>
 <% if (quizHistory != null) { %>
 <% for(int i = 0; i < 5; i++) { %>
 <% if(quizHistory.size() > i) { %>

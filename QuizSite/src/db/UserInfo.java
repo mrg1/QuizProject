@@ -984,8 +984,8 @@ public class UserInfo {
 		con = QuizDB.getConnection();
 		try {
 			PreparedStatement addStatement = con.prepareStatement(QuizSqlStatements.SQL_ADD_RATING);
-			addStatement.setInt(1, r.getQuizId());
-			addStatement.setString(2, r.getUsername());
+			addStatement.setString(1, r.getUsername());
+			addStatement.setInt(2, r.getQuizId());
 			addStatement.setInt(3, r.getRating());
 			addStatement.setString(4, r.getReview());
 			addStatement.execute();
@@ -1009,7 +1009,7 @@ public class UserInfo {
 		}
 		
 		if(ratingTotal.size() == 0) return -1;
-		int total;
+		int total = 0;
 		for(int r : ratingTotal){
 			total += r;
 		}
