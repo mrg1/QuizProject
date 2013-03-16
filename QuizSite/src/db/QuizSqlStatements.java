@@ -93,7 +93,7 @@ public class QuizSqlStatements {
 	//Reporting
 	private final static String REPORT_TABLE = "reports";
 	public final static String SQL_ADD_REPORT = "INSERT INTO " + REPORT_TABLE + " (quizId) VALUES(?);";
-	public final static String SQL_DELETE_REPORTS = "DELETE FROM " + REPORT_TABLE + "WHERE quizId=?;";
+	public final static String SQL_DELETE_REPORTS = "DELETE FROM " + REPORT_TABLE + " WHERE quizId=?;";
 	public final static String SQL_GET_REPORTS = "SELECT quizId, count(*) as c FROM " + REPORT_TABLE + " GROUP BY quizId ORDER BY c DESC;";
 
 	public static final String RATINGS_TABLE = "ratings";

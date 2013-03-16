@@ -92,13 +92,13 @@ for(User u : users) {
 	<tr>
 	<td>
 	<form action="DeleteQuizServlet" method="post">
-		<input type="hidden" name="quizId" value=<%=id %> />
+		<input type="hidden" name="quizID" value=<%=id %> />
 		<input type="submit" value="Delete" />
 	</form>
 	</td>
 	<td>
 	<form action="UnreportServlet" method="post">
-		<input type="hidden" name="quizId" value=<%=id %> />
+		<input type="hidden" name="quizID" value=<%=id %> />
 		<input type="submit" value="Mark Appropriate" />	
 	</form>
 	</td>
