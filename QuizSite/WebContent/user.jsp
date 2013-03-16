@@ -49,12 +49,15 @@
 	<p>Review: <%=rating.getReview() %></p>
 <%} %>
 <h3>Achievements:</h3>
-<div class="achievements">
-<% List<Integer> achievements = UserInfo.getAchievements(user); %>
+<% List<Integer> achievements = UserInfo.getAchievements(username); %>
 <% for(Integer i : achievements) {%>
-	<p> <%=AchievementInfo.getAchievement(i) %></p>
-	<%} %>
-</div>
+	<p href="#i" class="achievements" rel="htmltooltip"><%=AchievementInfo.getAchievement(i) %></p>
+
+	<div class="htmltooltip" id="i">
+		<p><b><%=AchievementInfo.getAchievement(i) %></b></p>
+		<p><%=AchievementInfo.getAchievementDesc(i)%></p>
+	</div>
+<%} %>
 
 <h3 class="inline">User's Recent Activity</h3>
 <p class="inline"><a href="history.jsp">(See Full History)</a></p>

@@ -459,10 +459,10 @@ public class UserInfo {
 				int questionId = rs.getInt(1);
 				q.setID(questionId);
 				for(String answer: q.getCorrectAnswers()){
-					addAnswer(questionId, answer, true);
+					if(!answer.equals("")) addAnswer(questionId, answer, true);
 				}
 				for(String answer: q.getIncorrectAnswers()){
-					addAnswer(questionId, answer, false);
+					if(!answer.equals("")) addAnswer(questionId, answer, false);
 				}
 			}
 		} catch (SQLException e) {
@@ -1003,7 +1003,7 @@ public class UserInfo {
 			selectStatement.setInt(1, quizId);
 			ResultSet rs = selectStatement.executeQuery();
 			while(rs.next()){
-				ratingTotal.add(rs.getInt(1));
+				ratingTotal.add(rs.getInt(3));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

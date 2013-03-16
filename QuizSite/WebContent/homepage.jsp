@@ -87,7 +87,7 @@
 <tr valign="top">
 
 <td>
-<table class="table2" width="250">
+<table class="table2">
 <tr>
 <th>Title</th>
 <th>Score</th>
@@ -107,7 +107,7 @@
 </td>
 
 <td>
-<table class="table2" width="250">
+<table class="table2">
 <tr valign="top">
 <th>Title</th>
 <th>Date</th>
@@ -153,8 +153,9 @@
 <% for (int i = 0; i < 5; i++) {%>
 <% if(rated.size() > i) { %>
 <% AverageRating rating = rated.get(i); %>
+<% if(rating.getRating() > -1) {%>
 <li><%=i + 1 %>. <a href="quiz.jsp?id=<%=rating.getQuizId()%>"><%=UserInfo.getQuizName(rating.getQuizId()) %></a></li>
-<% } } } %>
+<% } } } } %>
 
 </ul>
 

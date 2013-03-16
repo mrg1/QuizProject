@@ -1,6 +1,7 @@
 package quiz;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -56,15 +57,24 @@ public class AddQuestionServlet extends HttpServlet {
 		String[] answers;
 		switch(currQuestionType){
 			case QuestionInfo.MULTIPLE_CHOICE_ID:
-				boolString = request.getParameter("randomized");
 				question = request.getParameter("question");
 				testWeight = request.getParameter("weight");
 				if(!testWeight.equals("") && !testWeight.equals(null)) weight = Integer.parseInt(testWeight);
-				if(boolString != null){
-					caseOrRand = true;
+				ArrayList<String> choices = new ArrayList<String>();
+				for(int i = 0; i < MultipleChoiceQuestion.CHOICES_ALLOWED; i++) {
+					String choice = request.getParameter("choice" + i).trim();
+					if(!choice.equals("")) choices.add(choice.trim());
 				}
-				answers = QuestionInfo.getAnswersFromString(request.getParameter("choices"));
-				String answer = request.getParameter("answer");
+				answers = new String[choices.size()];
+				for(int i = (choices.size()-1); i >=0; i--) {
+					answers[i] = choices.get(i);
+				}
+				int answerIndex;
+				String answer = "";
+				if(request.getParameter("correct") != null) {
+					answerIndex = Integer.parseInt(request.getParameter("correct"));
+					answer = request.getParameter("choice" + answerIndex);
+				}
 				UserInfo.addQuestion(quizId, new MultipleChoiceQuestion(question, answers, answer, caseOrRand, weight));
 				break;
 			case QuestionInfo.PICTURE_QUESTION_ID:
