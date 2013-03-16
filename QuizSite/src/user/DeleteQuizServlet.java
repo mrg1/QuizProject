@@ -41,6 +41,7 @@ public class DeleteQuizServlet extends HttpServlet {
 			request.setAttribute("alert", UserInfo.getQuiz(quizID).getName() + " has been deleted.");
 			UserInfo.deleteHistoryForQuiz(quizID);
 			UserInfo.deleteRatingsByQuiz(quizID);
+			UserInfo.deleteReport(quizID);
 			UserInfo.deleteQuiz(quizID);
 			request.getRequestDispatcher("admin.jsp").forward(request, response);
 		} else {
