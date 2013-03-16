@@ -100,6 +100,10 @@ public class QuizSqlStatements {
 	public static final String SQL_GET_RATINGS_BY_USER = "SELECT username, quizId, rating, review FROM " + RATINGS_TABLE + " WHERE username=? ORDER BY rating DESC, rating_time_stamp DESC";
 	public static final String SQL_GET_RATINGS_FOR_QUIZ = "SELECT username, quizId, rating, review FROM " + RATINGS_TABLE + " WHERE quizId=? ORDER BY rating_time_stamp DESC";
 	public static final String SQL_ADD_RATING = "INSERT INTO " + RATINGS_TABLE + " (username, quizId, rating, review) VALUES (?, ?, ?, ?);";
+
+
+	public static final String SQL_DELETE_RATING_USER = "DELETE FROM " + RATINGS_TABLE + " WHERE username=?;";
+	public static final String SQL_DELETE_RATING_QUIZ = "DELETE FROM " + RATINGS_TABLE + " WHERE quizId=?;";
 	
 
 
