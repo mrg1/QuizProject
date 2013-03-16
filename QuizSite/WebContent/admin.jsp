@@ -45,8 +45,9 @@ for(User u : users) {
 		System.out.println(u.getUsername() + " recorded as admin");
 	}
 } %>
-<table>
+<table class="adminTable">
 <%for(User cur : admins) { %>
+	<tr><th></th><th></th></tr>
 	<tr>
 	
 	<td>
@@ -61,7 +62,8 @@ for(User u : users) {
 </table>
 
 <h2>Users</h2>
-<table>
+<table class="adminTable">
+	<tr><th></th><th></th><th></th></tr>
 <% if(users.isEmpty()) %><tr><td>No users yet!</td></tr>
 <% for(User cur : users) { %>
 	<tr>
@@ -83,7 +85,8 @@ for(User u : users) {
 </table>
 
 <h2>Quizzes</h2>
-<table>
+<table class="adminTable">
+	<tr><th></th><th></th><th class="wide"></th></tr>
 <% List<Integer> quizIDs = UserInfo.getQuizzesByTitle(); %>
 <% if(quizIDs.isEmpty()) %><tr><td>No quizzes yet!</td></tr>
 <% for(Integer id : quizIDs) { %>
