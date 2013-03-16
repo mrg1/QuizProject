@@ -39,9 +39,6 @@
 
 <p><input type="checkbox" name="immediate" value="immediate"/>Would you like your quiz to give immediate correction?</p>
 
-<p><input type="checkbox" name="practice" value="practice"/>Would you like your quiz to allow practice mode?</p>
-
-
 <p><input type="submit" value="Add New Question"/> 
 <select name="questionType">
 <option value="0">Multiple Choice</option>
