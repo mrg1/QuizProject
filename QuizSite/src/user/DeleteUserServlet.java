@@ -39,9 +39,11 @@ public class DeleteUserServlet extends HttpServlet {
 		if(UserInfo.isAdmin(username)) {
 			request.setAttribute("alert", user + " has been deleted.");
 			UserInfo.deleteHistory(user);
+			UserInfo.deleteRatingsByUser(user);
 			for(int id : UserInfo.getQuizzesByTitle()) {
 				if(UserInfo.getQuiz(id).getAuthor().equals(user)) {
 					UserInfo.deleteHistoryForQuiz(id);
+					UserInfo.deleteRatingsByQuiz(quizID);
 					UserInfo.deleteQuiz(id);
 				}
 			}
