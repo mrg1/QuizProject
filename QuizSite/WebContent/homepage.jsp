@@ -133,13 +133,24 @@
 
 <h3>Popular Quizzes</h3>
 
+<h4>Most Taken</h4>
 <ul class="list1">
 
-<% List<Integer> popular = UserInfo.popularQuizIds(); %>
-<% if(!popular.isEmpty()) { %>
-<% for (int i = 0; i < 10; i++) {%>
-<% if(popular.size() > i) { %>
-<% int id = popular.get(i); %>
+<% List<Integer> taken = UserInfo.popularQuizIds(); %>
+<% if(!taken.isEmpty()) { %>
+<% for (int i = 0; i < 5; i++) {%>
+<% if(taken.size() > i) { %>
+<% int id = taken.get(i); %>
+<li><%=i + 1 %>. <a href="quiz.jsp?id=<%=id%>"><%=UserInfo.getQuizName(id) %></a></li>
+<% } } } %>
+
+<h4>Highest Rated</h4>
+<ul class="list1">
+
+<% Map<Integer, Double> rated = UserInfo.getHighestRatedQuizzes(); %>
+<% if(!rated.isEmpty()) { %>
+<% for (int i = 0; i < 5; i++) {%>
+<% if(rated.size() > i) { %>
 <li><%=i + 1 %>. <a href="quiz.jsp?id=<%=id%>"><%=UserInfo.getQuizName(id) %></a></li>
 <% } } } %>
 
