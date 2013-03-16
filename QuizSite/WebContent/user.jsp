@@ -41,6 +41,13 @@
 	<input type="submit" value="Change Profile Picture" /></p>
 	</form>
 <%} %>
+<h3>Reviews:</h3>
+<% List<Rating> ratings = UserInfo.getRatingsByUser(user); %>
+<% if(ratings.isEmpty()) {%><p>No reviews yet.</p><%} %>
+<% for(Rating rating : ratings) { %>
+	<p><b><%=rating.getRating()%> stars</b> for quiz <a href="quiz.jsp?id=<%=rating.getQuizId() %>"><%= UserInfo.getQuizName(rating.getQuizId()) %></a>.</p>
+	<p>Review: <%=rating.getReview() %></p>
+<%} %>
 <h3>Achievements:</h3>
 <% List<Integer> achievements = UserInfo.getAchievements(username); %>
 <% for(Integer i : achievements) {%>
