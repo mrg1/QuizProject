@@ -1056,6 +1056,14 @@ public class UserInfo {
 			Double rating = getAverageRating(quizId);
 			ratings.add(new AverageRating(quizId, rating));
 		}
+		if (ratings.size() > 0) {
+		    Collections.sort(ratings, new Comparator<AverageRating>() {
+		        @Override
+		        public int compare(final AverageRating object1, final AverageRating object2) {
+		            return object2.getRating().compareTo(object1.getRating());
+		        }
+		       } );
+		}
 		return ratings;
 	}
 	
