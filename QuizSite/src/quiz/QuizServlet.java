@@ -42,6 +42,7 @@ public class QuizServlet extends HttpServlet {
 		String username = (String) request.getSession().getAttribute("username");
 		int quizId = Integer.parseInt(request.getParameter("quizId"));
 		request.setAttribute("quizId", quizId);
+		request.setAttribute("qOrder", request.getParameter("qOrder"));
 		Quiz quiz = UserInfo.getQuiz(quizId);
 		int score = 0;
 		int maxScore = 0;

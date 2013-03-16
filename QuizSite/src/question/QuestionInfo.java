@@ -11,9 +11,11 @@ public class QuestionInfo {
 	
 	public static String[] getAnswersFromString(String answers) {
 		List<String> result = new ArrayList<String>();
-		String[] tokens = answers.split("\n");
-		for(String s : tokens){
-			result.add(s.trim());
+		if(!answers.equals("")){
+			String[] tokens = answers.split("\n");
+			for(String s : tokens){
+				result.add(s.trim());
+			}
 		}
 		String[] arrayResult = result.toArray(new String[result.size()]);
 		return arrayResult;

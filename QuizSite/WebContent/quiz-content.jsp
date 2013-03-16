@@ -10,6 +10,14 @@
 <head>
 <% Quiz quiz = UserInfo.getQuiz(Integer.parseInt(request.getParameter("id"))); %>
 <% String username = (String)session.getAttribute("username"); %>
+<%
+quiz.shuffleQuestions();
+Question[] questions = quiz.getQuestions();
+String qOrder = "";
+for(Question q : questions) {
+	qOrder += (q.getID() + ",");
+}
+%>
 <title><%= quiz.getName() %></title>
 <link href="stylesheet.css" rel="stylesheet" type="text/css"></link>
 </head>
@@ -24,8 +32,7 @@
 <form action="QuizServlet" method="post">
 <input type="hidden" name="startTime" value="<%= System.currentTimeMillis() %>"></input>
 <%
-quiz.shuffleQuestions();
-Question[] questions = quiz.getQuestions();
+
 
 for (Question q : questions) {
 	out.println("<hr>");
@@ -34,6 +41,7 @@ for (Question q : questions) {
 %>
 <p>
 <input type="hidden" name="quizId" value="<%= request.getParameter("id") %>"></input>
+<input type="hidden" name="qOrder" value="<%= qOrder %>"></input>
 <% Object from = request.getAttribute("from"); %>
 <% if(from != null) { %>
 	<input type="hidden" name="scoreToBeat" value="<%= (String)request.getParameter("scoreToBeat") %>"></input>

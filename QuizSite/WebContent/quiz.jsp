@@ -27,7 +27,13 @@
 
 <div class="leftQuiz">
 <h1><%= quiz.getName() %></h1>
-<p class="achievements">Created by <a href="user.jsp?user=<%=quiz.getAuthor()%>"><%= quiz.getAuthor() %></a>. <%=quiz.getDescription() %></p>
+
+
+<form action="ReportServlet" method="post">
+	<p class="achievements">Created by <a href="user.jsp?user=<%=quiz.getAuthor()%>"><%= quiz.getAuthor() %></a>. <%=quiz.getDescription() %>
+	<input type="hidden" name="quizId" value=<%=request.getParameter("id") %> />
+	<input type="submit" value="Report Inappropriate" /></p>
+</form>
 <p class="achievements inline">Tags: </p>
 <% List<String> tags = UserInfo.getTagsForQuiz(quiz.getQuizId()); %>
 <% for (String s : tags) { %>
