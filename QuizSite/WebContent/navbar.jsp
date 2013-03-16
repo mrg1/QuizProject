@@ -5,7 +5,7 @@
 
 <div class="right">
 <ul class="navbar">
-<li class="inline navbarItem"><a href="tag-page.jsp">Categories</a></li>
+<li class="inline navbarItem"><a href="tag-page.jsp">Tags</a></li>
 <li class="inline navbarItem"><a href="quizzes.jsp">Quizzes</a></li>
 <% if(loggedIn) { %>
 <li class="inline navbarItem"><a href="friends.jsp">Friends</a></li>
