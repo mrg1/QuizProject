@@ -43,6 +43,9 @@ table.table5 th {
 .friendTable th, td {
 	width:450px;
 }
+.table1 {
+	max-width:90%;
+}
 table.statsTable {
 	padding-top:10px;
 	float:left;
@@ -216,4 +219,24 @@ cursor: pointer;
 .testPicture {
 	max-height:200px;
 	max-width:100%;
+}
+.htmltooltip{
+position: absolute; /*leave this and next 3 values alone*/
+z-index: 1000;
+left: -1000px;
+top: -1000px;
+background-color: lavender;
+border: 10px solid blueviolet;
+color: black;
+padding: 15px;
+width: 250px; /*width of tooltip*/
+}
+.adminTable {
+	width:100px;
+}
+table.adminTable th {
+    background-color:white;
+    text-align:center;
+    color:white;
+    font-weight: bold;
 }

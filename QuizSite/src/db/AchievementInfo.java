@@ -73,4 +73,24 @@ public class AchievementInfo {
 		
 	}
 	
+	public static String getAchievementDesc(int id) {
+		switch(id) {
+			case PRACTICE_MAKES_ID:
+				return "Took a quiz in practice mode";
+			case AM_AUTH_ID:
+				return "Created a quiz";
+			case PROF_AUTH_ID:
+				return "Created 5 quizzes";
+			case PROD_AUTH_ID:
+				return "Created 10 quizzes";
+			case QUIZ_MACHINE_ID:
+				return "Took 10 quizzes";
+			case THE_GREATEST_ID:
+				return "Earned top score on a quiz";
+			case JAQUIZZ_ICAL_ID:
+				return "Took 32 quizzes";
+			}
+		return "";
+	}
+	
 }

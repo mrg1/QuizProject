@@ -7,7 +7,9 @@ import java.util.*;
 import java.util.Date;
 
 import question.*;
+import quiz.AverageRating;
 import quiz.Quiz;
+import quiz.Rating;
 import quiz.Score;
 
 import message.*;
@@ -978,4 +980,91 @@ public class UserInfo {
 			e.printStackTrace();
 		}
 	}
+	
+	public static void addRating(Rating r){
+		con = QuizDB.getConnection();
+		try {
+			PreparedStatement addStatement = con.prepareStatement(QuizSqlStatements.SQL_ADD_RATING);
+			addStatement.setString(1, r.getUsername());
+			addStatement.setInt(2, r.getQuizId());
+			addStatement.setInt(3, r.getRating());
+			addStatement.setString(4, r.getReview());
+			addStatement.execute();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static double getAverageRating(int quizId){
+		List<Integer> ratingTotal = new ArrayList<Integer>();
+		con = QuizDB.getConnection();
+		try {
+			PreparedStatement selectStatement = con.prepareStatement(QuizSqlStatements.SQL_GET_RATINGS_FOR_QUIZ);
+			selectStatement.setInt(1, quizId);
+			ResultSet rs = selectStatement.executeQuery();
+			while(rs.next()){
+				ratingTotal.add(rs.getInt(3));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		if(ratingTotal.size() == 0) return -1;
+		int total = 0;
+		for(int r : ratingTotal){
+			total += r;
+		}
+		return (double)total/(double)ratingTotal.size();
+	}
+	
+	public static List<Rating> getRatingsForQuiz(int quizId){
+		List<Rating> ratings = new ArrayList<Rating>();
+		con = QuizDB.getConnection();
+		try {
+			PreparedStatement selectStatement = con.prepareStatement(QuizSqlStatements.SQL_GET_RATINGS_FOR_QUIZ);
+			selectStatement.setInt(1, quizId);
+			ResultSet rs = selectStatement.executeQuery();
+			while(rs.next()){
+				ratings.add(new Rating(rs.getString(1), rs.getInt(2), rs.getInt(3), rs.getString(4)));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return ratings;
+	}
+	
+	public static List<Rating> getRatingsByUser(String username){
+		List<Rating> ratings = new ArrayList<Rating>();
+		con = QuizDB.getConnection();
+		try {
+			PreparedStatement selectStatement = con.prepareStatement(QuizSqlStatements.SQL_GET_RATINGS_BY_USER);
+			selectStatement.setString(1, username);
+			ResultSet rs = selectStatement.executeQuery();
+			while(rs.next()){
+				ratings.add(new Rating(rs.getString(1), rs.getInt(2), rs.getInt(3), rs.getString(4)));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return ratings;
+	}
+	
+	public static List<AverageRating> getHighestRatedQuizzes(){
+		List<AverageRating> ratings = new ArrayList<AverageRating>();
+		List<Integer> quizzes = recentlyCreatedQuizIds();
+		for(int quizId : quizzes){
+			Double rating = getAverageRating(quizId);
+			ratings.add(new AverageRating(quizId, rating));
+		}
+		if (ratings.size() > 0) {
+		    Collections.sort(ratings, new Comparator<AverageRating>() {
+		        @Override
+		        public int compare(final AverageRating object1, final AverageRating object2) {
+		            return object2.getRating().compareTo(object1.getRating());
+		        }
+		       } );
+		}
+		return ratings;
+	}
+	
 }

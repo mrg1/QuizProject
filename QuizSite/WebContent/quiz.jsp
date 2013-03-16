@@ -71,12 +71,14 @@
 <table class="statsTable">
 
 <tr>
+<th>Average Rating</th>
 <th>Average Score</th>
 <th>Average Time</th>
 <th>Number of Attempts</th>
 </tr>
 
 <tr>
+<td align="center"><h1>3 Stars</h1></td>
 <td align="center"><h1><%=sumScore %>%</h1></td>
 <td align="center"><h1><%=sumTime %> seconds</h1></td>
 <td align="center"><h1><%=n %> attempts</h1></td>
@@ -84,7 +86,7 @@
 
 </table>
 
-<div class="panel3 historyTable">
+<div class="panel3">
 
 <h3>Your Past Attempts</h3>
 <table class="table5 sortable">
@@ -104,6 +106,30 @@
 <td><%= UserInfo.getDateForScore(score.getScoreId()) %></td>
 <td><%= score.getElapsed() %></td>
 <td><%= score.getScore()%>%</td>
+</tr>
+<% } } } %>
+
+
+</table>
+
+<h3>Recent Reviews</h3>
+<table class="table5 sortable">
+<tr>
+<th>User</th>
+<th>Rating</th>
+<th>Comments</th>
+</tr>
+
+
+<% List<Rating> reviews = UserInfo.getRatingsForQuiz(quiz.getQuizId()); %>
+<% if (reviews != null) { %>
+<% for(int i = 0; i < 5; i++) { %>
+<% if(reviews.size() > i) { %>
+<%	Rating r = reviews.get(i); %>
+<tr>
+<td><%= r.getUsername() %></td>
+<td><%= r.getRating() %></td>
+<td><%= r.getReview() %></td>
 </tr>
 <% } } } %>
 

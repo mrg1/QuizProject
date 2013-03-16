@@ -60,7 +60,7 @@ public class QuizSqlStatements {
 	//Scores
 	private final static String SCORES_TABLE = "scores";
 	public final static String SQL_GET_SCORES = "SELECT quizId, score, elapsed, scoreId FROM " + SCORES_TABLE + " WHERE username=? ORDER BY scoreTimeStamp DESC;";
-	public final static String SQL_GET_TOP_TEN = "SELECT username, score, elapsed, scoreId FROM " + SCORES_TABLE + " WHERE quizId=? ORDER BY score DESC LIMIT 10;";
+	public final static String SQL_GET_TOP_TEN = "SELECT username, score, elapsed, scoreId FROM " + SCORES_TABLE + " WHERE quizId=? ORDER BY score DESC, elapsed ASC, scoreTimeStamp ASC LIMIT 10;";
 	public final static String SQL_ADD_SCORE = "INSERT INTO " + SCORES_TABLE + " (username, quizId, score, elapsed) VALUES (?, ?, ?, ?);";
 	public final static String SQL_REMOVE_USER_HISTORY = "DELETE FROM " + SCORES_TABLE + " where username=?;";
 	public static final String SQL_REMOVE_QUIZ_HISTORY = "DELETE FROM " + SCORES_TABLE + " where quizId=?;";
@@ -68,7 +68,7 @@ public class QuizSqlStatements {
 	public final static String SQL_MOST_PLAYED_QUIZ = "SELECT quizId FROM (SELECT quizId, count(*) as c FROM " +  SCORES_TABLE + " GROUP BY quizId ORDER BY c DESC) as temp_table;";
 	public final static String SQL_GET_USER_QUIZ_HISTORY = "SELECT score, elapsed, scoreId FROM " + SCORES_TABLE + " where username=? AND quizId=? ORDER BY scoreTimeStamp DESC;";
 	public final static String SQL_GET_RECENT_QUIZ_ARREMPTS = "SELECT score, username, elapsed, scoreId FROM " + SCORES_TABLE + " WHERE quizId=? ORDER BY scoreTimeStamp DESC;";
-	public final static String SQL_GET_DAYS_SCORES_ON_QUIZ = "SELECT score, username, elapsed, scoreId FROM " + SCORES_TABLE + " WHERE quizId=? AND scoreTimeStamp > DATE_SUB(NOW(), INTERVAL 1 DAY) ORDER BY score DESC;";
+	public final static String SQL_GET_DAYS_SCORES_ON_QUIZ = "SELECT score, username, elapsed, scoreId FROM " + SCORES_TABLE + " WHERE quizId=? AND scoreTimeStamp > DATE_SUB(NOW(), INTERVAL 1 DAY) ORDER BY score DESC, elapsed ASC, scoreTimeStamp ASC;";
 	public static final String SQL_GET_SCORE_DATE = "SELECT scoreTimeStamp FROM " + SCORES_TABLE + " WHERE scoreId=?;";
 	
 	//Anouncements
@@ -95,6 +95,11 @@ public class QuizSqlStatements {
 	public final static String SQL_ADD_REPORT = "INSERT INTO " + REPORT_TABLE + " (quizId) VALUES(?);";
 	public final static String SQL_DELETE_REPORTS = "DELETE FROM " + REPORT_TABLE + "WHERE quizId=?;";
 	public final static String SQL_GET_REPORTS = "SELECT quizId, count(*) as c FROM " + REPORT_TABLE + " GROUP BY quizId ORDER BY c DESC;";
+
+	public static final String RATINGS_TABLE = "ratings";
+	public static final String SQL_GET_RATINGS_BY_USER = "SELECT username, quizId, rating, review FROM " + RATINGS_TABLE + " WHERE username=? ORDER BY rating DESC, rating_time_stamp DESC";
+	public static final String SQL_GET_RATINGS_FOR_QUIZ = "SELECT username, quizId, rating, review FROM " + RATINGS_TABLE + " WHERE quizId=? ORDER BY rating_time_stamp DESC";
+	public static final String SQL_ADD_RATING = "INSERT INTO " + RATINGS_TABLE + " (username, quizId, rating, review) VALUES (?, ?, ?, ?);";
 	
 
 
