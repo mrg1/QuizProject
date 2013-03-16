@@ -1,3 +1,11 @@
-/build
-/.gitignore
-/bin
+*.class
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+QuizSite/.classpath
+QuizSite/.settings/org.eclipse.jdt.core.prefs
+QuizSite/.settings/org.eclipse.wst.common.component
+QuizSite/.settings/org.eclipse.wst.common.common.project.facet.xml.core.xml

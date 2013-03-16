@@ -1047,4 +1047,14 @@ public class UserInfo {
 		}
 		return ratings;
 	}
+	
+	public static Map<Integer, Double> getHighestRatedQuizzes(){
+		Map<Integer, Double> ratings = new HashMap<Integer, Double>();
+		List<Integer> quizzes = recentlyCreatedQuizIds();
+		for(int quizId : quizzes){
+			Double rating = getAverageRating(quizId);
+			ratings.put(quizId, rating);
+		}
+		return ratings;
+	}
 }
