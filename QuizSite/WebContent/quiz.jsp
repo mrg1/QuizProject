@@ -6,6 +6,7 @@
 <%@ page import="message.*" %>
 <%@ page import="quiz.*" %>
 <%@ page import="java.util.*" %>
+<%@ page import="java.text.NumberFormat" %>
 
 <head>
 <% Quiz quiz = UserInfo.getQuiz(Integer.parseInt(request.getParameter("id"))); %>
@@ -78,8 +79,10 @@
 </tr>
 
 <tr>
-<td align="center"><h1>3 Stars</h1></td>
-<td align="center"><h1><%=sumScore %>%</h1></td>
+<%NumberFormat format = NumberFormat.getInstance(); %>
+<%format.setMaximumFractionDigits(1); %>
+<td align="center"><h1><%=format.format(5.11231) %></h1></td>
+<td align="center"><h1><%=sumScore %></h1></td>
 <td align="center"><h1><%=sumTime %> seconds</h1></td>
 <td align="center"><h1><%=n %> attempts</h1></td>
 </tr>
@@ -121,7 +124,7 @@
 </tr>
 
 
-<% List<Ratings> reviews = UserInfo.getRatingsForQuiz(quiz.getQuizId()); %>
+<% List<Rating> reviews = UserInfo.getRatingsForQuiz(quiz.getQuizId()); %>
 <% if (quizHistory != null) { %>
 <% for(int i = 0; i < 5; i++) { %>
 <% if(quizHistory.size() > i) { %>

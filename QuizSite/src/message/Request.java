@@ -12,7 +12,9 @@ public class Request extends Message{
 	
 	public String getHtml(){
 		String out = "";
-		out += "<p><a href='user.jsp?user="+from+"'>"+from+"</a> would like to be your friend. He/she says: "+content+"</p>\n";
+		out += "<p><a href='user.jsp?user="+from+"'>"+from+"</a> would like to be your friend.";
+		if(!content.isEmpty()) out += " He/she says: "+content;
+		out += "</p>\n";
 		out += "<form action=\"AcceptServlet\" method=\"post\">\n";
 		out += "<input type=\"hidden\" name=\"from\" value=\""+from+"\" />\n";
 		out += "<input type=\"hidden\" name=\"id\" value=\""+getMessageId()+"\" />\n";
