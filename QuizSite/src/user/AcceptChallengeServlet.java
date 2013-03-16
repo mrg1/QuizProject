@@ -36,13 +36,13 @@ public class AcceptChallengeServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String from = request.getParameter("from");
 		String scoreToBeat = request.getParameter("scoreToBeat");	
-		String quizID = request.getParameter("quizID");
+		int quizID = Integer.parseInt(request.getParameter("quizID"));
 		int id = Integer.parseInt(request.getParameter("id"));
 		
 		request.setAttribute("from",from);
 		request.setAttribute("scoreToBeat",scoreToBeat);
 		UserInfo.deleteMessages(id);
-		if(UserInfo.getQuiz(id).isOnePage()) 
+		if(UserInfo.getQuiz(quizID).isOnePage()) 
 			request.getRequestDispatcher("quiz-content.jsp?id="+quizID).forward(request, response);
 		else
 			request.getRequestDispatcher("quiz-content-multipage.jsp?id="+quizID).forward(request, response);
