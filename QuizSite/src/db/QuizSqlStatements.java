@@ -97,10 +97,8 @@ public class QuizSqlStatements {
 	public final static String SQL_GET_REPORTS = "SELECT quizId, count(*) as c FROM " + REPORT_TABLE + " GROUP BY quizId ORDER BY c DESC;";
 
 	public static final String RATINGS_TABLE = "ratings";
-	public static final String SQL_GET_RATINGS_BY_USER = "SELECT username, quizId, rating, review FROM " + RATINGS_TABLE + " WHERE username=?";
-	public static final String SQL_GET_RATINGS_FOR_QUIZ = "SELECT username, quizId, rating, review FROM " + RATINGS_TABLE + " WHERE quizId=?";
-
-
+	public static final String SQL_GET_RATINGS_BY_USER = "SELECT username, quizId, rating, review FROM " + RATINGS_TABLE + " WHERE username=? ORDER BY rating DESC";
+	public static final String SQL_GET_RATINGS_FOR_QUIZ = "SELECT username, quizId, rating, review FROM " + RATINGS_TABLE + " WHERE quizId=? ORDER BY rating_time_stampDESC";
 	public static final String SQL_ADD_RATING = "INSERT INTO " + RATINGS_TABLE + " (username, quizId, rating, review) VALUES (?, ?, ?, ?);";
 	
 
