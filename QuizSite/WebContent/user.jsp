@@ -41,7 +41,7 @@
 	<input type="submit" value="Change Profile Picture" /></p>
 	</form>
 <%} %>
-<h3>Highest Reviews:</h3>
+<h3>Reviews:</h3>
 <% List<Rating> ratings = UserInfo.getRatingsByUser(user); %>
 <% if(ratings.isEmpty()) {%><p>No reviews yet.</p><%} %>
 <% for(Rating rating : ratings) { %>
