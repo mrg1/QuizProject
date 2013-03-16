@@ -42,7 +42,6 @@ List<User> admins = new ArrayList<User>();
 for(User u : users) {
 	if(UserInfo.isAdmin(u.getUsername())) {
 		admins.add(u);
-		System.out.println(u.getUsername() + " recorded as admin");
 	}
 } %>
 <table>
@@ -83,6 +82,29 @@ for(User u : users) {
 </table>
 
 <h2>Quizzes</h2>
+<h3>Reported as Inappropriate</h3>
+<table>
+<%Map<Integer,Integer> reported = UserInfo.getReports(); %>
+<%if(reported.isEmpty()) %><tr><td>No quizzes reported.</td></tr>
+<%for(int id : reported.keySet()) {%>
+	<tr>
+	<td>
+	<form action="DeleteQuizServlet" method="post">
+		<input type="hidden" name="quizID" value=<%=id %> />
+		<input type="submit" value="Delete" />
+	</form>
+	</td>
+	<td>
+	<form action="UnreportServlet" method="post">
+		<input type="hidden" name="quizID" value=<%=id %> />
+		<input type="submit" value="Mark Appropriate" />	
+	</form>
+	</td>
+	<td><a href="quiz.jsp?id=<%= id %>"><%=UserInfo.getQuiz(id).getName() %></a>, id: <%=id %>, # of reports: <%=reported.get(id)%></td>
+	</tr>
+<%} %>
+</table>
+<h3>All Quizzes</h3>
 <table>
 <% List<Integer> quizIDs = UserInfo.getQuizzesByTitle(); %>
 <% if(quizIDs.isEmpty()) %><tr><td>No quizzes yet!</td></tr>

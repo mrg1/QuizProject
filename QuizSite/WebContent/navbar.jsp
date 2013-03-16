@@ -5,7 +5,6 @@
 
 <div class="right">
 <ul class="navbar">
-<li class="inline navbarItem"><a href="user.jsp?user=<%=(String)session.getAttribute("username")%>">Me</a></li>
 <li class="inline navbarItem"><a href="tag-page.jsp">Categories</a></li>
 <li class="inline navbarItem"><a href="quizzes.jsp">Quizzes</a></li>
 <% if(loggedIn) { %>
