@@ -8,6 +8,7 @@ import java.util.Random;
 public class MultipleChoiceQuestion implements Question {
 
 	public static final String DISPLAY_NAME = "Multiple Choice Question";
+	public static final int CHOICES_ALLOWED = 5;
 	
 	private String question;
 	private boolean randomize;
@@ -78,26 +79,10 @@ public class MultipleChoiceQuestion implements Question {
 	@Override
 	public String getHTML() {
 		String html = "<p>" + this.getText() + "</p>\n<p>";
-		if(randomize) {
-			Random rand = new Random();
-			boolean[] used = new boolean[choices.size()];
-			for(int i = 0; i < used.length; i++) {
-				used[i] = false;
-			}
-			for(int j = 0; j < choices.size(); j++) {
-				int index = rand.nextInt(choices.size());
-				while(used[index]) {
-					index = rand.nextInt(choices.size());
-					if(allChecked(used)) break;
-				}
-				html += "<p><input type=\"radio\" name=\"answer" + this.getID() + "\" value=\"" 
-						+ choices.get(index) +"\" />" + choices.get(index) + "<br />";
-			}
-		} else {
-			for(int i = 0; i < choices.size(); i++) {
-				html += "<p><input type=\"radio\" name=\"answer" + this.getID() + "\" value=\"" 
-						+ choices.get(i) +"\" />" + choices.get(i) + "<br />";
-			}
+//		for(int i = (choices.size()-1); i >=0; i--) {
+		for(int i = 0; i < choices.size(); i++) {
+			html += "<p><input type=\"radio\" name=\"answer" + this.getID() + "\" value=\"" 
+					+ choices.get(i) +"\" />" + " " +choices.get(i) + "<br />";
 		}
 		html += "</p>";
 		return html;
@@ -105,10 +90,10 @@ public class MultipleChoiceQuestion implements Question {
 	
 	public String getCorrectedHTML(String userAnswer) {
 		String html = "<p>" + this.getText() + "</p>\n"; 
-				for(int i = 0; i < choices.size(); i++) {
+				for(int i = (choices.size()-1); i >=0; i--) {
 					html += "<p><input type=\"radio\" name=\"answer" + this.getID() + "\" value=\"" + choices.get(i) +"\" ";
 					if(choices.get(i).equals(userAnswer)) html += "checked";
-					html +=	" disabled />" + choices.get(i) + "<br />";
+					html +=	" disabled />" + " " + choices.get(i) + "<br />";
 				};
 		if(this.checkAnswer(userAnswer) == this.getMaxScore()) {
 			html += "<p style=\"color: green; font-weight: bold\">Answer Correct!</p>";
@@ -133,9 +118,13 @@ public class MultipleChoiceQuestion implements Question {
 	public static String getBuilderHTML() {
 		String out = "";
 		out += "<p>Question: <input type=\"text\" name=\"question\" /></p>\n";
-		out += "<p>Incorrect Answers (separate each by new line): <textarea rows=\"4\" cols=\"50\" name=\"choices\"></textarea></p>\n";
-		out += "<p>Correct Answer: <input type=\"text\" name=\"answer\" /></p>\n";
-		out += "<p>Randomized order: <input type=\"checkbox\" name=\"randomized\" value=\"true\" /></p>\n";
+		out += "<p>Choices: (please select the correct answer with the radio buttons)</p>\n";
+		for(int i = 0; i < CHOICES_ALLOWED; i++) {
+			out += "<input type=\"radio\" name=\"correct\" value=\""+i+"\"><input type=\"text\" name=\"choice"+i+"\" size=\"40\"><br />";
+		}
+//		out += "<p>Incorrect Answers (separate each by new line): <textarea rows=\"4\" cols=\"50\" name=\"choices\"></textarea></p>\n";
+//		out += "<p>Correct Answer: <input type=\"text\" name=\"answer\" /></p>\n";
+//		out += "<p>Randomized order: <input type=\"checkbox\" name=\"randomized\" value=\"true\" /></p>\n";
 		out += "<p>Weight: <input type=\"text\" name=\"weight\" />\n";
 		out += "<input type=\"hidden\" name=\"questionId\" value=\""+QuestionInfo.MULTIPLE_CHOICE_ID+"\" /></p>\n"; 
 		return out;

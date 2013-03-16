@@ -457,10 +457,10 @@ public class UserInfo {
 				int questionId = rs.getInt(1);
 				q.setID(questionId);
 				for(String answer: q.getCorrectAnswers()){
-					addAnswer(questionId, answer, true);
+					if(!answer.equals("")) addAnswer(questionId, answer, true);
 				}
 				for(String answer: q.getIncorrectAnswers()){
-					addAnswer(questionId, answer, false);
+					if(!answer.equals("")) addAnswer(questionId, answer, false);
 				}
 			}
 		} catch (SQLException e) {
