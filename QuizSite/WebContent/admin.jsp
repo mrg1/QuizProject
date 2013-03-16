@@ -84,7 +84,7 @@ for(User u : users) {
 </table>
 
 <h3>Reported as Inappropriate</h3>
-<table>
+<table class="adminTable">
 	<tr><th></th><th></th><th></th></tr>
 <%Map<Integer,Integer> reported = UserInfo.getReports(); %>
 <%if(reported.isEmpty()) %><tr><td>No quizzes reported.</td></tr>
@@ -107,7 +107,7 @@ for(User u : users) {
 <%} %>
 </table>
 <h3>All Quizzes</h3>
-<table>
+<table class="adminTable">
 	<tr><th></th><th></th><th></th></tr>
 <% List<Integer> quizIDs = UserInfo.getQuizzesByTitle(); %>
 <% if(quizIDs.isEmpty()) %><tr><td>No quizzes yet!</td></tr>

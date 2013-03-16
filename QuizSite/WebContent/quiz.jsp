@@ -125,14 +125,14 @@
 
 
 <% List<Rating> reviews = UserInfo.getRatingsForQuiz(quiz.getQuizId()); %>
-<% if (quizHistory != null) { %>
+<% if (reviews != null) { %>
 <% for(int i = 0; i < 5; i++) { %>
-<% if(quizHistory.size() > i) { %>
-<%	Score score = quizHistory.get(i); %>
+<% if(reviews.size() > i) { %>
+<%	Rating r = reviews.get(i); %>
 <tr>
-<td><%= UserInfo.getDateForScore(score.getScoreId()) %></td>
-<td><%= score.getElapsed() %></td>
-<td><%= score.getScore()%>%</td>
+<td><%= r.getUsername() %></td>
+<td><%= r.getRating() %></td>
+<td><%= r.getReview() %></td>
 </tr>
 <% } } } %>
 

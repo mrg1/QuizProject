@@ -7,6 +7,7 @@ import java.util.*;
 import java.util.Date;
 
 import question.*;
+import quiz.AverageRating;
 import quiz.Quiz;
 import quiz.Rating;
 import quiz.Score;
@@ -1048,13 +1049,22 @@ public class UserInfo {
 		return ratings;
 	}
 	
-	public static Map<Integer, Double> getHighestRatedQuizzes(){
-		Map<Integer, Double> ratings = new HashMap<Integer, Double>();
+	public static List<AverageRating> getHighestRatedQuizzes(){
+		List<AverageRating> ratings = new ArrayList<AverageRating>();
 		List<Integer> quizzes = recentlyCreatedQuizIds();
 		for(int quizId : quizzes){
 			Double rating = getAverageRating(quizId);
-			ratings.put(quizId, rating);
+			ratings.add(new AverageRating(quizId, rating));
+		}
+		if (ratings.size() > 0) {
+		    Collections.sort(ratings, new Comparator<AverageRating>() {
+		        @Override
+		        public int compare(final AverageRating object1, final AverageRating object2) {
+		            return object2.getRating().compareTo(object1.getRating());
+		        }
+		       } );
 		}
 		return ratings;
 	}
+	
 }
