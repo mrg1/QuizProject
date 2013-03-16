@@ -54,7 +54,7 @@
 <h3>Achievements:</h3>
 <% List<Integer> achievements = UserInfo.getAchievements(username); %>
 <% for(Integer i : achievements) {%>
-	<p href="#i" class="achievements inline" rel="htmltooltip"><%=AchievementInfo.getAchievement(i) %></p>
+	<p href="#i" class="achievements" rel="htmltooltip"><%=AchievementInfo.getAchievement(i) %></p>
 
 	<div class="htmltooltip" id="i">
 		<p><b><%=AchievementInfo.getAchievement(i) %></b></p>
@@ -87,7 +87,7 @@
 <tr valign="top">
 
 <td>
-<table class="table2" width="250">
+<table class="table2">
 <tr>
 <th>Title</th>
 <th>Score</th>
@@ -107,7 +107,7 @@
 </td>
 
 <td>
-<table class="table2" width="250">
+<table class="table2">
 <tr valign="top">
 <th>Title</th>
 <th>Date</th>
@@ -133,15 +133,29 @@
 
 <h3>Popular Quizzes</h3>
 
+<h4>Most Taken</h4>
 <ul class="list1">
 
-<% List<Integer> popular = UserInfo.popularQuizIds(); %>
-<% if(!popular.isEmpty()) { %>
-<% for (int i = 0; i < 10; i++) {%>
-<% if(popular.size() > i) { %>
-<% int id = popular.get(i); %>
+<% List<Integer> taken = UserInfo.popularQuizIds(); %>
+<% if(!taken.isEmpty()) { %>
+<% for (int i = 0; i < 5; i++) {%>
+<% if(taken.size() > i) { %>
+<% int id = taken.get(i); %>
 <li><%=i + 1 %>. <a href="quiz.jsp?id=<%=id%>"><%=UserInfo.getQuizName(id) %></a></li>
 <% } } } %>
+</ul>
+
+<h4>Highest Rated</h4>
+<ul class="list1">
+
+<% List<AverageRating> rated = UserInfo.getHighestRatedQuizzes(); %>
+<% if(!rated.isEmpty()) { %>
+<% for (int i = 0; i < 5; i++) {%>
+<% if(rated.size() > i) { %>
+<% AverageRating rating = rated.get(i); %>
+<% if(rating.getRating() > -1) {%>
+<li><%=i + 1 %>. <a href="quiz.jsp?id=<%=rating.getQuizId()%>"><%=UserInfo.getQuizName(rating.getQuizId()) %></a></li>
+<% } } } } %>
 
 </ul>
 

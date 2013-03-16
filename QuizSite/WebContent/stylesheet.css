@@ -43,6 +43,9 @@ table.table5 th {
 .friendTable th, td {
 	width:450px;
 }
+.table1 {
+	max-width:90%;
+}
 table.statsTable {
 	padding-top:10px;
 	float:left;
