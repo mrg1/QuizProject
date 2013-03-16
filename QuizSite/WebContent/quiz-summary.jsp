@@ -42,10 +42,10 @@ for(int i = 0; i < idStrings.length; i++) {
 	<% int percent = Integer.parseInt((String)request.getAttribute("percent")); %>
 	<% if(scoreToBeat > percent) {%>
 		<p>Sorry, you couldn't beat <%=(String)from %>'s score.</p>
-		<% UserInfo.addMessage(new Note((String)from,username,"Shit I could not beat your score in "+quiz.getName()+".")); %>
+		<% UserInfo.addMessage(new Note((String)from,username,"I could not beat your score on "+quiz.getName()+".")); %>
 	<% } else if(scoreToBeat < percent) { %>
 		<p>You beat <%=(String)from %>'s score!</p>
-		<% UserInfo.addMessage(new Note((String)from,username,"Beat yo ass on "+quiz.getName()+".")); %>
+		<% UserInfo.addMessage(new Note((String)from,username,"I destroyed you on "+quiz.getName()+".")); %>
 	<% } else { %>
 		<p>You tied <%=(String)from %>'s score.</p>
 		<% UserInfo.addMessage(new Note((String)from,username,"We tied on "+quiz.getName()+".")); %>
@@ -60,7 +60,7 @@ for(int i = 0; i < idStrings.length; i++) {
 <table>
 <tr>
 <td>
-<h2>Challenge a friend?</h2>
+<h2>Challenge another user?</h2>
 <form action="ChallengeServlet" method="post">
 	<p>To: <input type="text" name="to"/></p>
 	<p>Trash talk:<br /><textarea rows="4" cols="50" name="content"></textarea>
@@ -79,7 +79,7 @@ for(int i = 0; i < idStrings.length; i++) {
 	<option value="4">4 Stars</option>
 	<option value="5">5 Stars</option>
 	</select></p>
-	<p>Review: <textarea rows="4" cols="50" name="content"></textarea>
+	<p>Review: <br /><textarea rows="4" cols="50" name="content"></textarea>
 	<input type="hidden" name="quizID" value=<%=request.getAttribute("quizId") %> /></p>
 	<p><input type="submit" value="Rate"/></p>
 </form>

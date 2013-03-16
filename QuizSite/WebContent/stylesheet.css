@@ -128,8 +128,8 @@ cursor: pointer;
 }
 
 .profile {
-	width:100px;
-	height:100px;
+	max-width:100px;
+	max-height:100px;
 	padding:20px;
 }
 

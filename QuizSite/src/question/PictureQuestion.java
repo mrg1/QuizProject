@@ -60,9 +60,11 @@ public class PictureQuestion implements Question {
 	@Override
 	public int checkAnswer(String userAnswer) {
 		if(caseSensitive) {
-			if(answers.contains(userAnswer)) return weight;
+			if(answers.contains(userAnswer.trim())) return weight;
 		} else {
-			if(answers.contains(userAnswer.toLowerCase())) return weight;
+			for(String ans : answers) {
+				if(ans.equalsIgnoreCase(userAnswer.trim())) return weight;
+			}
 		}
 		return 0;
 	}
