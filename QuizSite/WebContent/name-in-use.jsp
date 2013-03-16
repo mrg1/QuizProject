@@ -15,8 +15,10 @@
 <h1>The Name <%=request.getParameter("username") %> is Already In Use</h1>
 <p>Please enter another name and password.</p>
 <form action="CreateServlet" method="post">
-<p>User Name: <input type="text" name="username" /></p>
-<p>Password: <input type="password" name="password"/></p>
+<table>
+<tr><td>User Name:</td><td><input type="text" name="username" /></td></tr>
+<tr><td>Password:</td><td><input type="password" name="password" /></td></tr>
+</table>
 <input class="loginButton" type="submit" value="Create Account"/>
 </form>
 
